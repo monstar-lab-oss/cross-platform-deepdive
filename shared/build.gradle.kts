@@ -1,9 +1,12 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
-    id(Dependencies.sqlPlugin)
+    id("com.squareup.sqldelight")
     id("org.jetbrains.kotlin.plugin.serialization") version Versions.ktx
+    id("com.codingfeline.buildkonfig")
 }
 
 version = App.version
@@ -87,5 +90,16 @@ android {
 sqldelight {
     database("OKMoviesPlaceDatabase") {
         packageName = "${App.packageRoot}db"
+    }
+}
+
+buildkonfig {
+    packageName = App.packageRoot.substring(0, App.packageRoot.length - 1)
+
+    val localPropertiesFile = "local.properties"
+    val theMoviesApiKey = "theMoviesDBApiKey"
+
+    defaultConfigs {
+        buildConfigField(Type.STRING, theMoviesApiKey, project.readProperty(theMoviesApiKey, localPropertiesFile))
     }
 }

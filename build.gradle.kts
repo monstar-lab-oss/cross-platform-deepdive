@@ -9,6 +9,7 @@ buildscript {
         classpath(Dependencies.ktxGradlePlugin)
         classpath(Dependencies.gradle)
         classpath(Dependencies.sqlDelightGradle)
+        classpath(Dependencies.buildKonfigGradle)
     }
 }
 

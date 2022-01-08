@@ -2,6 +2,7 @@ object Versions {
     const val ktx = "1.6.0"
     const val gradle = "7.0.4"
     const val sqlDelight = "1.5.3"
+    const val buildKonf = "0.11.0"
 
     object Common {
         const val kodein = "7.10.0"
@@ -21,7 +22,7 @@ object Dependencies {
     const val ktxGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.ktx}"
     const val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
     const val sqlDelightGradle = "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
-    const val sqlPlugin = "com.squareup.sqldelight"
+    const val buildKonfigGradle = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:${Versions.buildKonf}"
 
     object Common {
         const val testCommonAnnotations = "test-annotations-common"
