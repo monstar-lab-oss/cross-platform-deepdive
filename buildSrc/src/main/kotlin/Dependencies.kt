@@ -5,6 +5,7 @@ object Versions {
 
     object Common {
         const val kodein = "7.10.0"
+        const val ktor = "1.6.7"
     }
 
     object Android {
@@ -26,6 +27,8 @@ object Dependencies {
         const val testCommonAnnotations = "test-annotations-common"
         const val kodein = "org.kodein.di:kodein-di:${Versions.Common.kodein}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.ktx}"
+        const val ktor = "io.ktor:ktor-client-core:${Versions.Common.ktor}"
+        const val ktorSerialization = "io.ktor:ktor-client-serialization:${Versions.Common.ktor}"
     }
 
     object Android {
@@ -33,15 +36,14 @@ object Dependencies {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.Android.appCompat}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayout}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.ktx}"
-
         const val sqlDelight = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
-
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.lifecycle}"
-
         const val kodein = "org.kodein.di:kodein-di-framework-android-x-viewmodel:${Versions.Common.kodein}"
+        const val ktor = "io.ktor:ktor-client-android:${Versions.Common.ktor}"
     }
 
     object IOS {
         const val sqlDelight = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
+        const val ktor = "io.ktor:ktor-client-ios:${Versions.Common.ktor}"
     }
 }

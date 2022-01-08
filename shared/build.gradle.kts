@@ -3,6 +3,7 @@ plugins {
     kotlin("native.cocoapods")
     id("com.android.library")
     id(Dependencies.sqlPlugin)
+    id("org.jetbrains.kotlin.plugin.serialization") version Versions.ktx
 }
 
 version = App.version
@@ -28,6 +29,8 @@ kotlin {
             dependencies {
                 implementation(Dependencies.Common.coroutines)
                 implementation(Dependencies.Common.kodein)
+                implementation(Dependencies.Common.ktor)
+                implementation(Dependencies.Common.ktorSerialization)
             }
         }
         val commonTest by getting {
@@ -38,6 +41,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(Dependencies.Android.sqlDelight)
+                implementation(Dependencies.Android.ktor)
             }
         }
         val androidTest by getting {
@@ -55,6 +59,7 @@ kotlin {
             iosArm64Main.dependsOn(this)
             dependencies {
                 implementation(Dependencies.IOS.sqlDelight)
+                implementation(Dependencies.IOS.ktor)
             }
             //iosSimulatorArm64Main.dependsOn(this)
         }
