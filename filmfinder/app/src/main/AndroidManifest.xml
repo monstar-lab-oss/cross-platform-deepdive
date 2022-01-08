@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.cliabhach.terrapin.red.eared"
+    >
+
+    <application
+        android:allowBackup="false"
+        android:fullBackupContent="@xml/data_backup_disallowed"
+        android:dataExtractionRules="@xml/data_extraction_disallowed"
+        android:supportsRtl="true"
+        tools:ignore="DataExtractionRules,UnusedAttribute"
+        />
+
+</manifest>
