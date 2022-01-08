@@ -1,0 +1,19 @@
+CREATE TABLE genreTable (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+CREATE INDEX genre_id ON genreTable(id);
+
+isMovieListEmpty:
+SELECT COUNT(*)
+FROM genreTable;
+
+movieGenreById:
+SELECT id, name
+FROM genreTable
+WHERE id = ?;
+
+insertGenre:
+INSERT INTO genreTable
+VALUES ?;
