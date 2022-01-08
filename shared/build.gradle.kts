@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id(Dependencies.sqlPlugin)
 }
 
 version = App.version
@@ -27,9 +28,14 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin(Dependencies.Common.testCommonAnnotations))
+                implementation(Dependencies.Common.kodein)
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation(Dependencies.Android.sqlDelight)
+            }
+        }
         val androidTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
@@ -43,6 +49,9 @@ kotlin {
             dependsOn(commonMain)
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
+            dependencies {
+                implementation(Dependencies.IOS.sqlDelight)
+            }
             //iosSimulatorArm64Main.dependsOn(this)
         }
         val iosX64Test by getting
@@ -63,5 +72,11 @@ android {
     defaultConfig {
         minSdk = App.minSdk
         targetSdk = App.targetSdk
+    }
+}
+
+sqldelight {
+    database("OKMoviesPlaceDatabase") {
+        packageName = "${App.packageRoot}db"
     }
 }

@@ -4,9 +4,11 @@ buildscript {
         google()
         mavenCentral()
     }
+
     dependencies {
         classpath(Dependencies.ktxGradlePlugin)
         classpath(Dependencies.gradle)
+        classpath(Dependencies.sqlDelightGradle)
     }
 }
 
