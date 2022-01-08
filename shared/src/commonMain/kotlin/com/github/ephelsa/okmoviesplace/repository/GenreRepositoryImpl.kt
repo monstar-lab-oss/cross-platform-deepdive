@@ -9,6 +9,10 @@ class GenreRepositoryImpl(
     private val localGenreDataSource: LocalGenreDataSource
 ) : GenreRepository {
 
+    override suspend fun refreshGenres() {
+        refreshGenresLocally()
+    }
+
     override suspend fun movieById(id: Int): Genre? {
         return if (localGenreDataSource.isMovieListEmpty()) {
             refreshGenresLocally().find { it.id == id }
