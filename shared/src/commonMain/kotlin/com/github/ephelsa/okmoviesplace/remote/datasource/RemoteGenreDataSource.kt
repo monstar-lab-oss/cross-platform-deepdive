@@ -1,4 +1,4 @@
-package com.github.ephelsa.okmoviesplace.remotedatasource
+package com.github.ephelsa.okmoviesplace.remote.datasource
 
 import com.github.ephelsa.okmoviesplace.model.Genre
 

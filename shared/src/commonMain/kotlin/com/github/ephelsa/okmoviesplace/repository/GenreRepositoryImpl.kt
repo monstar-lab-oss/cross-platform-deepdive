@@ -2,7 +2,7 @@ package com.github.ephelsa.okmoviesplace.repository
 
 import com.github.ephelsa.okmoviesplace.localdatasource.LocalGenreDataSource
 import com.github.ephelsa.okmoviesplace.model.Genre
-import com.github.ephelsa.okmoviesplace.remotedatasource.RemoteGenreDataSource
+import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource
 
 class GenreRepositoryImpl(
     private val remoteGenreDataSource: RemoteGenreDataSource,
