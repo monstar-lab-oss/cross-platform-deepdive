@@ -38,6 +38,7 @@ object Dependencies {
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.ktx}"
         const val sqlDelight = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.lifecycle}"
+        const val lifecycleScope = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.Android.lifecycle}"
         const val kodein = "org.kodein.di:kodein-di-framework-android-x-viewmodel:${Versions.Common.kodein}"
         const val ktor = "io.ktor:ktor-client-android:${Versions.Common.ktor}"
     }

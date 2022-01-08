@@ -27,6 +27,7 @@ dependencies {
         implementation(appCompat)
         implementation(constraintLayout)
         implementation(lifecycleViewModel)
+        implementation(lifecycleScope)
         implementation(coroutines)
         implementation(kodein)
     }
