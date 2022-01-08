@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = App.compileSdk
     defaultConfig {
-        applicationId = "com.github.ephelsa.okmoviesplace.android"
-        minSdk = 26
-        targetSdk = 31
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = App.applicationId
+        minSdk = App.minSdk
+        targetSdk = App.targetSdk
+        versionCode = App.versionCode
+        versionName = App.versionName
     }
     buildTypes {
         getByName("release") {
@@ -21,7 +21,7 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation(Dependencies.Android.material)
+    implementation(Dependencies.Android.appCompat)
+    implementation(Dependencies.Android.constraintLayout)
 }

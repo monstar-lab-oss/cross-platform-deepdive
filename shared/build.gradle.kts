@@ -4,7 +4,7 @@ plugins {
     id("com.android.library")
 }
 
-version = "1.0"
+version = App.version
 
 kotlin {
     android()
@@ -21,13 +21,12 @@ kotlin {
             baseName = "shared"
         }
     }
-    
+
     sourceSets {
         val commonMain by getting
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(kotlin(Dependencies.Common.testCommonAnnotations))
             }
         }
         val androidMain by getting
@@ -59,10 +58,10 @@ kotlin {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = App.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 26
-        targetSdk = 31
+        minSdk = App.minSdk
+        targetSdk = App.targetSdk
     }
 }
