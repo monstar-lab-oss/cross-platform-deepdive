@@ -1,5 +1,5 @@
 object Versions {
-    const val ktx = "1.6.10"
+    const val ktx = "1.6.0"
     const val gradle = "7.0.4"
     const val sqlDelight = "1.5.3"
 
@@ -24,6 +24,7 @@ object Dependencies {
     object Common {
         const val testCommonAnnotations = "test-annotations-common"
         const val kodein = "org.kodein.di:kodein-di:${Versions.Common.kodein}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.ktx}"
     }
 
     object Android {
