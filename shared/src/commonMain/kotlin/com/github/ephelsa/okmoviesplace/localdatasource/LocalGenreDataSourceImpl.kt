@@ -11,7 +11,7 @@ class LocalGenreDataSourceImpl(
     override suspend fun storeMovieList(genres: List<Genre>) {
         genreQueries.transaction {
             genres.forEach { genre ->
-                genreQueries.insertGenre(
+                genreQueries.insertOrReplace(
                     GenreTable(genre.id.toLong(), genre.name)
                 )
             }
