@@ -1,20 +1,36 @@
 package com.github.ephelsa.okmoviesplace.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.github.ephelsa.okmoviesplace.Greeting
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.github.ephelsa.okmoviesplace.model.Genre
+import com.github.ephelsa.okmoviesplace.repository.GenreRepository
+import kotlinx.coroutines.launch
+import org.kodein.di.DIAware
+import org.kodein.di.android.closestDI
+import org.kodein.di.instance
 
-fun greet(): String {
-    return Greeting().greeting()
-}
+class MainActivity : AppCompatActivity(), DIAware {
 
-class MainActivity : AppCompatActivity() {
+    override val di by closestDI()
+
+    private val genreRepository: GenreRepository by instance()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        getData {
+            tv.text = it.toString()
+        }
+    }
+
+    private fun getData(onResult: (Genre?) -> Unit) {
+        lifecycleScope.launch {
+            onResult(genreRepository.movieById(9648))
+        }
     }
 }
