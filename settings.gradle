@@ -1,6 +1,19 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    // The JS plugin adds a Yarn repo
+    // dynamically, so we shouldn't try
+    // to limit any urls from here.
+    repositories {
+        mavenCentral()
+    }
+}
 
 rootProject.name = 'Terrapin'
 
 include ':water'
-include ':filmfinder'
-include ':filmfinder:app'

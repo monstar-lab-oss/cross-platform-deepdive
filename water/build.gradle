@@ -5,9 +5,6 @@ plugins {
 group = 'com.cliabhach'
 version = '1.0'
 
-repositories {
-    mavenCentral()
-}
 
 kotlin {
     jvm {
@@ -41,7 +38,11 @@ kotlin {
         }
         commonTest {
             dependencies {
-                implementation kotlin('test')
+                // Commented out as per https://youtrack.jetbrains.com/issue/KTIJ-16821 and
+                // https://kotlinlang.org/docs/gradle.html#set-dependencies-on-test-libraries .
+                //
+                // Shame that the type inference for JetBrains' 'kotlin()' function is so bad.
+                //implementation kotlin('test')
             }
         }
         jvmMain {
