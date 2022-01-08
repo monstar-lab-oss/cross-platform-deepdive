@@ -27,12 +27,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(Dependencies.Common.coroutines)
+                implementation(Dependencies.Common.kodein)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin(Dependencies.Common.testCommonAnnotations))
-                implementation(Dependencies.Common.kodein)
             }
         }
         val androidMain by getting {

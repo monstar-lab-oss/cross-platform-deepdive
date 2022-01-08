@@ -21,9 +21,13 @@ android {
 
 dependencies {
     implementation(project(":shared"))
-    implementation(Dependencies.Android.material)
-    implementation(Dependencies.Android.appCompat)
-    implementation(Dependencies.Android.constraintLayout)
-    implementation(Dependencies.Android.lifecycleViewModel)
-    implementation(Dependencies.Android.coroutines)
+
+    with(Dependencies.Android) {
+        implementation(material)
+        implementation(appCompat)
+        implementation(constraintLayout)
+        implementation(lifecycleViewModel)
+        implementation(coroutines)
+        implementation(kodein)
+    }
 }

@@ -37,6 +37,8 @@ object Dependencies {
         const val sqlDelight = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
 
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.lifecycle}"
+
+        const val kodein = "org.kodein.di:kodein-di-framework-android-x-viewmodel:${Versions.Common.kodein}"
     }
 
     object IOS {
