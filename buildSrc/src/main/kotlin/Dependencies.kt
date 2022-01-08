@@ -11,6 +11,7 @@ object Versions {
         const val material = "1.4.0"
         const val appCompat = "1.4.0"
         const val constraintLayout = "2.1.2"
+        const val lifecycle = "2.4.0"
     }
 
 }
@@ -31,8 +32,11 @@ object Dependencies {
         const val material = "com.google.android.material:material:${Versions.Android.material}"
         const val appCompat = "androidx.appcompat:appcompat:${Versions.Android.appCompat}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayout}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.ktx}"
 
         const val sqlDelight = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
+
+        const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.lifecycle}"
     }
 
     object IOS {

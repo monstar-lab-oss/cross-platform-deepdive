@@ -24,4 +24,6 @@ dependencies {
     implementation(Dependencies.Android.material)
     implementation(Dependencies.Android.appCompat)
     implementation(Dependencies.Android.constraintLayout)
+    implementation(Dependencies.Android.lifecycleViewModel)
+    implementation(Dependencies.Android.coroutines)
 }
