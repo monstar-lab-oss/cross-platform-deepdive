@@ -18,4 +18,10 @@ object Typographies {
             letterSpacing = 0.15.sp
         )
     )
+
+    val TagTextStyle = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        letterSpacing = 0.25.sp
+    )
 }
