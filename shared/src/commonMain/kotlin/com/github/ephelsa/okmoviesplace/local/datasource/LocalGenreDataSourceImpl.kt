@@ -28,4 +28,10 @@ internal class LocalGenreDataSourceImpl(
             Genre(identifier.toInt(), name)
         }.executeAsOneOrNull()
     }
+
+    override suspend fun allMovieGenres(): List<Genre> {
+        return genreQueries.selectAll { id, name ->
+            Genre(id.toInt(), name)
+        }.executeAsList()
+    }
 }

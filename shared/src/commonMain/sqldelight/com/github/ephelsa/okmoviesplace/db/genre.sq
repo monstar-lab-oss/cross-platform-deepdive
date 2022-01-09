@@ -17,3 +17,7 @@ WHERE id = ?;
 insertOrReplace:
 INSERT OR REPLACE INTO genreTable
 VALUES ?;
+
+selectAll:
+SELECT id, name
+FROM genreTable;

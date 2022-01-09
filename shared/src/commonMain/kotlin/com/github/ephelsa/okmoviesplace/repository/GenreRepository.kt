@@ -4,7 +4,9 @@ import com.github.ephelsa.okmoviesplace.model.Genre
 
 interface GenreRepository {
 
-    suspend fun refreshGenres()
+    suspend fun reload()
 
     suspend fun movieById(id: Int): Genre?
+
+    suspend fun allMovieGenres(): List<Genre>
 }

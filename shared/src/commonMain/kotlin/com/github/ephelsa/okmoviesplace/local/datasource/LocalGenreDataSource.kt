@@ -8,4 +8,6 @@ internal interface LocalGenreDataSource {
     suspend fun isMovieListEmpty(): Boolean
 
     suspend fun movieById(id: Int): Genre?
+
+    suspend fun allMovieGenres(): List<Genre>
 }
