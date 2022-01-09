@@ -7,7 +7,7 @@ import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSource
 import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSourceImpl
 import com.github.ephelsa.okmoviesplace.local.SQLDelightDriverFactory
 import com.github.ephelsa.okmoviesplace.remote.OKMoviesPlaceClient
-import com.github.ephelsa.okmoviesplace.remote.TheMoviesDBUrl
+import com.github.ephelsa.okmoviesplace.remote.TheMovieDBUrl
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSourceImpl
 import com.github.ephelsa.okmoviesplace.repository.GenreRepository
@@ -57,13 +57,13 @@ object CommonDI {
      * Module for remote client.
      */
     private val remoteClientModule = DI.Module("Common/Remote/Client") {
-        bind<Url>("TheMoviesDBUrl") with provider { TheMoviesDBUrl.Url }
+        bind<Url>("TheMovieDBUrl") with provider { TheMovieDBUrl.Url }
 
         bind<HttpClient>() with provider {
             OKMoviesPlaceClient.client(
-                instance("TheMoviesDBUrl"),
+                instance("TheMovieDBUrl"),
                 "en-US", // TODO: Replace with real device implementation
-                BuildKonfig.theMoviesDBApiKey
+                BuildKonfig.theMovieDBApiKey
             )
         }
     }

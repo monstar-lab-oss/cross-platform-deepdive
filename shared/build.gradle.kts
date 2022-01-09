@@ -97,9 +97,9 @@ buildkonfig {
     packageName = App.packageRoot.substring(0, App.packageRoot.length - 1)
 
     val localPropertiesFile = "local.properties"
-    val theMoviesApiKey = "theMoviesDBApiKey"
+    val theMovieApiKey = "theMovieDBApiKey"
 
     defaultConfigs {
-        buildConfigField(Type.STRING, theMoviesApiKey, project.readProperty(theMoviesApiKey, localPropertiesFile))
+        buildConfigField(Type.STRING, theMovieApiKey, project.readProperty(theMovieApiKey, localPropertiesFile))
     }
 }
