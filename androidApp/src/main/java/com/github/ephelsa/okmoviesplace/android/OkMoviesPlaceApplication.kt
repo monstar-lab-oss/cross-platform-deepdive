@@ -1,6 +1,7 @@
 package com.github.ephelsa.okmoviesplace.android
 
 import android.app.Application
+import com.github.ephelsa.okmoviesplace.android.di.AppDI
 import com.github.ephelsa.okmoviesplace.di.CommonDI
 import com.github.ephelsa.okmoviesplace.localdatasource.SQLDelightDriverFactory
 import org.kodein.di.DI
@@ -17,5 +18,6 @@ class OkMoviesPlaceApplication : Application(), DIAware {
         bind { instance(SQLDelightDriverFactory(this@OkMoviesPlaceApplication)) }
 
         import(CommonDI.repositoryModule)
+        import(AppDI.viewModelModule)
     }
 }
