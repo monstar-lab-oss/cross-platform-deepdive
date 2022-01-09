@@ -3,17 +3,15 @@ package com.github.ephelsa.okmoviesplace.di
 import com.github.ephelsa.okmoviesplace.BuildKonfig
 import com.github.ephelsa.okmoviesplace.db.GenreQueries
 import com.github.ephelsa.okmoviesplace.db.OKMoviesPlaceDatabase
+import com.github.ephelsa.okmoviesplace.local.SQLDelightDriverFactory
 import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSource
 import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSourceImpl
-import com.github.ephelsa.okmoviesplace.local.SQLDelightDriverFactory
-import com.github.ephelsa.okmoviesplace.remote.OKMoviesPlaceClient
-import com.github.ephelsa.okmoviesplace.remote.TheMovieDBUrl
+import com.github.ephelsa.okmoviesplace.remote.TMDBClient
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSourceImpl
 import com.github.ephelsa.okmoviesplace.repository.GenreRepository
 import com.github.ephelsa.okmoviesplace.repository.GenreRepositoryImpl
 import io.ktor.client.HttpClient
-import io.ktor.http.Url
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.bindSingleton
@@ -57,11 +55,8 @@ object CommonDI {
      * Module for remote client.
      */
     private val remoteClientModule = DI.Module("Common/Remote/Client") {
-        bind<Url>("TheMovieDBUrl") with provider { TheMovieDBUrl.Url }
-
         bind<HttpClient>() with provider {
-            OKMoviesPlaceClient.client(
-                instance("TheMovieDBUrl"),
+            TMDBClient.client(
                 "en-US", // TODO: Replace with real device implementation
                 BuildKonfig.theMovieDBApiKey
             )

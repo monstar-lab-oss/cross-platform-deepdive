@@ -8,15 +8,14 @@ import io.ktor.client.features.observer.ResponseObserver
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.request
 import io.ktor.http.URLBuilder
-import io.ktor.http.Url
 import io.ktor.http.takeFrom
 import kotlinx.serialization.json.Json
 
-internal object OKMoviesPlaceClient {
-    fun client(baseUrl: Url, language: String, apiKey: String) = HttpClient {
+internal object TMDBClient {
+    fun client(language: String, apiKey: String) = HttpClient {
         defaultRequest {
             url.takeFrom(
-                URLBuilder().takeFrom(baseUrl).apply {
+                URLBuilder().takeFrom(TMDBConstants.BASE_API_PATH).apply {
                     encodedPath += url.encodedPath
                 }
             )
