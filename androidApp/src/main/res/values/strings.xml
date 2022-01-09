@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">oK Movies Place</string>
+
+    <string name="contentDescription_movieDetails">Open movie details</string>
 </resources>
