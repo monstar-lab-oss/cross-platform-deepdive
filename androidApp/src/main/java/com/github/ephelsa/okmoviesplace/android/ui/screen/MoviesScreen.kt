@@ -41,7 +41,7 @@ fun MoviesScreen(
         ) {
             ComingSoonSection(
                 title = "Dora And The Lost City Of Gold",
-                imageUrl = "https://images.unsplash.com/photo-1433162653888-a571db5ccccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                imagePath = "https://images.unsplash.com/photo-1433162653888-a571db5ccccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
             )
             GenresSection(viewModel)
             TrendingNowSection(viewModel)
@@ -53,7 +53,7 @@ fun MoviesScreen(
 @Composable
 fun ComingSoonSection(
     title: String,
-    imageUrl: String,
+    imagePath: String,
 ) {
     Column(
         modifier = Modifier
@@ -66,7 +66,7 @@ fun ComingSoonSection(
             style = MaterialTheme.typography.h1
         )
 
-        ComingSoonCard(title = title, imageUrl = imageUrl) {
+        ComingSoonCard(title, imagePath) {
 
         }
     }

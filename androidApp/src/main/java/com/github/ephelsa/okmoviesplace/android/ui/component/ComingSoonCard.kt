@@ -34,14 +34,14 @@ import com.github.ephelsa.okmoviesplace.android.ui.theme.Shapes
  * Coming Soon card design.
  *
  * @param title is displayed at top of the card.
- * @param imageUrl is the background image.
+ * @param imagePath is the background image.
  * @param onClick click action when the icon is pressed.
  */
 @ExperimentalMaterialApi
 @Composable
 fun ComingSoonCard(
     title: String,
-    imageUrl: String,
+    imagePath: String,
     onClick: () -> Unit
 ) {
     Surface(
@@ -52,7 +52,7 @@ fun ComingSoonCard(
         elevation = 4.dp,
     ) {
         Image(
-            painter = rememberImagePainter(data = imageUrl),
+            painter = rememberImagePainter(data = imagePath),
             contentDescription = title,
             contentScale = ContentScale.FillBounds
         )
