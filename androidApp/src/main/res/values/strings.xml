@@ -5,6 +5,9 @@
     <string name="label_movies">Movies</string>
     <string name="label_favorites">Favorites</string>
     <string name="label_comingSoon">Coming Soon</string>
+    <string name="label_trendingNow">Trending Now</string>
+    <string name="label_adultContent">+18</string>
 
     <string name="contentDescription_movieDetails">Open movie details</string>
+    <string name="contentDescription_votesAverage">%s votes average</string>
 </resources>
