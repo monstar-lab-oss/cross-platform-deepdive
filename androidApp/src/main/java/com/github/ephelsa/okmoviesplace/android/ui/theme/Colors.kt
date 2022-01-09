@@ -1,4 +1,4 @@
-package com.github.ephelsa.okmoviesplace.android.theme
+package com.github.ephelsa.okmoviesplace.android.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
