@@ -3,9 +3,9 @@ package com.github.ephelsa.okmoviesplace.di
 import com.github.ephelsa.okmoviesplace.BuildKonfig
 import com.github.ephelsa.okmoviesplace.db.GenreQueries
 import com.github.ephelsa.okmoviesplace.db.OKMoviesPlaceDatabase
-import com.github.ephelsa.okmoviesplace.localdatasource.LocalGenreDataSource
-import com.github.ephelsa.okmoviesplace.localdatasource.LocalGenreDataSourceImpl
-import com.github.ephelsa.okmoviesplace.localdatasource.SQLDelightDriverFactory
+import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSource
+import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSourceImpl
+import com.github.ephelsa.okmoviesplace.local.SQLDelightDriverFactory
 import com.github.ephelsa.okmoviesplace.remote.OKMoviesPlaceClient
 import com.github.ephelsa.okmoviesplace.remote.TheMoviesDBUrl
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource

@@ -1,4 +1,4 @@
-package com.github.ephelsa.okmoviesplace.localdatasource
+package com.github.ephelsa.okmoviesplace.local
 
 import android.content.Context
 import com.github.ephelsa.okmoviesplace.db.OKMoviesPlaceDatabase

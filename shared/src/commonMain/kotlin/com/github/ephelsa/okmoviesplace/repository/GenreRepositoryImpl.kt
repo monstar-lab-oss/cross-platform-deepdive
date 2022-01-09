@@ -1,6 +1,6 @@
 package com.github.ephelsa.okmoviesplace.repository
 
-import com.github.ephelsa.okmoviesplace.localdatasource.LocalGenreDataSource
+import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSource
 import com.github.ephelsa.okmoviesplace.model.Genre
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource
 

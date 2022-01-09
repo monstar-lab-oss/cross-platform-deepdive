@@ -1,4 +1,4 @@
-package com.github.ephelsa.okmoviesplace.localdatasource
+package com.github.ephelsa.okmoviesplace.local.datasource
 
 import com.github.ephelsa.okmoviesplace.db.GenreQueries
 import com.github.ephelsa.okmoviesplace.db.GenreTable
