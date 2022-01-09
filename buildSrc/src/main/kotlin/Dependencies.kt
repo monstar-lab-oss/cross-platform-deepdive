@@ -14,6 +14,7 @@ object Versions {
         const val appCompat = "1.4.0"
         const val lifecycle = "2.4.0"
         const val compose = "1.1.0-rc01"
+        const val coilCompose = "1.4.0"
         const val activityCompose = "1.4.0"
     }
 
@@ -49,6 +50,7 @@ object Dependencies {
             const val animation = "androidx.compose.animation:animation:${Versions.Android.compose}"
             const val tooling = "androidx.compose.ui:ui-tooling:${Versions.Android.compose}"
             const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.Android.lifecycle}"
+            const val coil = "io.coil-kt:coil-compose:${Versions.Android.coilCompose}"
         }
     }
 

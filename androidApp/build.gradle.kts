@@ -55,5 +55,6 @@ dependencies {
         implementation(animation)
         implementation(tooling)
         implementation(viewModel)
+        implementation(coil)
     }
 }
