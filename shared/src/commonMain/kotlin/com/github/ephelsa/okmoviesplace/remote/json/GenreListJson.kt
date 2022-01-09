@@ -1,7 +1,7 @@
 package com.github.ephelsa.okmoviesplace.remote.json
 
 import com.github.ephelsa.okmoviesplace.model.Genre
-import com.github.ephelsa.okmoviesplace.util.ModelMapper
+import com.github.ephelsa.okmoviesplace.model.ModelMapper
 import kotlinx.serialization.Serializable
 
 @Serializable

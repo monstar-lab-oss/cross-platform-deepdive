@@ -1,4 +1,4 @@
-package com.github.ephelsa.okmoviesplace.util
+package com.github.ephelsa.okmoviesplace.model
 
 /**
  * Interface to let any obj be mapped as a model entity
