@@ -4,7 +4,7 @@ import com.github.ephelsa.okmoviesplace.localdatasource.LocalGenreDataSource
 import com.github.ephelsa.okmoviesplace.model.Genre
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource
 
-class GenreRepositoryImpl(
+internal class GenreRepositoryImpl(
     private val remoteGenreDataSource: RemoteGenreDataSource,
     private val localGenreDataSource: LocalGenreDataSource
 ) : GenreRepository {

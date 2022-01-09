@@ -4,7 +4,7 @@ import com.github.ephelsa.okmoviesplace.db.GenreQueries
 import com.github.ephelsa.okmoviesplace.db.GenreTable
 import com.github.ephelsa.okmoviesplace.model.Genre
 
-class LocalGenreDataSourceImpl(
+internal class LocalGenreDataSourceImpl(
     private val genreQueries: GenreQueries
 ) : LocalGenreDataSource {
 

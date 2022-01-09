@@ -2,7 +2,7 @@ package com.github.ephelsa.okmoviesplace.localdatasource
 
 import com.github.ephelsa.okmoviesplace.model.Genre
 
-interface LocalGenreDataSource {
+internal interface LocalGenreDataSource {
     suspend fun storeMovieList(genres: List<Genre>)
 
     suspend fun isMovieListEmpty(): Boolean

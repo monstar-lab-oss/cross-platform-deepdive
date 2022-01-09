@@ -5,7 +5,7 @@ import com.github.ephelsa.okmoviesplace.util.ModelMapper
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GenreListJson(
+internal data class GenreListJson(
     val genres: List<GenreJson>
 ) : ModelMapper<List<Genre>> {
 

@@ -5,7 +5,7 @@ import com.github.ephelsa.okmoviesplace.remote.json.GenreListJson
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 
-class RemoteGenreDataSourceImpl(
+internal class RemoteGenreDataSourceImpl(
     private val client: HttpClient
 ) : RemoteGenreDataSource {
 
