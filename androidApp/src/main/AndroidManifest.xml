@@ -12,7 +12,7 @@
         android:theme="@style/OKMoviesPlaceTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".OkMoviesPlaceActivity"
+            android:name=".movies.MoviesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
