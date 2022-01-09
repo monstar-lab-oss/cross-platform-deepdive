@@ -5,12 +5,12 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val ColorPalette = lightColors(
-    primary = RaisingBlack,
-    primaryVariant = RichBlackFOGA29,
-    secondary = ImperialRed,
-    secondaryVariant = ImperialRed,
-    background = RichBlackFOGA29,
-    surface = RichBlackFOGA29,
+    primary = Colors.RaisingBlack,
+    primaryVariant = Colors.RichBlackFOGA29,
+    secondary = Colors.ImperialRed,
+    secondaryVariant = Colors.MintCream,
+    background = Colors.RichBlackFOGA29,
+    surface = Colors.RichBlackFOGA29,
 )
 
 @Composable
@@ -18,6 +18,6 @@ fun OKMoviesPlaceTheme(content: @Composable () -> Unit) {
     MaterialTheme(
         colors = ColorPalette,
         content = content,
-        typography = Typography
+        typography = Typographies.Default
     )
 }

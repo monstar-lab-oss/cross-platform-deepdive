@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -27,8 +26,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.github.ephelsa.okmoviesplace.android.R
-import com.github.ephelsa.okmoviesplace.android.ui.theme.MintCream
+import com.github.ephelsa.okmoviesplace.android.ui.theme.Colors
 import com.github.ephelsa.okmoviesplace.android.ui.theme.OKMoviesPlaceTheme
+import com.github.ephelsa.okmoviesplace.android.ui.theme.Shapes
 
 /**
  * Coming Soon card design.
@@ -47,9 +47,8 @@ fun ComingSoonCard(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(1.6f)
-            .padding(16.dp),
-        shape = RoundedCornerShape(8.dp),
+            .aspectRatio(1.6f),
+        shape = Shapes.CardRoundedCornerShape,
         elevation = 4.dp,
     ) {
         Image(
@@ -73,7 +72,7 @@ fun ComingSoonCard(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.h6,
-                color = MintCream
+                color = Colors.MintCream
             )
 
             Icon(
@@ -83,7 +82,7 @@ fun ComingSoonCard(
                     .rotate(-45.0f)
                     .size(20.dp)
                     .clickable(onClick = onClick),
-                tint = MintCream,
+                tint = Colors.MintCream,
             )
         }
     }
@@ -92,7 +91,7 @@ fun ComingSoonCard(
 @ExperimentalMaterialApi
 @Preview
 @Composable
-fun ComingSoonCardPreview() {
+private fun ComingSoonCardPreview() {
     OKMoviesPlaceTheme {
         ComingSoonCard("Dora And The Lost City Of Gold", "https://images.unsplash.com/photo-1433162653888-a571db5ccccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80") {
 
