@@ -12,8 +12,9 @@ object Versions {
     object Android {
         const val material = "1.4.0"
         const val appCompat = "1.4.0"
-        const val constraintLayout = "2.1.2"
         const val lifecycle = "2.4.0"
+        const val compose = "1.1.0-rc01"
+        const val activityCompose = "1.4.0"
     }
 
 }
@@ -35,13 +36,20 @@ object Dependencies {
     object Android {
         const val material = "com.google.android.material:material:${Versions.Android.material}"
         const val appCompat = "androidx.appcompat:appcompat:${Versions.Android.appCompat}"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.Android.constraintLayout}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.ktx}"
         const val sqlDelight = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
         const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Android.lifecycle}"
         const val lifecycleScope = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.Android.lifecycle}"
         const val kodein = "org.kodein.di:kodein-di-framework-android-x-viewmodel:${Versions.Common.kodein}"
         const val ktor = "io.ktor:ktor-client-android:${Versions.Common.ktor}"
+
+        object Compose {
+            const val activity = "androidx.activity:activity-compose:${Versions.Android.activityCompose}"
+            const val material = "androidx.compose.material:material:${Versions.Android.compose}"
+            const val animation = "androidx.compose.animation:animation:${Versions.Android.compose}"
+            const val tooling = "androidx.compose.ui:ui-tooling:${Versions.Android.compose}"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.Android.lifecycle}"
+        }
     }
 
     object IOS {
