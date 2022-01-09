@@ -22,6 +22,7 @@ class MoviesActivity : ComponentActivity(), DIAware {
         super.onCreate(savedInstanceState)
 
         viewModel.movieGenres()
+        viewModel.trendingMovies()
 
         setContent {
             OKMoviesPlaceTheme {
