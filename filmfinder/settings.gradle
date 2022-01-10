@@ -14,5 +14,6 @@ dependencyResolutionManagement {
     }
 }
 
-include ':water'
 include ':app'
+include ':shell'
+include ':water'
