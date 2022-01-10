@@ -1,11 +1,14 @@
 package com.github.ephelsa.okmoviesplace.android.ui.component
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ExperimentalMaterialApi
@@ -40,25 +43,30 @@ import com.github.ephelsa.okmoviesplace.android.ui.theme.Shapes
 @ExperimentalMaterialApi
 @Composable
 fun ComingSoonCard(
+    modifier: Modifier = Modifier,
     title: String,
     imagePath: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Surface(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .aspectRatio(1.6f),
         shape = Shapes.CardRoundedCornerShape,
         elevation = 4.dp,
     ) {
         Image(
-            painter = rememberImagePainter(data = imagePath),
+            painter = rememberImagePainter(
+                data = imagePath,
+                builder = {
+                    placeholder(R.drawable.placeholder)
+                }
+            ),
             contentDescription = title,
-            contentScale = ContentScale.FillBounds
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
         )
         Row(
             modifier = Modifier
-                .fillMaxWidth()
                 .padding(
                     horizontal = 12.dp,
                     vertical = 14.dp
@@ -93,7 +101,7 @@ fun ComingSoonCard(
 @Composable
 private fun ComingSoonCardPreview() {
     OKMoviesPlaceTheme {
-        ComingSoonCard("Dora And The Lost City Of Gold", "https://images.unsplash.com/photo-1433162653888-a571db5ccccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80") {
+        ComingSoonCard(title = "Dora And The Lost City Of Gold", imagePath = "https://images.unsplash.com/photo-1433162653888-a571db5ccccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80") {
 
         }
     }

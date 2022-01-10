@@ -11,7 +11,8 @@ internal object AppDI {
     val viewModelModule = DI.Module("Android/ViewModel") {
         bind<MoviesViewModel>() with provider {
             MoviesViewModel(
-                genreRepository = instance()
+                genreRepository = instance(),
+                movieRepository = instance()
             )
         }
     }

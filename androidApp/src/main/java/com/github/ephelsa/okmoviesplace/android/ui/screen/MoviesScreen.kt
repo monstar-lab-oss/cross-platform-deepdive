@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -16,7 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.github.ephelsa.okmoviesplace.android.R
 import com.github.ephelsa.okmoviesplace.android.movies.MoviesViewModel
 import com.github.ephelsa.okmoviesplace.android.ui.component.ComingSoonCard
@@ -39,10 +42,7 @@ fun MoviesScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(Spaces.MediumHigh)
         ) {
-            ComingSoonSection(
-                title = "Dora And The Lost City Of Gold",
-                imagePath = "https://images.unsplash.com/photo-1433162653888-a571db5ccccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-            )
+            ComingSoonSection(viewModel)
             GenresSection(viewModel)
             TrendingNowSection(viewModel)
         }
@@ -52,22 +52,36 @@ fun MoviesScreen(
 @ExperimentalMaterialApi
 @Composable
 fun ComingSoonSection(
-    title: String,
-    imagePath: String,
+    viewModel: MoviesViewModel,
 ) {
+    val upcomingMovies by viewModel.onUpcomingMovies.collectAsState()
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val cardSize = screenWidth - (Spaces.Medium * 2)
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = Spaces.Medium),
         verticalArrangement = Arrangement.spacedBy(Spaces.Medium)
     ) {
+
         Text(
             text = stringResource(R.string.label_comingSoon),
-            style = MaterialTheme.typography.h1
+            style = MaterialTheme.typography.h1,
         )
 
-        ComingSoonCard(title, imagePath) {
-
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(Spaces.Medium)
+        ) {
+            items(upcomingMovies ?: emptyList()) {
+                ComingSoonCard(
+                    modifier = Modifier.width(cardSize),
+                    title = it.title,
+                    imagePath = it.imagePath
+                ) {
+                    // TODO
+                }
+            }
         }
     }
 }
@@ -90,7 +104,7 @@ fun GenresSection(
 
 @Composable
 fun TrendingNowSection(
-    viewModel: MoviesViewModel
+    viewModel: MoviesViewModel,
 ) {
     val movies by viewModel.onTrendingMovies.collectAsState()
 
