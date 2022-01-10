@@ -10,6 +10,6 @@ internal class RemoteGenreDataSourceImpl(
 ) : RemoteGenreDataSource {
 
     override suspend fun movieList(): List<Genre> {
-        return client.get<GenreListJson>("/genre/movie/list").asModel()
+        return client.get<GenreListJson>("genre/movie/list").asModel()
     }
 }

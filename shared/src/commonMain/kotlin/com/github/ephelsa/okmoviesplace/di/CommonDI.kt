@@ -9,11 +9,17 @@ import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSourceImp
 import com.github.ephelsa.okmoviesplace.remote.TMDBClient
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSourceImpl
+import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteMovieDataSource
+import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteMovieDataSourceImpl
+import com.github.ephelsa.okmoviesplace.remote.utils.TMDBImagePathProvider
 import com.github.ephelsa.okmoviesplace.repository.GenreRepository
 import com.github.ephelsa.okmoviesplace.repository.GenreRepositoryImpl
+import com.github.ephelsa.okmoviesplace.repository.MovieRepository
+import com.github.ephelsa.okmoviesplace.repository.MovieRepositoryImpl
 import io.ktor.client.HttpClient
 import org.kodein.di.DI
 import org.kodein.di.bind
+import org.kodein.di.bindProvider
 import org.kodein.di.bindSingleton
 import org.kodein.di.instance
 import org.kodein.di.provider
@@ -37,8 +43,7 @@ object CommonDI {
      * Module for local database.
      */
     private val localDatabaseModule = DI.Module("Common/Local/Database") {
-        bind { singleton { OKMoviesPlaceDatabase(instance<SQLDelightDriverFactory>().createDriver()) } }
-
+        bind<OKMoviesPlaceDatabase>() with singleton { OKMoviesPlaceDatabase(instance<SQLDelightDriverFactory>().createDriver()) }
         bind<GenreQueries>() with provider { instance<OKMoviesPlaceDatabase>().genreQueries }
     }
 
@@ -49,6 +54,7 @@ object CommonDI {
         import(remoteClientModule)
 
         bindSingleton<RemoteGenreDataSource> { RemoteGenreDataSourceImpl(instance()) }
+        bindSingleton<RemoteMovieDataSource> { RemoteMovieDataSourceImpl(instance(), instance()) }
     }
 
     /**
@@ -64,11 +70,19 @@ object CommonDI {
     }
 
     /**
+     * Module to provide any utils
+     */
+    private val utilsModule = DI.Module("Common/Utils") {
+        bindProvider { TMDBImagePathProvider() }
+    }
+
+    /**
      * Module for repositories.
      */
     val repositoryModule = DI.Module("Common/Repository") {
-        importAll(localModule, remoteModule)
+        importAll(localModule, remoteModule, utilsModule)
 
-        bind<GenreRepository> { provider { GenreRepositoryImpl(instance(), instance()) } }
+        bindSingleton<GenreRepository> { GenreRepositoryImpl(instance(), instance()) }
+        bindSingleton<MovieRepository> { MovieRepositoryImpl(instance(), instance()) }
     }
 }
