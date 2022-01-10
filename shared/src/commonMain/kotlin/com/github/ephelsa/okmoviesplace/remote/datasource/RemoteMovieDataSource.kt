@@ -1,11 +1,11 @@
 package com.github.ephelsa.okmoviesplace.remote.datasource
 
-import com.github.ephelsa.okmoviesplace.model.Genre
-import com.github.ephelsa.okmoviesplace.model.Movie
+import com.github.ephelsa.okmoviesplace.remote.json.MovieJson
+import com.github.ephelsa.okmoviesplace.remote.json.UpcomingJson
 
 internal interface RemoteMovieDataSource {
 
-    suspend fun upcoming(backdropWidth: Int, genresMapper: (List<Int>) -> List<Genre>): List<Movie>
+    suspend fun upcoming(backdropWidth: Int): List<UpcomingJson>
 
-    suspend fun trendingNow(): List<Movie>
+    suspend fun trendingNow(posterWidth: Int): List<MovieJson>
 }

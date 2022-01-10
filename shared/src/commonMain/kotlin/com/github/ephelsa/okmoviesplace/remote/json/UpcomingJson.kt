@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class MovieJson(
+internal data class UpcomingJson(
     val id: Int,
     val adult: Boolean,
     val title: String,
@@ -14,14 +14,14 @@ internal data class MovieJson(
     val votesAverage: Double,
     @SerialName("genre_ids")
     val genreIds: List<Int>,
-    @SerialName("poster_path")
-    val posterImagePath: String,
+    @SerialName("backdrop_path")
+    val backdropImagePath: String,
 ) : ModelMapper<Movie> {
 
     override fun asModel(): Movie {
         return Movie(
             id = id,
-            imagePath = posterImagePath,
+            imagePath = backdropImagePath,
             title = title,
             isAdult = adult,
             votesAverage = votesAverage,

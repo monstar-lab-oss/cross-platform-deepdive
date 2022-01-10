@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 internal data class ResultListJson<T>(
     val page: Int,
-    val results: List<T>
+    val results: List<T>,
 ) {
     fun <M> map(block: (T) -> M): List<M> {
         return results.map(block)
