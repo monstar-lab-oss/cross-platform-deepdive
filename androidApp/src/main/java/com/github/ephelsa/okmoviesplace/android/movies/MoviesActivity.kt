@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalAbsoluteElevation
 import com.github.ephelsa.okmoviesplace.android.ui.screen.MoviesScreen
 import com.github.ephelsa.okmoviesplace.android.ui.theme.OKMoviesPlaceTheme
 import org.kodein.di.DI
@@ -23,7 +22,7 @@ class MoviesActivity : ComponentActivity(), DIAware {
         super.onCreate(savedInstanceState)
 
         viewModel.movieGenres()
-        viewModel.trendingMovies()
+        viewModel.trendingMovies(500)   // TODO: How the fuck can I know the composable view width?
         viewModel.upcomingMovies(500) // TODO: How the fuck can I know the composable view width?
 
         setContent {

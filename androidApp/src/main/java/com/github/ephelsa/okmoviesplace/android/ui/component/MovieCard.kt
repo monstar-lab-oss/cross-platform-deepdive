@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.github.ephelsa.okmoviesplace.android.R
+import com.github.ephelsa.okmoviesplace.android.ui.theme.Colors
 import com.github.ephelsa.okmoviesplace.android.ui.theme.OKMoviesPlaceTheme
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Shapes
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Spaces
@@ -36,7 +36,7 @@ fun MovieCard(
     imageModifier: Modifier = Modifier,
     movie: Movie,
     showAll: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val screenWidth = LocalConfiguration.current.screenWidthDp.dp
 
@@ -56,7 +56,7 @@ fun MovieCard(
                 .fillMaxWidth()
                 .aspectRatio(0.8f)
                 .clip(Shapes.CardRoundedCornerShape)
-                .background(color = MaterialTheme.colors.secondary)
+                .background(color = Colors.Onyx)
         )
 
         if (showAll) {

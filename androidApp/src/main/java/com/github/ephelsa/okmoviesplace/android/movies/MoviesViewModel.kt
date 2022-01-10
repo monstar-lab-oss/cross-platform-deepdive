@@ -40,9 +40,9 @@ class MoviesViewModel(
         }
     }
 
-    fun trendingMovies() {
+    fun trendingMovies(posterWidth: Int) {
         viewModelScope.launch {
-            trendingMovies.emit(null)
+            trendingMovies.emit(movieRepository.trendingNow(posterWidth))
         }
     }
 }
