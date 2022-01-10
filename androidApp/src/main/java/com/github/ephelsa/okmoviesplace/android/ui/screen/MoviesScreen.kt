@@ -77,10 +77,14 @@ fun ComingSoonSection(
                 ComingSoonCard(
                     modifier = Modifier.width(cardSize),
                     title = it.title,
-                    imagePath = it.imagePath
-                ) {
-                    // TODO
-                }
+                    imagePath = it.imagePath,
+                    onClick = {
+                        // TODO
+                    },
+                    onPlay = {
+                        // TODO
+                    }
+                )
             }
         }
     }
@@ -128,7 +132,7 @@ fun TrendingNowSection(
                     movie = it,
                     showAll = true
                 ) {
-
+                    // TODO
                 }
             }
         }

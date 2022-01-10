@@ -8,4 +8,5 @@ object Colors {
     val RaisingBlack = Color(0xFF2b2d3b)
     val MintCream = Color(0xFFEAF2EF)
     val Mustard = Color(0xFFFCDC4D)
+    val Onyx = Color(0xFF3c3c3e)
 }

@@ -4,6 +4,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -46,51 +48,62 @@ fun ComingSoonCard(
     modifier: Modifier = Modifier,
     title: String,
     imagePath: String,
+    onPlay: () -> Unit,
     onClick: () -> Unit,
 ) {
     Surface(
         modifier = modifier
-            .aspectRatio(1.6f),
+            .height(IntrinsicSize.Min)
+            .clickable(onClick = onClick),
         shape = Shapes.CardRoundedCornerShape,
         elevation = 4.dp,
     ) {
         Image(
             painter = rememberImagePainter(
                 data = imagePath,
-                builder = {
-                    placeholder(R.drawable.placeholder)
-                }
             ),
             contentDescription = title,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-        Row(
             modifier = Modifier
-                .padding(
-                    horizontal = 12.dp,
-                    vertical = 14.dp
-                ),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Top
-        ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(0.8f),
-                text = title,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.h6,
-                color = Colors.MintCream
-            )
+                .aspectRatio(1.6f)
+                .background(Colors.Onyx)
+        )
 
-            Icon(
-                imageVector = Icons.Outlined.Send,
-                contentDescription = stringResource(R.string.contentDescription_movieDetails),
+        Box(modifier = Modifier.fillMaxSize()) {
+            Row(
                 modifier = Modifier
-                    .rotate(-45.0f)
-                    .size(20.dp)
-                    .clickable(onClick = onClick),
-                tint = Colors.MintCream,
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colors.surface.copy(alpha = 0.1f))
+                    .padding(
+                        horizontal = 12.dp,
+                        vertical = 14.dp
+                    ),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
+            ) {
+                Text(
+                    modifier = Modifier.fillMaxWidth(0.8f),
+                    text = title,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.h6,
+                    color = Colors.MintCream
+                )
+
+                Icon(
+                    imageVector = Icons.Outlined.Send,
+                    contentDescription = stringResource(R.string.contentDescription_movieDetails),
+                    modifier = Modifier
+                        .rotate(-45.0f)
+                        .size(20.dp),
+                    tint = Colors.MintCream,
+                )
+            }
+
+            PlayButton(
+                modifier = Modifier.align(Alignment.Center),
+                playTitle = "",
+                onClick = onPlay
             )
         }
     }
@@ -101,8 +114,11 @@ fun ComingSoonCard(
 @Composable
 private fun ComingSoonCardPreview() {
     OKMoviesPlaceTheme {
-        ComingSoonCard(title = "Dora And The Lost City Of Gold", imagePath = "https://images.unsplash.com/photo-1433162653888-a571db5ccccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80") {
-
-        }
+        ComingSoonCard(
+            title = "Dora And The Lost City Of Gold",
+            imagePath = "https://images.unsplash.com/photo-1433162653888-a571db5ccccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+            onPlay = {},
+            onClick = {}
+        )
     }
 }
