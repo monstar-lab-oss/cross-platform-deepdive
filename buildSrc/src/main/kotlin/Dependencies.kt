@@ -6,7 +6,7 @@ object Versions {
 
     object Common {
         const val kodein = "7.10.0"
-        const val ktor = "1.6.7"
+        const val ktor = "1.6.0"
     }
 
     object Android {
@@ -29,7 +29,7 @@ object Dependencies {
     object Common {
         const val testCommonAnnotations = "test-annotations-common"
         const val kodein = "org.kodein.di:kodein-di:${Versions.Common.kodein}"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.ktx}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.ktx}-native-mt"
         const val ktor = "io.ktor:ktor-client-core:${Versions.Common.ktor}"
         const val ktorSerialization = "io.ktor:ktor-client-serialization:${Versions.Common.ktor}"
     }

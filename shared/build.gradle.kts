@@ -76,6 +76,27 @@ kotlin {
             //iosSimulatorArm64Test.dependsOn(this)
         }
     }
+
+    /**
+     * This makes compile the application for iOs.
+     *
+     * Theres is needed add the -lsqlite3
+     *
+     * [Issue link][https://github.com/JetBrains/kotlin-native/issues/3672]
+     *
+     * Other way to do this:
+     *
+     * 1. In the cocoapods.framework add: isStatic = true
+     * 2. Open shared.podspec
+     * 3. In spec.libraries add "sqlite3".
+     */
+    targets.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget>().forEach { target ->
+        target.binaries.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.mpp.Framework>()
+            .forEach { lib ->
+                lib.isStatic = false
+                lib.linkerOpts.add("-lsqlite3")
+            }
+    }
 }
 
 android {
@@ -87,6 +108,7 @@ android {
     }
 }
 
+// Documentation: https://cashapp.github.io/sqldelight/multiplatform_sqlite/gradle/
 sqldelight {
     database("OKMoviesPlaceDatabase") {
         packageName = "${App.packageRoot}db"
