@@ -13,7 +13,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.home_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, HomeFragment.newInstance())
+                .replace(R.id.background, HomeFragment.newInstance())
+                .replace(R.id.foreground, SearchFragment.newInstance())
                 .commitNow()
         }
     }

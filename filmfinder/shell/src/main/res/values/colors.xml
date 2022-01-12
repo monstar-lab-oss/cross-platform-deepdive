@@ -8,6 +8,9 @@
     <color name="nyanza">#e1f0c4</color>
     <color name="black_coral">#4f6272</color>
 
+    <!-- Associated palette colors -->
+    <color name="nyanza_dark">#2B2E26</color>
+
     <color name="black">@android:color/black</color>
     <color name="white">@android:color/white</color>
 </resources>
