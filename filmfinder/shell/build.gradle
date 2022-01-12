@@ -33,6 +33,7 @@ dependencies {
     // TODO: Balance dependencies with :app
     // UI Libraries
     implementation 'com.google.android.material:material:1.4.0'
+    implementation 'io.github.lapism:search:1.2.1'
 
     // Androidx
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
