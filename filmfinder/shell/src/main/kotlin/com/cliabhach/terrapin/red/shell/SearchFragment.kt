@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import com.lapism.search.widget.MaterialSearchBar
+import com.cliabhach.terrapin.red.shell.databinding.SearchFragmentBinding
+import com.cliabhach.terrapin.red.shell.databinding.ViewSearchResultsBinding
 import com.lapism.search.widget.MaterialSearchView
 
 /**
@@ -18,21 +18,24 @@ class SearchFragment : Fragment() {
         fun newInstance() = SearchFragment()
     }
 
+    private lateinit var binding: SearchFragmentBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.search_fragment, container, false)
+        binding = SearchFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val parent = view as ViewGroup
 
-        val results = layoutInflater.inflate(R.layout.view_search_results, parent, false)
-        (results as RecyclerView).adapter = EmptyAdapter()
+        val results = ViewSearchResultsBinding.inflate(layoutInflater, parent, false)
+        results.root.adapter = EmptyAdapter()
 
-        val searchBar = view.findViewById<MaterialSearchBar>(R.id.search_input_bar)
-        val searchResults = view.findViewById<MaterialSearchView>(R.id.search_results_container)
+        val searchBar = binding.searchInputBar
+        val searchResults = binding.searchResultsContainer
 
 
         searchBar.setOnClickListener {
@@ -42,7 +45,7 @@ class SearchFragment : Fragment() {
             searchResults.requestFocus()
         }
 
-        searchResults.addView(results)
+        searchResults.addView(results.root)
         searchResults.setNavigationOnClickListener {
             searchResults.clearFocus()
         }
