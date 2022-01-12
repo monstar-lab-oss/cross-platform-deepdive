@@ -4,4 +4,9 @@
     package="com.cliabhach.terrapin.red.shell"
     >
 
+    <application
+        android:theme="@style/Keratin.Theme"
+        >
+    </application>
+
 </manifest>

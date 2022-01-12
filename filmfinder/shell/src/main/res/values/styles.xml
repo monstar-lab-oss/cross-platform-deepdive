@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Keratin">
+        <!-- Base style - does not require any attributes -->
+    </style>
+    <style name="Keratin.Theme" parent="Theme.MaterialComponents.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/slimy_green</item>
+        <item name="colorPrimaryVariant">@color/dark_purple</item>
+        <item name="colorOnPrimary">@color/nyanza</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/tumbleweed</item>
+        <item name="colorSecondaryVariant">@color/black_coral</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:background">?attr/colorOnPrimary</item>
+    </style>
+</resources>

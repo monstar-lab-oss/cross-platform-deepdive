@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Palette generated on https://coolors.co -->
+    <color name="slimy_green">#288f00</color>
+    <color name="dark_purple">#22031f</color>
+    <color name="tumbleweed">#d5a18e</color>
+    <color name="nyanza">#e1f0c4</color>
+    <color name="black_coral">#4f6272</color>
+
+    <color name="black">@android:color/black</color>
+    <color name="white">@android:color/white</color>
+</resources>
