@@ -9,6 +9,48 @@
     tools:context=".HomeFragment"
     >
 
+    <ImageView
+        android:id="@+id/star_1"
+        style="@style/Keratin.Star"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109"
+        />
+
+    <ImageView
+        android:id="@+id/star_2"
+        style="@style/Keratin.Star"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.746"
+        />
+
+    <ImageView
+        android:id="@+id/star_3"
+        style="@style/Keratin.Star"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.306"
+        />
+
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"

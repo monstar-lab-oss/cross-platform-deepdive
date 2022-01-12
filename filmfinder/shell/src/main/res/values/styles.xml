@@ -17,4 +17,10 @@
         <!-- Customize your theme here. -->
         <item name="android:background">?attr/colorOnPrimary</item>
     </style>
+    <style name="Keratin.Star">
+        <item name="android:importantForAccessibility">no</item>
+        <item name="android:contentDescription">@null</item>
+        <item name="android:src">@drawable/ic_round_star</item>
+        <item name="tint">?attr/colorSecondary</item>
+    </style>
 </resources>
