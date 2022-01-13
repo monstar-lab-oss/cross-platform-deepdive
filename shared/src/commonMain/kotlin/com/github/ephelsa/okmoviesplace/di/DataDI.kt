@@ -28,7 +28,7 @@ import org.kodein.di.singleton
 /**
  * Hold [modules][DI.Module] for common package.
  */
-object CommonDI {
+object DataDI {
 
     /**
      * Module for local data sources.

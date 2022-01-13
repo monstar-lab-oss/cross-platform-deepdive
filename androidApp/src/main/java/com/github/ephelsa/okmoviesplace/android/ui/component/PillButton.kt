@@ -2,9 +2,11 @@ package com.github.ephelsa.okmoviesplace.android.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +17,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -26,13 +29,14 @@ import com.github.ephelsa.okmoviesplace.android.ui.theme.OKMoviesPlaceTheme
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Spaces
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Typographies
 import com.github.ephelsa.okmoviesplace.android.ui.utils.clickableWithNoRipple
+import com.github.ephelsa.okmoviesplace.android.ui.utils.shimmerEffectColor
 
 @Composable
 fun PillButton(
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,
     onClick: (() -> Unit)? = null,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val color = if (isSelected) {
         MaterialTheme.colors.secondary
@@ -51,6 +55,24 @@ fun PillButton(
         color = color,
         contentColor = MaterialTheme.colors.secondaryVariant,
         content = content
+    )
+}
+
+/**
+ * PillButton in loading state
+ */
+@Composable
+fun PillButton(
+    modifier: Modifier = Modifier,
+) {
+    val width = remember { (40..200).random() }
+
+    Box(
+        modifier
+            .background(shimmerEffectColor())
+            .width(width.dp)
+            .height(20.dp)
+            .padding(8.dp),
     )
 }
 
@@ -78,7 +100,7 @@ fun PillVotesButton(
     modifier: Modifier = Modifier,
     votes: Double,
     isSelected: Boolean = false,
-    onClick: (() -> Unit)? = null
+    onClick: (() -> Unit)? = null,
 ) {
     PillButton(
         modifier = modifier,
@@ -106,7 +128,7 @@ fun PillVotesButton(
 @Composable
 fun PillButtonRowList(
     modifier: Modifier = Modifier,
-    content: LazyListScope.() -> Unit
+    content: LazyListScope.() -> Unit,
 ) {
     LazyRow(
         modifier = modifier,

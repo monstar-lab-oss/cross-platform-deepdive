@@ -12,11 +12,24 @@
         android:theme="@style/OKMoviesPlaceTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".movies.MoviesActivity"
+            android:name=".ui.screen.movies.MoviesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="screen.movies" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.screen.favorites.FavoritesActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="screen.favorites" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>
