@@ -22,7 +22,7 @@ abstract class UserActionManager<SP : UIState, EP : UserAction>(
         createScope()
     }
 
-    abstract fun runEvent(event: EP)
+    abstract fun action(event: EP)
 }
 
 internal interface UserActionCoroutineScope : CoroutineScope {

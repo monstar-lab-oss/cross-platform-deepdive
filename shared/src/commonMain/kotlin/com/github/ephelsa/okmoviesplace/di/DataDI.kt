@@ -1,11 +1,14 @@
 package com.github.ephelsa.okmoviesplace.di
 
 import com.github.ephelsa.okmoviesplace.BuildKonfig
+import com.github.ephelsa.okmoviesplace.db.FavoriteQueries
 import com.github.ephelsa.okmoviesplace.db.GenreQueries
 import com.github.ephelsa.okmoviesplace.db.OKMoviesPlaceDatabase
 import com.github.ephelsa.okmoviesplace.local.SQLDelightDriverFactory
 import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSource
 import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSourceImpl
+import com.github.ephelsa.okmoviesplace.local.datasource.LocalMovieDataSource
+import com.github.ephelsa.okmoviesplace.local.datasource.LocalMovieDataSourceImpl
 import com.github.ephelsa.okmoviesplace.remote.TMDBClient
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSourceImpl
@@ -37,6 +40,7 @@ object DataDI {
         import(localDatabaseModule)
 
         bindSingleton<LocalGenreDataSource> { LocalGenreDataSourceImpl(instance()) }
+        bindSingleton<LocalMovieDataSource> { LocalMovieDataSourceImpl(instance()) }
     }
 
     /**
@@ -45,6 +49,7 @@ object DataDI {
     private val localDatabaseModule = DI.Module("Common/Local/Database") {
         bind<OKMoviesPlaceDatabase>() with singleton { OKMoviesPlaceDatabase(instance<SQLDelightDriverFactory>().createDriver()) }
         bind<GenreQueries>() with provider { instance<OKMoviesPlaceDatabase>().genreQueries }
+        bind<FavoriteQueries>() with provider { instance<OKMoviesPlaceDatabase>().favoriteQueries }
     }
 
     /**
@@ -83,6 +88,6 @@ object DataDI {
         importAll(localModule, remoteModule, utilsModule)
 
         bindSingleton<GenreRepository> { GenreRepositoryImpl(instance(), instance()) }
-        bindSingleton<MovieRepository> { MovieRepositoryImpl(instance(), instance()) }
+        bindSingleton<MovieRepository> { MovieRepositoryImpl(instance(), instance(), instance()) }
     }
 }

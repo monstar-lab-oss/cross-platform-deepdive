@@ -22,7 +22,7 @@ class MoviesActivity : ComponentActivity(), DIAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        actionManager.runEvent(MoviesUserAction.LoadPage(500, 500))
+        actionManager.action(MoviesUserAction.LoadPage(500, 500))
 
         setContent {
             OKMoviesPlaceTheme {

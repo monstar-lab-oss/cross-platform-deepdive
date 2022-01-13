@@ -1,0 +1,13 @@
+CREATE TABLE favoriteTable (
+    movie_id INTEGER NOT NULL PRIMARY KEY
+);
+
+addFavorite:
+INSERT INTO favoriteTable VALUES ?;
+
+removeFavorite:
+DELETE FROM favoriteTable WHERE movie_id = ?;
+
+favorites:
+SELECT movie_id
+FROM favoriteTable;

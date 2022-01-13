@@ -1,5 +1,6 @@
 package com.github.ephelsa.okmoviesplace.repository
 
+import com.github.ephelsa.okmoviesplace.local.datasource.LocalMovieDataSource
 import com.github.ephelsa.okmoviesplace.model.Movie
 import com.github.ephelsa.okmoviesplace.model.MovieDetails
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteMovieDataSource
@@ -7,11 +8,9 @@ import com.github.ephelsa.okmoviesplace.repository.utils.matchGenresIds
 
 internal class MovieRepositoryImpl(
     private val remoteMovieDataSource: RemoteMovieDataSource,
+    private val localMovieDataSource: LocalMovieDataSource,
     private val genreRepository: GenreRepository,
 ) : MovieRepository {
-
-    // TODO: This is temporal
-    private val favorites = mutableSetOf(460458, 568124, 634649)
 
     override suspend fun comingSoon(imageWidth: Int): List<Movie> {
         val genres = genreRepository.allMovieGenres()
@@ -36,18 +35,19 @@ internal class MovieRepositoryImpl(
     }
 
     override suspend fun addFavorite(movieId: Int) {
-        favorites.add(movieId)
+        localMovieDataSource.addFavorite(movieId)
     }
 
     override suspend fun removeFavorite(movieId: Int) {
-        favorites.remove(movieId)
+        localMovieDataSource.removeFavorite(movieId)
     }
 
-    override suspend fun allFavorites(posterWidth: Int): List<MovieDetails> {
+    override suspend fun allFavorites(imageWidth: Int): List<MovieDetails> {
+        val movieIds = localMovieDataSource.favorites()
         val movies = mutableListOf<MovieDetails>()
 
-        favorites.forEach { movieId ->
-            val json = remoteMovieDataSource.details(movieId, posterWidth)
+        movieIds.forEach { movieId ->
+            val json = remoteMovieDataSource.details(movieId, imageWidth)
             movies.add(json.asModel())
         }
 

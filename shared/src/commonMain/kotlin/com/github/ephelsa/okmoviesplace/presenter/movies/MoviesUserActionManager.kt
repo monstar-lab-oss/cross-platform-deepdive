@@ -15,7 +15,7 @@ class MoviesUserActionManager(
     private val genreRepository: GenreRepository,
 ) : UserActionManager<MoviesUIState, MoviesUserAction>(dispatcher, navigation) {
 
-    override fun runEvent(event: MoviesUserAction) {
+    override fun action(event: MoviesUserAction) {
         when (event) {
             is MoviesUserAction.LoadPage -> loadPage(event)
             MoviesUserAction.PullToRefreshPage -> TODO()
