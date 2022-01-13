@@ -7,7 +7,7 @@ import com.github.ephelsa.okmoviesplace.presenter.UserAction
 sealed class MoviesUserAction : UserAction {
     object PullToRefreshPage : MoviesUserAction()
     data class LoadPage(
-        val backdropWidth: Int,
-        val posterWidth: Int,
+        val comingSoonWidth: Int,
+        val trendingNowWidth: Int,
     ) : MoviesUserAction()
 }

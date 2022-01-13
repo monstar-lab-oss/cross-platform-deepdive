@@ -12,23 +12,23 @@ internal class RemoteMovieDataSourceImpl(
     private val imagePath: TMDBImagePathProvider,
 ) : RemoteMovieDataSource {
 
-    override suspend fun upcoming(backdropWidth: Int): List<MovieJson> {
+    override suspend fun comingSoon(imageWidth: Int): List<MovieJson> {
         return client.get<ResultListJson<MovieJson>>("movie/upcoming")
             .map { json ->
-                json.withFullPath(backdropWidth, imagePath)
+                json.withFullPath(imageWidth, imagePath)
             }
     }
 
-    override suspend fun trendingNow(posterWidth: Int): List<MovieJson> {
+    override suspend fun trendingNow(imageWidth: Int): List<MovieJson> {
         return client.get<ResultListJson<MovieJson>>("trending/movie/day")
             .map { json ->
-                json.withFullPath(posterWidth, imagePath)
+                json.withFullPath(imageWidth, imagePath)
             }
     }
 
-    override suspend fun details(movieId: Int, posterWidth: Int): MovieDetailsJson {
+    override suspend fun details(movieId: Int, imageWidth: Int): MovieDetailsJson {
         val json = client.get<MovieDetailsJson>("movie/$movieId")
 
-        return json.withFullPath(posterWidth, imagePath)
+        return json.withFullPath(imageWidth, imagePath)
     }
 }

@@ -13,9 +13,9 @@ internal class MovieRepositoryImpl(
     // TODO: This is temporal
     private val favorites = mutableSetOf(460458, 568124, 634649)
 
-    override suspend fun upcoming(backdropWidth: Int): List<Movie> {
+    override suspend fun comingSoon(imageWidth: Int): List<Movie> {
         val genres = genreRepository.allMovieGenres()
-        val upcoming = remoteMovieDataSource.upcoming(backdropWidth)
+        val upcoming = remoteMovieDataSource.comingSoon(imageWidth)
         val movies = upcoming.map { json ->
             json.asModel()
                 .copy(genres = genres.matchGenresIds(json.genreIds))
@@ -24,9 +24,9 @@ internal class MovieRepositoryImpl(
         return movies
     }
 
-    override suspend fun trendingNow(posterWidth: Int): List<Movie> {
+    override suspend fun trendingNow(imageWidth: Int): List<Movie> {
         val genres = genreRepository.allMovieGenres()
-        val trending = remoteMovieDataSource.trendingNow(posterWidth)
+        val trending = remoteMovieDataSource.trendingNow(imageWidth)
         val movies = trending.map { movieJson ->
             movieJson.asModel()
                 .copy(genres = genres.matchGenresIds(movieJson.genreIds))

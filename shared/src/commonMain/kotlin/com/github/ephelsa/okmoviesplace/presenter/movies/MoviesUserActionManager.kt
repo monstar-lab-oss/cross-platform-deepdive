@@ -26,9 +26,9 @@ class MoviesUserActionManager(
         launch {
             state.emit(MoviesUIState.Loading)
 
-            val comingSoonMovies = async { movieRepository.upcoming(event.backdropWidth) }
+            val comingSoonMovies = async { movieRepository.comingSoon(event.comingSoonWidth) }
             val movieGenres = async { genreRepository.allMovieGenres() }
-            val trendingNowMovies = async { movieRepository.trendingNow(event.posterWidth) }
+            val trendingNowMovies = async { movieRepository.trendingNow(event.trendingNowWidth) }
 
             // At the moment to implement Result, here should handle things...
             val resourceReady = MoviesUIState.Ready(
