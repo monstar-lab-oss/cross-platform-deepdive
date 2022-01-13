@@ -21,7 +21,7 @@ class FavoritesActivity : ComponentActivity(), DIAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        actionManager.runEvent(FavoritesUserAction.LoadPage(500))
+        actionManager.action(FavoritesUserAction.LoadPage(500))
 
         setContent {
             OKMoviesPlaceTheme {
