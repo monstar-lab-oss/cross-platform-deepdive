@@ -2,6 +2,6 @@ plugins {
     id 'org.jetbrains.kotlin.multiplatform' version '1.6.10' apply false
 }
 
-group = 'com.cliabhach'
+group = 'com.cliabhach.terrapin'
 version = '1.0'
 

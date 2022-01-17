@@ -2,7 +2,7 @@ plugins {
     id 'org.jetbrains.kotlin.multiplatform'
 }
 
-group = 'com.cliabhach'
+group = 'com.cliabhach.terrapin'
 version = '1.0'
 
 
@@ -31,10 +31,11 @@ kotlin {
     else if (isMingwX64) nativeTarget = mingwX64("native")
     else throw new GradleException("Host OS is not supported in Kotlin/Native.")
 
-    
+
     sourceSets {
         commonMain {
-
+            dependencies {
+            }
         }
         commonTest {
             dependencies {
