@@ -2,6 +2,7 @@ package com.cliabhach.terrapin.red.eared
 
 import android.app.Application
 import com.cliabhach.terrapin.di.netModule
+import com.cliabhach.terrapin.red.shell.di.shellModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,7 +21,7 @@ class RedApplication: Application() {
         startKoin {
             androidLogger(level = Level.ERROR)
             androidContext(applicationContext)
-            modules(netModule)
+            modules(netModule, shellModule)
         }
     }
 }
