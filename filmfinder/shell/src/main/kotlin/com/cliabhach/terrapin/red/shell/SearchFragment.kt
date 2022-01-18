@@ -1,5 +1,6 @@
 package com.cliabhach.terrapin.red.shell
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +8,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage
 import com.cliabhach.terrapin.red.shell.databinding.SearchFragmentBinding
 import com.cliabhach.terrapin.red.shell.databinding.ViewSearchResultsBinding
 import com.cliabhach.terrapin.red.shell.search.MovieTitleListAdapter
+import com.cliabhach.terrapin.red.shell.search.SearchListener
 import com.cliabhach.terrapin.red.shell.search.SearchResultAdapter
 import com.cliabhach.terrapin.red.shell.search.SearchViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.koin.android.ext.android.inject
 
 /**
  * @author Philip Cohn-Cort
@@ -29,6 +34,8 @@ class SearchFragment : Fragment() {
 
     private lateinit var binding: SearchFragmentBinding
 
+    private val listener: SearchListener by inject()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +49,8 @@ class SearchFragment : Fragment() {
         val parent = view as ViewGroup
 
         val results = ViewSearchResultsBinding.inflate(layoutInflater, parent, false)
-        results.root.adapter = EmptyAdapter()
+
+        val mainAdapter = obtainMainAdapter(results)
 
         val searchBar = binding.searchInputBar
         val searchResults = binding.searchResultsContainer
@@ -51,7 +59,19 @@ class SearchFragment : Fragment() {
         viewModel.queryFlow.filter {
             searchResults.visibility != View.GONE
         }.onEach {
-            TODO("Search and modify the UI based on the result")
+            when(val search = listener.search(it)) {
+                SearchResultsPage.Empty -> {
+                    searchResults.setTextColor(Color.BLUE)
+                }
+                is SearchResultsPage.Results -> {
+                    searchResults.setTextColor(Color.RED)
+                    mainAdapter.submitList(search.list)
+                }
+                is SearchResultsPage.Unusable -> {
+                    searchResults.setTextColor(Color.BLACK)
+                    Snackbar.make(searchResults, search.message, Snackbar.LENGTH_LONG).show()
+                }
+            }
         }.launchIn(lifecycleScope)
 
 
