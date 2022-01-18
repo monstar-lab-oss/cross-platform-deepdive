@@ -5,10 +5,13 @@
     package="com.cliabhach.terrapin.red.eared"
     >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="false"
         android:fullBackupContent="@xml/data_backup_disallowed"
         android:dataExtractionRules="@xml/data_extraction_disallowed"
+        android:name=".RedApplication"
         android:supportsRtl="true"
         tools:ignore="DataExtractionRules,UnusedAttribute"
         />
