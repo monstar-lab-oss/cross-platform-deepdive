@@ -33,10 +33,16 @@ android {
 }
 
 dependencies {
+    // Other modules
+    api project(':water')
+
     // TODO: Balance dependencies with :app
     // UI Libraries
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'io.github.lapism:search:1.2.1'
+
+    // Dependency Injection (DI)
+    api 'io.insert-koin:koin-android:3.1.5'
 
     // Androidx
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'

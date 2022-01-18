@@ -35,6 +35,9 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation 'io.ktor:ktor-client-core:1.6.7'
+                api 'io.insert-koin:koin-core:3.1.5'
+                api 'io.insert-koin:koin-ktor:3.1.5'
             }
         }
         commonTest {
@@ -47,19 +50,25 @@ kotlin {
             }
         }
         jvmMain {
-
+            dependencies {
+                implementation "io.ktor:ktor-client-java:1.6.7"
+            }
         }
         jvmTest {
 
         }
         jsMain {
-
+            dependencies {
+                implementation "io.ktor:ktor-client-js:1.6.7"
+            }
         }
         jsTest {
 
         }
         nativeMain {
-
+            dependencies {
+                implementation "io.ktor:ktor-client-curl:1.6.7"
+            }
         }
         nativeTest {
 
