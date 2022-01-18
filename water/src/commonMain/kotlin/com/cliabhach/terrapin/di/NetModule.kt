@@ -1,5 +1,6 @@
 package com.cliabhach.terrapin.di
 
+import com.cliabhach.terrapin.net.Api
 import io.ktor.client.*
 import org.koin.dsl.module
 
@@ -9,6 +10,7 @@ import org.koin.dsl.module
  * @author Philip Cohn-Cort
  */
 val netModule = module {
+    single { Api(trueApi = get()) }
     single {
         HttpClient {
             expectSuccess = false
