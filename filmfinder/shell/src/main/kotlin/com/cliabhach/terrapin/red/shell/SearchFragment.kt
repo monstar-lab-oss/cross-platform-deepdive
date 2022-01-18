@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.cliabhach.terrapin.red.shell.databinding.SearchFragmentBinding
 import com.cliabhach.terrapin.red.shell.databinding.ViewSearchResultsBinding
+import com.cliabhach.terrapin.red.shell.search.MovieTitleListAdapter
+import com.cliabhach.terrapin.red.shell.search.SearchResultAdapter
 import com.cliabhach.terrapin.red.shell.search.SearchViewModel
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
@@ -65,6 +67,26 @@ class SearchFragment : Fragment() {
             searchResults.clearFocus()
         }
         searchResults.setOnQueryTextListener(viewModel.queryTextListener)
+    }
+
+    /**
+     * Retrieve a RecyclerView adapter for showing search results in a list.
+     *
+     * We try to be economical - if there is already a compatible adapter on
+     * the given binding, then we'll just return that. We create and attach
+     * [MovieTitleListAdapter]s when no other adapter is currently available.
+     */
+    private fun obtainMainAdapter(results: ViewSearchResultsBinding): SearchResultAdapter<*> {
+        val currentAdapter = results.root.adapter
+
+        val mainAdapter = if (currentAdapter is SearchResultAdapter) {
+            currentAdapter
+        } else {
+            MovieTitleListAdapter().also {
+                results.root.adapter = it
+            }
+        }
+        return mainAdapter
     }
 
 }
