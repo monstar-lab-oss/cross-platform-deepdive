@@ -1,6 +1,7 @@
 package com.cliabhach.terrapin.net
 
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage
+import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Empty
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Results
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Unusable
 import io.ktor.client.*
@@ -24,9 +25,19 @@ class Api(private val trueApi: HttpClient) {
 
         val results: SearchResultsPage = if (response.status.isSuccess()) {
             val page = response.receive<RawSearchPage>()
-            Results(page.results.toList())
+            if (page.results.isEmpty()) {
+                Empty
+            } else {
+                Results(page.results.toList())
+            }
         } else {
-            Unusable(message = response.status.toString())
+            val actualStatus = if (response.status.description.isNotBlank()) {
+                response.status
+            } else {
+                HttpStatusCode.fromValue(response.status.value)
+            }
+
+            Unusable(message = actualStatus.toString())
         }
 
         return results
