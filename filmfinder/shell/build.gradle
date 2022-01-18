@@ -38,13 +38,14 @@ dependencies {
 
     // TODO: Balance dependencies with :app
     // UI Libraries
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.5.0'
     implementation 'io.github.lapism:search:1.2.1'
 
     // Dependency Injection (DI)
     api 'io.insert-koin:koin-android:3.1.5'
 
     // Androidx
+    api 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
