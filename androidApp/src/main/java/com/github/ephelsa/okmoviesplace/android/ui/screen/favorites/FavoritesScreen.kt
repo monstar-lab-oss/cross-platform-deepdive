@@ -34,17 +34,19 @@ import com.github.ephelsa.okmoviesplace.android.ui.component.SectionTitle
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Colors
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Spaces
 import com.github.ephelsa.okmoviesplace.model.Genre
+import com.github.ephelsa.okmoviesplace.presenter.Navigation
 import com.github.ephelsa.okmoviesplace.presenter.favorites.FavoritesUIState
 import com.github.ephelsa.okmoviesplace.presenter.favorites.FavoritesUserAction
 import com.github.ephelsa.okmoviesplace.presenter.favorites.FavoritesUserActionManager
 
 @Composable
 fun FavoritesScreen(
+    navigation: Navigation,
     actionManager: FavoritesUserActionManager,
 ) {
     val favoritesState: FavoritesUIState? by actionManager.onState.collectAsState()
 
-    DiscoveryFeature(actionManager.navigation, DiscoveryFeatureTab.Favorites) {
+    DiscoveryFeature(navigation, DiscoveryFeatureTab.Favorites) {
         Column(
             modifier = Modifier
                 .fillMaxSize()

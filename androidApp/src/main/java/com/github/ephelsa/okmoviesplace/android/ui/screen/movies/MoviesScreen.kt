@@ -37,16 +37,19 @@ import com.github.ephelsa.okmoviesplace.android.ui.component.SectionTitle
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Spaces
 import com.github.ephelsa.okmoviesplace.model.Genre
 import com.github.ephelsa.okmoviesplace.model.Movie
+import com.github.ephelsa.okmoviesplace.presenter.Navigation
+import com.github.ephelsa.okmoviesplace.presenter.Router
 import com.github.ephelsa.okmoviesplace.presenter.movies.MoviesUIState
 import com.github.ephelsa.okmoviesplace.presenter.movies.MoviesUserActionManager
 
 @Composable
 fun MoviesScreen(
+    navigation: Navigation,
     actionManager: MoviesUserActionManager,
 ) {
     val moviesState: MoviesUIState? by actionManager.onState.collectAsState()
 
-    DiscoveryFeature(actionManager.navigation, DiscoveryFeatureTab.Movies) {
+    DiscoveryFeature(navigation, DiscoveryFeatureTab.Movies) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -64,7 +67,9 @@ fun MoviesScreen(
 
                     ComingSoonSection(content.comingSoonMovies)
                     GenresSection(content.movieGenres)
-                    TrendingNowSection(content.trendingNowMovies)
+                    TrendingNowSection(content.trendingNowMovies) {
+                        navigation.goTo(Router.MovieDetailsRoute(it.id))
+                    }
                 }
             }
         }
@@ -174,6 +179,7 @@ fun GenresSection(
 @Composable
 fun TrendingNowSection(
     trendingMovies: List<Movie>,
+    onMovieSelected: (Movie) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -193,10 +199,9 @@ fun TrendingNowSection(
             items(trendingMovies) {
                 MovieCard(
                     movie = it,
-                    showAll = true
-                ) {
-                    // TODO
-                }
+                    showAll = true,
+                    onClick = { onMovieSelected(it) }
+                )
             }
         }
     }

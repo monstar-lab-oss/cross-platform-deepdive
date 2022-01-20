@@ -1,6 +1,7 @@
 package com.github.ephelsa.okmoviesplace.presenter
 
 import kotlin.coroutines.CoroutineContext
+import kotlin.native.concurrent.ThreadLocal
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -8,10 +9,11 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 abstract class UserActionManager<SP : UIState, EP : UserAction>(
     dispatcher: CoroutineDispatcher,
-    val navigation: Navigation,
 ) : UserActionCoroutineScope by UserActionCoroutineScope.UserActionCoroutineScopeImpl(dispatcher) {
 
     protected val state = MutableStateFlow<SP?>(null)
@@ -23,6 +25,10 @@ abstract class UserActionManager<SP : UIState, EP : UserAction>(
     }
 
     abstract fun action(event: EP)
+
+    fun collectState(state: (SP?) -> Unit) {
+        onState.onEach(state).launchIn(this)
+    }
 }
 
 internal interface UserActionCoroutineScope : CoroutineScope {

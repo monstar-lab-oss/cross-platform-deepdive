@@ -1,10 +1,12 @@
 package com.github.ephelsa.okmoviesplace.di
 
 import com.github.ephelsa.okmoviesplace.local.SQLDelightDriverFactory
+import com.github.ephelsa.okmoviesplace.presenter.AndroidNavigation
 import com.github.ephelsa.okmoviesplace.presenter.Navigation
 import kotlinx.coroutines.Dispatchers
 import org.kodein.di.DI
 import org.kodein.di.bindProvider
+import org.kodein.di.bindSingleton
 import org.kodein.di.instance
 
 actual object PlatformDI {
@@ -17,7 +19,7 @@ actual object PlatformDI {
 
     private val androidModule = DI.Module("Platform/Android") {
         bindProvider { SQLDelightDriverFactory(instance()) }
-        bindProvider { Navigation(instance()) }
+        bindSingleton<Navigation> { AndroidNavigation(instance()) }
     }
 
     private val dispatchers = DI.Module("Platform/Android/Dispatcher") {

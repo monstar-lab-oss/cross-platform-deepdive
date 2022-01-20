@@ -28,8 +28,8 @@ fun DiscoveryFeature(
         topBar = {
             Toolbar(tabSelected) {
                 when (it) {
-                    DiscoveryFeatureTab.Movies -> navigation.goTo(Router.Movies)
-                    DiscoveryFeatureTab.Favorites -> navigation.goTo(Router.Favorites)
+                    DiscoveryFeatureTab.Movies -> navigation.goTo(Router.MoviesRoute)
+                    DiscoveryFeatureTab.Favorites -> navigation.goTo(Router.FavoritesRoute)
                 }
             }
         },

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.github.ephelsa.okmoviesplace.android.ui.theme.OKMoviesPlaceTheme
-import com.github.ephelsa.okmoviesplace.di.TagsDI
+import com.github.ephelsa.okmoviesplace.presenter.Navigation
 import com.github.ephelsa.okmoviesplace.presenter.favorites.FavoritesUserAction
 import com.github.ephelsa.okmoviesplace.presenter.favorites.FavoritesUserActionManager
 import org.kodein.di.DI
@@ -16,7 +16,8 @@ class FavoritesActivity : ComponentActivity(), DIAware {
 
     override val di: DI by closestDI()
 
-    private val actionManager: FavoritesUserActionManager by instance(TagsDI.Presenter.Favorites)
+    private val actionManager: FavoritesUserActionManager by instance()
+    private val navigation: Navigation by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +26,7 @@ class FavoritesActivity : ComponentActivity(), DIAware {
 
         setContent {
             OKMoviesPlaceTheme {
-                FavoritesScreen(actionManager)
+                FavoritesScreen(navigation, actionManager)
             }
         }
     }

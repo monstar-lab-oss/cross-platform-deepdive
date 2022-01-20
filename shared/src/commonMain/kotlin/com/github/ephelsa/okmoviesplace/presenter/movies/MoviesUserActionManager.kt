@@ -1,6 +1,5 @@
 package com.github.ephelsa.okmoviesplace.presenter.movies
 
-import com.github.ephelsa.okmoviesplace.presenter.Navigation
 import com.github.ephelsa.okmoviesplace.presenter.UserActionManager
 import com.github.ephelsa.okmoviesplace.repository.GenreRepository
 import com.github.ephelsa.okmoviesplace.repository.MovieRepository
@@ -10,10 +9,9 @@ import kotlinx.coroutines.launch
 
 class MoviesUserActionManager(
     dispatcher: CoroutineDispatcher,
-    navigation: Navigation,
     private val movieRepository: MovieRepository,
     private val genreRepository: GenreRepository,
-) : UserActionManager<MoviesUIState, MoviesUserAction>(dispatcher, navigation) {
+) : UserActionManager<MoviesUIState, MoviesUserAction>(dispatcher) {
 
     override fun action(event: MoviesUserAction) {
         when (event) {

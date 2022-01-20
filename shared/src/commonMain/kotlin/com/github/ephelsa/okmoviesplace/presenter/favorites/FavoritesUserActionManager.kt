@@ -2,7 +2,6 @@ package com.github.ephelsa.okmoviesplace.presenter.favorites
 
 import com.github.ephelsa.okmoviesplace.model.Genre
 import com.github.ephelsa.okmoviesplace.model.MovieDetails
-import com.github.ephelsa.okmoviesplace.presenter.Navigation
 import com.github.ephelsa.okmoviesplace.presenter.UserActionManager
 import com.github.ephelsa.okmoviesplace.repository.MovieRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -10,9 +9,8 @@ import kotlinx.coroutines.launch
 
 class FavoritesUserActionManager(
     dispatcher: CoroutineDispatcher,
-    navigation: Navigation,
     private val movieRepository: MovieRepository,
-) : UserActionManager<FavoritesUIState, FavoritesUserAction>(dispatcher, navigation) {
+) : UserActionManager<FavoritesUIState, FavoritesUserAction>(dispatcher) {
 
     override fun action(event: FavoritesUserAction) {
         when (event) {
