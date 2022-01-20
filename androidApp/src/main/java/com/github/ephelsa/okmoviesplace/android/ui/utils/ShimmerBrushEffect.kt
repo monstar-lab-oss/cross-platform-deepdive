@@ -17,7 +17,7 @@ fun shimmerEffectColor(): Brush {
     val infiniteTransition = rememberInfiniteTransition()
     val alpha by infiniteTransition.animateFloat(
         initialValue = 0.2f,
-        targetValue = 0.35f,
+        targetValue = 0.5f,
         animationSpec = infiniteRepeatable(
             animation = tween(1_000),
             repeatMode = RepeatMode.Reverse

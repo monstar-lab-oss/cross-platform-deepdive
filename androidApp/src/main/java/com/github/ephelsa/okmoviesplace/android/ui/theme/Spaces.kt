@@ -6,5 +6,6 @@ object Spaces {
     val MediumHigh = 18.dp
     val Medium = 16.dp
     val MediumLow = 12.dp
+    val Small = 8.dp
     val ThinHigh = 4.dp
 }

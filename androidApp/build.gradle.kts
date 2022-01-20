@@ -56,5 +56,6 @@ dependencies {
         implementation(tooling)
         implementation(viewModel)
         implementation(coil)
+        implementation(constraintLayout)
     }
 }

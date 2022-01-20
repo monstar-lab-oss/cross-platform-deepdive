@@ -32,5 +32,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.screen.moviedetails.MovieDetailsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="screen.moviedetails" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest> 

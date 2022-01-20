@@ -53,4 +53,8 @@ internal class MovieRepositoryImpl(
 
         return movies
     }
+
+    override suspend fun details(movieId: Int, imageWidth: Int): MovieDetails {
+        return remoteMovieDataSource.details(movieId, imageWidth).asModel()
+    }
 }

@@ -9,4 +9,5 @@ interface MovieRepository {
     suspend fun addFavorite(movieId: Int)
     suspend fun removeFavorite(movieId: Int)
     suspend fun allFavorites(imageWidth: Int): List<MovieDetails>
+    suspend fun details(movieId: Int, imageWidth: Int): MovieDetails
 }

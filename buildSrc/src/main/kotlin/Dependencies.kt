@@ -16,6 +16,7 @@ object Versions {
         const val compose = "1.1.0-rc01"
         const val coilCompose = "1.4.0"
         const val activityCompose = "1.4.0"
+        const val constraintCompose = "1.0.0"
     }
 
 }
@@ -51,6 +52,7 @@ object Dependencies {
             const val tooling = "androidx.compose.ui:ui-tooling:${Versions.Android.compose}"
             const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.Android.lifecycle}"
             const val coil = "io.coil-kt:coil-compose:${Versions.Android.coilCompose}"
+            const val constraintLayout = "androidx.constraintlayout:constraintlayout-compose:${Versions.Android.constraintCompose}"
         }
     }
 

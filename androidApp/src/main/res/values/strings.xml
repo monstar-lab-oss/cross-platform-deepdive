@@ -15,4 +15,5 @@
     <string name="contentDescription_votesAverage">%s votes average</string>
     <string name="contentDescription_playButton">Play %s</string>
     <string name="contentDescription_noFavoriteMovies">You have not added favorite movies yet</string>
+    <string name="contentDescription_navigateBack">Navigate back</string>
 </resources>
