@@ -9,8 +9,10 @@ import io.ktor.client.request.parameter
 import io.ktor.client.statement.request
 import io.ktor.http.URLBuilder
 import io.ktor.http.takeFrom
+import kotlin.native.concurrent.ThreadLocal
 import kotlinx.serialization.json.Json
 
+@ThreadLocal
 internal object TMDBClient {
     fun client(language: String, apiKey: String) = HttpClient {
         defaultRequest {
@@ -29,6 +31,7 @@ internal object TMDBClient {
                 Json {
                     isLenient = true
                     ignoreUnknownKeys = true
+                    useAlternativeNames = false
                 }
             )
         }
