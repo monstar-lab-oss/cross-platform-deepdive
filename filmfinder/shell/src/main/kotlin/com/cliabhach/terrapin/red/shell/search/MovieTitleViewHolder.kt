@@ -1,11 +1,15 @@
 package com.cliabhach.terrapin.red.shell.search
 
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.cliabhach.terrapin.red.shell.databinding.ViewSearchResultBinding
 
 /**
  * @author Philip Cohn-Cort
  */
 class MovieTitleViewHolder(
-    val view: TextView
-) : RecyclerView.ViewHolder(view)
+    binding: ViewSearchResultBinding
+) : RecyclerView.ViewHolder(binding.root) {
+
+    val title = binding.text1
+
+}
