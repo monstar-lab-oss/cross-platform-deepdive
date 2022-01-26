@@ -19,7 +19,7 @@ object PresenterDI {
         }
 
         bindProvider {
-            MovieDetailsUserActionManager(instance(TagsDI.Dispatcher.IO), instance())
+            MovieDetailsUserActionManager(instance(TagsDI.Dispatcher.IO), instance(), instance())
         }
     }
 }

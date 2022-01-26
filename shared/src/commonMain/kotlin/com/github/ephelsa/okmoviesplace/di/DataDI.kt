@@ -10,11 +10,15 @@ import com.github.ephelsa.okmoviesplace.local.datasource.LocalGenreDataSourceImp
 import com.github.ephelsa.okmoviesplace.local.datasource.LocalMovieDataSource
 import com.github.ephelsa.okmoviesplace.local.datasource.LocalMovieDataSourceImpl
 import com.github.ephelsa.okmoviesplace.remote.TMDBClient
+import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteActorDataSource
+import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteActorDataSourceImpl
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSource
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteGenreDataSourceImpl
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteMovieDataSource
 import com.github.ephelsa.okmoviesplace.remote.datasource.RemoteMovieDataSourceImpl
 import com.github.ephelsa.okmoviesplace.remote.utils.TMDBImagePathProvider
+import com.github.ephelsa.okmoviesplace.repository.ActorRepository
+import com.github.ephelsa.okmoviesplace.repository.ActorRepositoryImpl
 import com.github.ephelsa.okmoviesplace.repository.GenreRepository
 import com.github.ephelsa.okmoviesplace.repository.GenreRepositoryImpl
 import com.github.ephelsa.okmoviesplace.repository.MovieRepository
@@ -60,6 +64,7 @@ object DataDI {
 
         bindSingleton<RemoteGenreDataSource> { RemoteGenreDataSourceImpl(instance()) }
         bindSingleton<RemoteMovieDataSource> { RemoteMovieDataSourceImpl(instance(), instance()) }
+        bindSingleton<RemoteActorDataSource> { RemoteActorDataSourceImpl(instance(), instance()) }
     }
 
     /**
@@ -89,5 +94,6 @@ object DataDI {
 
         bindSingleton<GenreRepository> { GenreRepositoryImpl(instance(), instance()) }
         bindSingleton<MovieRepository> { MovieRepositoryImpl(instance(), instance(), instance()) }
+        bindSingleton<ActorRepository> { ActorRepositoryImpl(instance()) }
     }
 }
