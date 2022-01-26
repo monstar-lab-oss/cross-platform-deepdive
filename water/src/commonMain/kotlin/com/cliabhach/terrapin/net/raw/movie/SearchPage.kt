@@ -9,6 +9,6 @@ import kotlinx.serialization.Serializable
 data class SearchPage(
     val page: Int,
     val results: Array<SearchResult>,
-    val totalPages: Int,
-    val totalResults: Int,
+    val totalPages: Int = 1,
+    val totalResults: Int = results.size,
 )

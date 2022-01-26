@@ -25,6 +25,8 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
         val parameters = ParametersBuilder().apply {
             set("query", query)
             set("api_key", apiKey)
+            set("language", "en-US")
+            set("include_adult", "false")
         }
 
         val url = URLBuilder(
@@ -38,7 +40,7 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
         val response = trueApi.get<HttpResponse>(
             url = url
         ) {
-            // Do we need to set Content-Type?
+            accept(ContentType("application", "json"))
         }
 
         val results: SearchResultsPage = if (response.status.isSuccess()) {
