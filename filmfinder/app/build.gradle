@@ -13,6 +13,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField 'String', 'API_KEY', 'TODO()'
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

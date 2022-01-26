@@ -14,14 +14,17 @@ import com.cliabhach.terrapin.net.raw.movie.SearchPage as RawSearchPage
 /**
  * Entrypoint to the network, as essential as water itself.
  *
+ * The API key should be provided at build-time using something along the
+ * lines of Android's BuildConfig.
+ *
  * @author Philip Cohn-Cort
  */
-class Api(private val trueApi: HttpClient) {
+class Api(private val trueApi: HttpClient, private val apiKey: String) {
 
     suspend fun searchMovies(query: String): SearchResultsPage {
         val parameters = ParametersBuilder().apply {
             set("query", query)
-            // TODO: set("api_key", key)
+            set("api_key", apiKey)
         }
 
         val url = URLBuilder(
