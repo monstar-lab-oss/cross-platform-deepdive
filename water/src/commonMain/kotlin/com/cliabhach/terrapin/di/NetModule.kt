@@ -24,9 +24,14 @@ val netModule = module {
         val platformFeatures: List<HttpClientPlugin> = get()
         HttpClient {
             expectSuccess = false
+
+            // Basic logging of requests and responses
             install(Logging) {
                 logger = Logger.SIMPLE
             }
+
+
+            // Additional per-platform features (optional)
             platformFeatures.forEach {
                 install(it)
             }
@@ -34,4 +39,4 @@ val netModule = module {
     }
 }
 
-typealias HttpClientPlugin = HttpClientFeature<*,*>
+typealias HttpClientPlugin = HttpClientFeature<*, *>
