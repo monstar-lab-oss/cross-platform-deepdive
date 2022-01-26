@@ -1,5 +1,6 @@
 package com.github.ephelsa.okmoviesplace.remote.json
 
+import com.github.ephelsa.okmoviesplace.model.HourMinDuration
 import com.github.ephelsa.okmoviesplace.model.ImagePath
 import com.github.ephelsa.okmoviesplace.model.ModelMapper
 import com.github.ephelsa.okmoviesplace.model.MovieDetails
@@ -26,6 +27,8 @@ internal data class MovieDetailsJson(
     val description: String,
     @SerialName("original_language")
     val language: String,
+    @SerialName("runtime")
+    val duration: Int,
 ) : ModelMapper<MovieDetails>, ImageFullPath<MovieDetailsJson> {
 
     override fun asModel(): MovieDetails {
@@ -40,7 +43,8 @@ internal data class MovieDetailsJson(
             votesAverage = votesAverage,
             genres = genres.map(GenreListJson.GenreJson::asModel),
             description = description,
-            language = language
+            language = language,
+            duration = convertDuration()
         )
     }
 
@@ -48,6 +52,15 @@ internal data class MovieDetailsJson(
         return copy(
             backdropPath = provider.withWidth(backdropPath, width),
             posterPath = provider.withWidth(posterPath, width)
+        )
+    }
+
+    private fun convertDuration(): HourMinDuration {
+        val raw = (duration / 60.0).toString()
+
+        return HourMinDuration(
+            hours = raw[0].digitToInt(),
+            minutes = raw[2].digitToInt() * 6
         )
     }
 }

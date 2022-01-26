@@ -8,6 +8,7 @@ interface MovieRepository {
     suspend fun trendingNow(imageWidth: Int): List<Movie>
     suspend fun addFavorite(movieId: Int)
     suspend fun removeFavorite(movieId: Int)
-    suspend fun allFavorites(imageWidth: Int): List<MovieDetails>
+    suspend fun allFavorites(imageWidth: Int): List<Movie>
+    suspend fun isMovieFavorite(movieId: Int): Boolean
     suspend fun details(movieId: Int, imageWidth: Int): MovieDetails
 }

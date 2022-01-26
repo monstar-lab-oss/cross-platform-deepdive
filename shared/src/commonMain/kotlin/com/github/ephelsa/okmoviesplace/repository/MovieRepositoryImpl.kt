@@ -42,7 +42,7 @@ internal class MovieRepositoryImpl(
         localMovieDataSource.removeFavorite(movieId)
     }
 
-    override suspend fun allFavorites(imageWidth: Int): List<MovieDetails> {
+    override suspend fun allFavorites(imageWidth: Int): List<Movie> {
         val movieIds = localMovieDataSource.favorites()
         val movies = mutableListOf<MovieDetails>()
 
@@ -51,7 +51,22 @@ internal class MovieRepositoryImpl(
             movies.add(json.asModel())
         }
 
-        return movies
+        return movies.map { details ->
+            Movie(
+                id = details.id,
+                imagePath = details.imagePath,
+                title = details.title,
+                isAdult = details.isAdult,
+                votesAverage = details.votesAverage,
+                genres = details.genres
+            )
+        }
+    }
+
+    override suspend fun isMovieFavorite(movieId: Int): Boolean {
+        val favorites = localMovieDataSource.favorites()
+
+        return favorites.contains(movieId)
     }
 
     override suspend fun details(movieId: Int, imageWidth: Int): MovieDetails {
