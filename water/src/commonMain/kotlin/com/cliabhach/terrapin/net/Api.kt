@@ -19,9 +19,24 @@ import com.cliabhach.terrapin.net.raw.movie.SearchPage as RawSearchPage
 class Api(private val trueApi: HttpClient) {
 
     suspend fun searchMovies(query: String): SearchResultsPage {
+        val parameters = ParametersBuilder().apply {
+            set("query", query)
+            // TODO: set("api_key", key)
+        }
+
+        val url = URLBuilder(
+            protocol = URLProtocol.HTTPS,
+            host = "api.themoviedb.org",
+            parameters = parameters
+        ).apply {
+            path("3", "search", "movie")
+        }.build()
+
         val response = trueApi.get<HttpResponse>(
-            "https://api.themoviedb.org/3/search/movie/?query=$query&api_key="
-        )
+            url = url
+        ) {
+            // Do we need to set Content-Type?
+        }
 
         val results: SearchResultsPage = if (response.status.isSuccess()) {
             val page = response.receive<RawSearchPage>()
