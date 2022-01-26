@@ -3,6 +3,7 @@ package com.github.ephelsa.okmoviesplace.android.ui.screen.moviedetails
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import coil.annotation.ExperimentalCoilApi
 import com.github.ephelsa.okmoviesplace.android.ui.theme.OKMoviesPlaceTheme
 import com.github.ephelsa.okmoviesplace.presenter.Navigation
 import com.github.ephelsa.okmoviesplace.presenter.moviedetails.MovieDetailsUserAction
@@ -12,6 +13,7 @@ import org.kodein.di.DIAware
 import org.kodein.di.android.closestDI
 import org.kodein.di.instance
 
+@ExperimentalCoilApi
 class MovieDetailsActivity : ComponentActivity(), DIAware {
 
     override val di: DI by closestDI()
@@ -39,7 +41,7 @@ class MovieDetailsActivity : ComponentActivity(), DIAware {
 
     override fun onStart() {
         super.onStart()
-        actionManager.action(MovieDetailsUserAction.LoadPage(movieId, 500))
+        actionManager.action(MovieDetailsUserAction.LoadPage(movieId, 500, 200))
     }
 
     override fun onDestroy() {

@@ -7,7 +7,9 @@
     <string name="label_comingSoon">Coming Soon</string>
     <string name="label_trendingNow">Trending Now</string>
     <string name="label_adultContent">+18</string>
-    <string name="label_yourFavoriteCategories">Your favorites categories</string>
+    <string name="label_favoriteCategories">Your categories</string>
+    <string name="label_favoriteMovies">Your movies</string>
+    <string name="label_casting">Casting</string>
 
     <string name="empty_noMoviesAddedYet">No movies added yet</string>
 
@@ -16,4 +18,5 @@
     <string name="contentDescription_playButton">Play %s</string>
     <string name="contentDescription_noFavoriteMovies">You have not added favorite movies yet</string>
     <string name="contentDescription_navigateBack">Navigate back</string>
+    <string name="contentDescription_addToFavorite">Add to Favorite button</string>
 </resources>

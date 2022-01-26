@@ -10,18 +10,21 @@ object Typographies {
         h1 = TextStyle(
             fontWeight = FontWeight.Bold,
             fontSize = 34.sp,
-            letterSpacing = (-1.5).sp
+            letterSpacing = (-1.5).sp,
+            color = Colors.MintCream
         ),
         h6 = TextStyle(
             fontWeight = FontWeight.Medium,
             fontSize = 18.sp,
-            letterSpacing = 0.15.sp
+            letterSpacing = 0.15.sp,
+            color = Colors.MintCream
         )
     )
 
     val TagTextStyle = TextStyle(
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
-        letterSpacing = 0.25.sp
+        letterSpacing = 0.25.sp,
+        color = Colors.MintCream
     )
 }

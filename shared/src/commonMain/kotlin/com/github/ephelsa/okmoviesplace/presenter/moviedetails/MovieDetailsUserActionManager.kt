@@ -1,20 +1,21 @@
 package com.github.ephelsa.okmoviesplace.presenter.moviedetails
 
 import com.github.ephelsa.okmoviesplace.presenter.UserActionManager
+import com.github.ephelsa.okmoviesplace.repository.ActorRepository
 import com.github.ephelsa.okmoviesplace.repository.MovieRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MovieDetailsUserActionManager(
     dispatcher: CoroutineDispatcher,
     private val moviesRepository: MovieRepository,
+    private val actorRepository: ActorRepository,
 ) : UserActionManager<MovieDetailsUIState, MovieDetailsUserAction>(dispatcher) {
 
     override fun action(event: MovieDetailsUserAction) {
         when (event) {
             is MovieDetailsUserAction.LoadPage -> loadPage(event)
-            is MovieDetailsUserAction.RemoveFavorite -> removeFavorite(event)
-            is MovieDetailsUserAction.SaveFavorite -> saveFavorite(event)
         }
     }
 
@@ -22,25 +23,31 @@ class MovieDetailsUserActionManager(
         launch {
             state.emit(MovieDetailsUIState.Loading)
 
-            val movieDetails = moviesRepository.details(event.movieId, event.imageWidth)
+            val movieDetails = async { moviesRepository.details(event.movieId, event.imageWidth) }
+            val actors = async { actorRepository.actorsPerMovie(event.movieId, event.actorImageWidth) }
+            val isMovieFavorite = async { moviesRepository.isMovieFavorite(event.movieId) }
 
-            state.emit(MovieDetailsUIState.Ready(movieDetails))
+            val ready = MovieDetailsUIState.Ready(
+                movieDetails = movieDetails.await(),
+                casting = actors.await(),
+                isMovieFavorite = isMovieFavorite.await()
+            )
+
+            state.emit(ready)
         }
     }
 
-    private fun saveFavorite(event: MovieDetailsUserAction.SaveFavorite) {
+    fun saveFavorite(movieId: Int, onDone: () -> Unit) {
         launch {
-            state.emit(MovieDetailsUIState.Loading)
-            moviesRepository.addFavorite(event.movieId)
-            state.emit(MovieDetailsUIState.OperationDone)
+            moviesRepository.addFavorite(movieId)
+            onDone()
         }
     }
 
-    private fun removeFavorite(event: MovieDetailsUserAction.RemoveFavorite) {
+    fun removeFavorite(movieId: Int, onDone: () -> Unit) {
         launch {
-            state.emit(MovieDetailsUIState.Loading)
-            moviesRepository.removeFavorite(event.movieId)
-            state.emit(MovieDetailsUIState.OperationDone)
+            moviesRepository.removeFavorite(movieId)
+            onDone()
         }
     }
 }

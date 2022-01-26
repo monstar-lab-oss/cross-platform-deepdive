@@ -6,8 +6,6 @@ sealed class MovieDetailsUserAction : UserAction {
     data class LoadPage(
         val movieId: Int,
         val imageWidth: Int,
+        val actorImageWidth: Int
     ) : MovieDetailsUserAction()
-
-    data class SaveFavorite(val movieId: Int) : MovieDetailsUserAction()
-    data class RemoveFavorite(val movieId: Int) : MovieDetailsUserAction()
 }
