@@ -1,13 +1,11 @@
 package com.github.ephelsa.okmoviesplace.presenter.favorites
 
-import com.github.ephelsa.okmoviesplace.model.Genre
-import com.github.ephelsa.okmoviesplace.model.MovieDetails
+import com.github.ephelsa.okmoviesplace.model.Movie
 import com.github.ephelsa.okmoviesplace.presenter.UIState
 
 sealed class FavoritesUIState : UIState {
     data class Ready(
-        val genres: List<Genre>,
-        val movies: List<MovieDetails>,
+        val movies: List<Movie>,
     ) : FavoritesUIState()
 
     object Empty : FavoritesUIState()

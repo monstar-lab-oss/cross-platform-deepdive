@@ -2,13 +2,12 @@ package com.github.ephelsa.okmoviesplace.android.ui.screen.favorites
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -28,15 +27,14 @@ import androidx.compose.ui.unit.sp
 import com.github.ephelsa.okmoviesplace.android.R
 import com.github.ephelsa.okmoviesplace.android.ui.component.DiscoveryFeature
 import com.github.ephelsa.okmoviesplace.android.ui.component.DiscoveryFeatureTab
-import com.github.ephelsa.okmoviesplace.android.ui.component.PillButtonRowList
-import com.github.ephelsa.okmoviesplace.android.ui.component.PillTextButton
+import com.github.ephelsa.okmoviesplace.android.ui.component.MovieCard
 import com.github.ephelsa.okmoviesplace.android.ui.component.SectionTitle
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Colors
 import com.github.ephelsa.okmoviesplace.android.ui.theme.Spaces
-import com.github.ephelsa.okmoviesplace.model.Genre
+import com.github.ephelsa.okmoviesplace.model.Movie
 import com.github.ephelsa.okmoviesplace.presenter.Navigation
+import com.github.ephelsa.okmoviesplace.presenter.Router
 import com.github.ephelsa.okmoviesplace.presenter.favorites.FavoritesUIState
-import com.github.ephelsa.okmoviesplace.presenter.favorites.FavoritesUserAction
 import com.github.ephelsa.okmoviesplace.presenter.favorites.FavoritesUserActionManager
 
 @Composable
@@ -49,10 +47,8 @@ fun FavoritesScreen(
     DiscoveryFeature(navigation, DiscoveryFeatureTab.Favorites) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .padding(horizontal = Spaces.Medium)
         ) {
-
             when (favoritesState) {
                 FavoritesUIState.Empty -> EmptyFavoritesScreen()
                 FavoritesUIState.Error -> TODO()
@@ -61,7 +57,10 @@ fun FavoritesScreen(
                 }
                 is FavoritesUIState.Ready -> {
                     val ready = favoritesState as FavoritesUIState.Ready
-                    GenresSection(ready.genres) { actionManager.action(FavoritesUserAction.FilterByGenre(it)) }
+
+                    MoviesSection(movies = ready.movies) { id ->
+                        navigation.goTo(Router.MovieDetailsRoute(id))
+                    }
                 }
             }
         }
@@ -97,24 +96,34 @@ private fun EmptyFavoritesScreen() {
 }
 
 @Composable
-private fun GenresSection(
-    genres: List<Genre>,
-    onGenreSelected: (Genre) -> Unit,
+private fun MoviesSection(
+    movies: List<Movie>,
+    onMovie: (Int) -> Unit,
 ) {
+    val columnMovies = movies.chunked(2)
+
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = Spaces.Medium),
         verticalArrangement = Arrangement.spacedBy(Spaces.Medium)
     ) {
-        SectionTitle(stringResource(R.string.label_yourFavoriteCategories))
+        SectionTitle(stringResource(R.string.label_favoriteMovies))
 
-        val columns = genres.chunked(5)
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(Spaces.MediumLow)
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(Spaces.Medium)
         ) {
-            items(columns) { chunked ->
-                PillButtonRowList {
-                    items(chunked) {
-                        PillTextButton(text = it.name) { onGenreSelected(it) }
+            items(columnMovies) { moviesRow ->
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(Spaces.Medium)
+                ) {
+                    items(moviesRow) {
+                        MovieCard(movie = it, showAll = true) {
+                            onMovie(it.id)
+                        }
                     }
                 }
             }

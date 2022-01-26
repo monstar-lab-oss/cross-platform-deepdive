@@ -9,4 +9,5 @@ data class MovieDetails(
     val genres: List<Genre>,
     val description: String,
     val language: String,
+    val duration: HourMinDuration,
 )

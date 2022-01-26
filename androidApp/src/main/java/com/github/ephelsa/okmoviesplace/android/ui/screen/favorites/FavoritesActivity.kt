@@ -22,13 +22,16 @@ class FavoritesActivity : ComponentActivity(), DIAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        actionManager.action(FavoritesUserAction.LoadPage(500))
-
         setContent {
             OKMoviesPlaceTheme {
                 FavoritesScreen(navigation, actionManager)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        actionManager.action(FavoritesUserAction.LoadPage(500))
     }
 
     override fun onDestroy() {

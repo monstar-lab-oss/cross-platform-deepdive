@@ -1,7 +1,5 @@
 package com.github.ephelsa.okmoviesplace.presenter.favorites
 
-import com.github.ephelsa.okmoviesplace.model.Genre
-import com.github.ephelsa.okmoviesplace.model.MovieDetails
 import com.github.ephelsa.okmoviesplace.presenter.UserActionManager
 import com.github.ephelsa.okmoviesplace.repository.MovieRepository
 import kotlinx.coroutines.CoroutineDispatcher
@@ -24,12 +22,11 @@ class FavoritesUserActionManager(
             state.emit(FavoritesUIState.Loading)
 
             val movies = movieRepository.allFavorites(info.imageWidth)
-            val genres: List<Genre> = movies.map(MovieDetails::genres).flatten()
 
             if (movies.isEmpty()) {
                 state.emit(FavoritesUIState.Empty)
             } else {
-                state.emit(FavoritesUIState.Ready(genres, movies))
+                state.emit(FavoritesUIState.Ready(movies))
             }
         }
     }
