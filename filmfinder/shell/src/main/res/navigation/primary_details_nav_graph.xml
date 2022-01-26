@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/movie_list_fragment"
+    >
+
+    <fragment
+        android:id="@+id/movie_list_fragment"
+        android:name="com.cliabhach.terrapin.red.shell.details.MovieListFragment"
+        android:label="MovieListFragment"
+        >
+    </fragment>
+    <fragment
+        android:id="@+id/movie_detail_fragment"
+        android:name="com.cliabhach.terrapin.red.shell.details.MovieFragment"
+        android:label="movie_detail"
+        >
+    </fragment>
+</navigation>
