@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -41,6 +42,14 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = SearchFragmentBinding.inflate(inflater, container, false)
+
+        // Make the search box's EditText (defined in material_search_view.xml) match our theme.
+        binding.searchResultsContainer
+            .findViewById<EditText>(R.id.search_view_edit_text)
+            .apply {
+                setTextAppearance(R.style.Keratin_TextAppearance_SearchText)
+            }
+
         return binding.root
     }
 

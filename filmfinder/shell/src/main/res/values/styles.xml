@@ -29,4 +29,14 @@
     <style name="Keratin.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">?attr/colorSecondary</item>
     </style>
+
+    <style name="Keratin.TextAppearance">
+        <!-- Base text style - does not require any attributes -->
+    </style>
+    <!-- This SearchText style should replace Lapism's MaterialSearchTextAppearance -->
+    <style name="Keratin.TextAppearance.SearchText" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textColor">?colorOnSurface</item>
+        <item name="android:textColorHint">?colorOnSurfaceVariant</item>
+        <item name="android:letterSpacing">0.0</item>
+    </style>
 </resources>
