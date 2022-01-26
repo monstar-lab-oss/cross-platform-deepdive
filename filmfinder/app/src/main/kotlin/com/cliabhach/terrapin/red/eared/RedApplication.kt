@@ -21,7 +21,7 @@ class RedApplication: Application() {
         startKoin {
             androidLogger(level = Level.ERROR)
             androidContext(applicationContext)
-            modules(netModule, shellModule)
+            modules(netModule, shellModule, earedModule)
         }
     }
 }
