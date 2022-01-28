@@ -20,8 +20,9 @@
         tools:layout="@layout/movie_details_fragment"
         >
         <argument
-            android:name="item_id"
-            android:defaultValue=""
-            app:argType="string" />
+            android:name="terrapin:movie_id"
+            android:defaultValue="-1"
+            app:argType="integer"
+            />
     </fragment>
 </navigation>

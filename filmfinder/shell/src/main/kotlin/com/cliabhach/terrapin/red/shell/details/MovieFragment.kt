@@ -31,6 +31,6 @@ class MovieFragment : Fragment() {
 
     companion object {
 
-        const val ARG_MOVIE_ID = "terrapin.movie_id"
+        const val ARG_MOVIE_ID = "terrapin:movie_id"
     }
 }
