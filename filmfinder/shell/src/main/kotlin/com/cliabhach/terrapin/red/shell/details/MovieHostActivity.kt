@@ -43,7 +43,12 @@ class MovieHostActivity : AppCompatActivity() {
         val binding = MovieDetailsActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val initialId = intent.getIntExtra(MovieFragment.ARG_MOVIE_ID, -1)
+        // The field 'navController' isn't usable...wonder if we need to retrieve it manually?
+
+        if (savedInstanceState == null) {
+            val initialId = intent.getIntExtra(MovieFragment.ARG_MOVIE_ID, -1)
+            // TODO: Should navigate so as to show that movie. Or maybe pull it in in the fragment?
+        }
 
         barConfig = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, barConfig)
