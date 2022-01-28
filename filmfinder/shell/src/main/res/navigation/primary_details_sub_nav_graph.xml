@@ -2,6 +2,7 @@
 <navigation
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_details"
     app:startDestination="@id/fragment_movie_detail"
     >
@@ -9,7 +10,13 @@
         android:id="@+id/fragment_movie_detail"
         android:name="com.cliabhach.terrapin.red.shell.details.MovieFragment"
         android:label="@string/title_movie_details"
+        tools:layout="@layout/movie_details_fragment"
         >
+        <argument
+            android:name="item_id"
+            android:defaultValue=""
+            app:argType="string"
+            />
     </fragment>
 
 </navigation>

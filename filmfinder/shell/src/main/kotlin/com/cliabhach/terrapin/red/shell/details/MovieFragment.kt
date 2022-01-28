@@ -9,5 +9,7 @@ import androidx.fragment.app.Fragment
  */
 class MovieFragment : Fragment() {
     companion object {
+
+        const val ARG_MOVIE_ID = "terrapin.movie_id"
     }
 }
