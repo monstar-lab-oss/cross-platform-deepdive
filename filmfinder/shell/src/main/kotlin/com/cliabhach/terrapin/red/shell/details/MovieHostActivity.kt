@@ -44,6 +44,8 @@ class MovieHostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportFragmentManager.fragmentFactory = MovieNavHost.obtainFactory(intent.extras)
+
         val binding = MovieDetailsActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
