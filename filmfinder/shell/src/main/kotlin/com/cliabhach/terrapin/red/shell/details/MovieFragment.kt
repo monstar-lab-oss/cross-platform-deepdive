@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target
 import com.cliabhach.terrapin.net.Api
 import com.cliabhach.terrapin.net.filtered.movie.MovieDetails
 import com.cliabhach.terrapin.red.shell.databinding.MovieDetailsFragmentBinding
@@ -56,6 +58,11 @@ class MovieFragment : Fragment() {
                         is MovieDetails.Result -> {
                             binding.movieDetailTitle.text = details.title
                             binding.movieDetailTagline.text = details.tagline
+                            Glide.with(this)
+                                .load(details.posterUrl)
+                                // Request the full-size - the API will choose a reasonable size for us.
+                                .override(Target.SIZE_ORIGINAL)
+                                .into(binding.movieDetailsPoster)
                         }
                         is MovieDetails.Unusable -> {
                             binding.movieDetailTagline.text = details.message
