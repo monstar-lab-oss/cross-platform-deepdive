@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage
 import com.cliabhach.terrapin.red.shell.databinding.SearchFragmentBinding
 import com.cliabhach.terrapin.red.shell.databinding.ViewSearchResultsBinding
+import com.cliabhach.terrapin.red.shell.details.MovieHostActivity
 import com.cliabhach.terrapin.red.shell.search.MovieTitleListAdapter
 import com.cliabhach.terrapin.red.shell.search.SearchListener
 import com.cliabhach.terrapin.red.shell.search.SearchResultAdapter
@@ -112,7 +113,15 @@ class SearchFragment : Fragment() {
         val mainAdapter = if (currentAdapter is SearchResultAdapter) {
             currentAdapter
         } else {
-            MovieTitleListAdapter().also {
+            MovieTitleListAdapter(
+                onItemClick = { view, item ->
+                    val source = view.context
+
+                    source.startActivity(
+                        MovieHostActivity.newActivityIntent(source, searchTerm, item)
+                    )
+                }
+            ).also {
                 results.root.adapter = it
             }
         }

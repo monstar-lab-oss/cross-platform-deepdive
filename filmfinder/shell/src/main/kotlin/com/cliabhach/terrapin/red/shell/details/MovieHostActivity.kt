@@ -1,9 +1,9 @@
 package com.cliabhach.terrapin.red.shell.details
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -91,13 +91,11 @@ class MovieHostActivity : AppCompatActivity() {
     companion object {
 
         fun newActivityIntent(
-            source: View,
+            source: Context,
             searchTerm: CharSequence,
             initial: SearchResult
         ): Intent {
-            val context = source.context
-
-            return Intent(context, MovieHostActivity::class.java).apply {
+            return Intent(source, MovieHostActivity::class.java).apply {
                 putExtra(MovieFragment.ARG_MOVIE_ID, initial.id)
                 putExtra(MovieListFragment.ARG_SEARCH_TERM, searchTerm)
             }

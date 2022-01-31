@@ -40,7 +40,14 @@ class MovieListFragment : AbstractListDetailFragment() {
         val args = requireArguments()
         val query = args.getCharSequence(ARG_SEARCH_TERM, "")
 
-        val movieAdapter = MovieTitleListAdapter()
+        val movieAdapter = MovieTitleListAdapter(
+            onItemClick = { _, item ->
+                detailPaneNavHostFragment.navController.navigate(
+                    R.id.fragment_movie_detail,
+                    Bundle(args).also { it.putInt(MovieFragment.ARG_MOVIE_ID, item.id) }
+                )
+            }
+        )
 
         binding.movieList.adapter = movieAdapter
 
