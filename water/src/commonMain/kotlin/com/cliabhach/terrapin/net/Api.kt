@@ -29,19 +29,11 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
             set("language", "en-US")
         }
 
-        val url = URLBuilder(
-            protocol = URLProtocol.HTTPS,
-            host = "api.themoviedb.org",
-            parameters = parameters
-        ).apply {
+        val url = secureUrl(parameters) {
             path("3", "movie", "$id")
-        }.build()
-
-        val response = trueApi.get<HttpResponse>(
-            url = url
-        ) {
-            accept(ContentType("application", "json"))
         }
+
+        val response = getAsJson(url)
 
         val results: MovieDetails = if (response.status.isSuccess()) {
             val details = response.receive<Details>()
@@ -72,19 +64,11 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
             set("include_adult", "false")
         }
 
-        val url = URLBuilder(
-            protocol = URLProtocol.HTTPS,
-            host = "api.themoviedb.org",
-            parameters = parameters
-        ).apply {
+        val url = secureUrl(parameters) {
             path("3", "search", "movie")
-        }.build()
-
-        val response = trueApi.get<HttpResponse>(
-            url = url
-        ) {
-            accept(ContentType("application", "json"))
         }
+
+        val response = getAsJson(url)
 
         val results: SearchResultsPage = if (response.status.isSuccess()) {
             val page = response.receive<RawSearchPage>()
@@ -104,5 +88,33 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
         }
 
         return results
+    }
+
+    /**
+     * Helper function for creating an HTTPS [Url] for The Movie DB.
+     */
+    private fun secureUrl(
+        parameters: ParametersBuilder,
+        block: URLBuilder.() -> Unit
+    ): Url {
+        return URLBuilder(
+            protocol = URLProtocol.HTTPS,
+            host = "api.themoviedb.org",
+            parameters = parameters
+        ).apply(block = block).build()
+    }
+
+    /**
+     * Helper function for making a GET request.
+     *
+     * @see HttpClient.get
+     */
+    private suspend fun getAsJson(url: Url): HttpResponse {
+        val response = trueApi.get<HttpResponse>(
+            url = url
+        ) {
+            accept(ContentType("application", "json"))
+        }
+        return response
     }
 }
