@@ -21,6 +21,7 @@ class MovieTitleListAdapter : SearchResultAdapter<MovieTitleViewHolder>() {
         holder.title.text = getItem(position).title
 
         // NB: Is it worth injecting a navigation tool here?
+        // yes. Details screen needs different behavior from home screen
         holder.title.setOnClickListener {
             it.context.startActivity(
                 MovieHostActivity.newActivityIntent(it, searchTerm, getItem(position))
