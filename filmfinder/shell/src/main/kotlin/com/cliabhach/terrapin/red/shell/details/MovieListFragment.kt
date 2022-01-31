@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.NavHostFragment
 import com.cliabhach.terrapin.red.shell.EmptyAdapter
 import com.cliabhach.terrapin.red.shell.databinding.MovieListFragmentBinding
 
@@ -28,5 +30,34 @@ class MovieListFragment : Fragment() {
         val binding = MovieListFragmentBinding.bind(view)
 
         binding.movieList.adapter = EmptyAdapter()
+
+        val activity = requireActivity()
+
+        val topNavHost = activity.supportFragmentManager.primaryNavigationFragment
+
+        if (topNavHost is NavHostFragment) {
+            navigateToDetails(activity, binding, topNavHost)
+        }
+    }
+
+    /**
+     * Wrapper for a call to [showDetails].
+     */
+    private fun navigateToDetails(
+        activity: FragmentActivity,
+        binding: MovieListFragmentBinding,
+        topNavHost: NavHostFragment
+    ) {
+        val initialId = activity.intent.getIntExtra(MovieFragment.ARG_MOVIE_ID, -1)
+
+        val embeddedNavFragment = binding.movieDetailNavContainer?.run {
+            childFragmentManager.findFragmentById(id)
+        }
+
+        showDetails(
+            topNavHost,
+            embeddedNavFragment as? NavHostFragment,
+            initialId
+        )
     }
 }
