@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.AbstractListDetailFragment
 import androidx.navigation.fragment.NavHostFragment
 import com.cliabhach.terrapin.red.shell.EmptyAdapter
@@ -39,28 +38,6 @@ class MovieListFragment : AbstractListDetailFragment() {
 
     override fun onCreateDetailPaneNavHostFragment(): NavHostFragment {
         return NavHostFragment.create(R.navigation.primary_details_sub_nav_graph, arguments)
-    }
-
-    /**
-     * Wrapper for a call to [showDetails].
-     */
-    @Deprecated("Handle this with onCreateDetailPaneNavHostFragment instead")
-    private fun navigateToDetails(
-        activity: FragmentActivity,
-        binding: MovieListFragmentBinding,
-        topNavHost: NavHostFragment
-    ) {
-        val initialId = activity.intent.getIntExtra(MovieFragment.ARG_MOVIE_ID, -1)
-
-        val embeddedNavFragment = null/*binding.movieDetailNavContainer?.run {
-            childFragmentManager.findFragmentById(id)
-        }*/
-
-        showDetails(
-            topNavHost,
-            embeddedNavFragment as? NavHostFragment,
-            initialId
-        )
     }
 
     companion object {
