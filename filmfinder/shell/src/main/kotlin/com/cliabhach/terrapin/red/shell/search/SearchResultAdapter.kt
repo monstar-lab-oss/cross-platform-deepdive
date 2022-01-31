@@ -21,4 +21,15 @@ abstract class SearchResultAdapter<VH : ViewHolder> : ListAdapter<SearchResult, 
             return oldItem.title == newItem.title
         }
     }
-)
+) {
+
+    /**
+     * Current search query.
+     *
+     * Not intended for use directly by the rest of the
+     * layout; it should only really be used to alter the
+     * behaviour of [onBindViewHolder]. Set whenever the
+     * list changes.
+     */
+    var searchTerm: CharSequence = ""
+}

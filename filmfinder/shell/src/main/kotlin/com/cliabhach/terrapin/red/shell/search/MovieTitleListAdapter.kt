@@ -23,7 +23,7 @@ class MovieTitleListAdapter : SearchResultAdapter<MovieTitleViewHolder>() {
         // NB: Is it worth injecting a navigation tool here?
         holder.title.setOnClickListener {
             it.context.startActivity(
-                MovieHostActivity.newActivityIntent(it, getItem(position))
+                MovieHostActivity.newActivityIntent(it, searchTerm, getItem(position))
             )
         }
     }

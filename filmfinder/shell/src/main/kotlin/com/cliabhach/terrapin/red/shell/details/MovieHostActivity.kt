@@ -82,19 +82,22 @@ class MovieHostActivity : AppCompatActivity() {
         return topNavHost
     }
 
-    internal val ARG_MOVIE_RESULT = "terrapin:movie_search_result"
-
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(barConfig) || super.onSupportNavigateUp()
     }
 
     companion object {
 
-        fun newActivityIntent(source: View, initial: SearchResult): Intent {
+        fun newActivityIntent(
+            source: View,
+            searchTerm: CharSequence,
+            initial: SearchResult
+        ): Intent {
             val context = source.context
 
             return Intent(context, MovieHostActivity::class.java).apply {
                 putExtra(MovieFragment.ARG_MOVIE_ID, initial.id)
+                putExtra(MovieListFragment.ARG_SEARCH_TERM, searchTerm)
             }
         }
     }
