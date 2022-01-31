@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.cliabhach.terrapin.net.Api
 import com.cliabhach.terrapin.red.shell.databinding.MovieDetailsFragmentBinding
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
 
 /**
@@ -18,7 +20,16 @@ import org.koin.android.ext.android.inject
  */
 class MovieFragment : Fragment() {
 
+    private lateinit var viewModel: MovieDetailsViewModel
+
     internal val api: Api by inject()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel = ViewModelProvider(this)[MovieDetailsViewModel::class.java]
+        activity?.let { viewModel.onActivityCreated(it) }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +45,14 @@ class MovieFragment : Fragment() {
 
         val movieId = requireArguments().getInt(ARG_MOVIE_ID, -1)
 
-        binding.movieDetail.text = "No text yet!"
+        binding.movieDetailTitle.text = "No text yet!"
 
         if (movieId != -1) {
             // TODO: Request and bind details
-            lifecycleScope.launch {
-                // Make the api call here
-            }
+            viewModel.movieIdFlow
+                .onEach { id ->
+                    // TODO
+                }.launchIn(lifecycleScope)
         }
 
     }
