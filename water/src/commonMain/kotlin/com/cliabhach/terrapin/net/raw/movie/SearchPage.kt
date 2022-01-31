@@ -1,5 +1,6 @@
 package com.cliabhach.terrapin.net.raw.movie
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -9,6 +10,8 @@ import kotlinx.serialization.Serializable
 data class SearchPage(
     val page: Int,
     val results: Array<SearchResult>,
+    @SerialName("total_pages")
     val totalPages: Int = 1,
+    @SerialName("total_results")
     val totalResults: Int = results.size,
 )
