@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.cliabhach.terrapin.net.Api
+import com.cliabhach.terrapin.net.filtered.movie.MovieDetails
 import com.cliabhach.terrapin.red.shell.databinding.MovieDetailsFragmentBinding
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
@@ -48,10 +50,18 @@ class MovieFragment : Fragment() {
         binding.movieDetailTitle.text = "No text yet!"
 
         if (movieId != -1) {
-            // TODO: Request and bind details
             viewModel.movieIdFlow
                 .onEach { id ->
-                    // TODO
+                    when (val details = api.getMovieDetails(id)) {
+                        is MovieDetails.Result -> {
+                            binding.movieDetailTitle.text = details.title
+                            binding.movieDetailTagline.text = details.tagline
+                        }
+                        is MovieDetails.Unusable -> {
+                            binding.movieDetailTagline.text = details.message
+                            Snackbar.make(binding.movieDetailTitle, details.message, Snackbar.LENGTH_LONG).show()
+                        }
+                    }
                 }.launchIn(lifecycleScope)
         }
 
