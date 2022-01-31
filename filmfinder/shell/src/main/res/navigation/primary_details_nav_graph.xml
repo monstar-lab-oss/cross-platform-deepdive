@@ -12,6 +12,16 @@
         android:name="com.cliabhach.terrapin.red.shell.details.MovieListFragment"
         android:label="MovieListFragment"
         >
+        <action
+            android:id="@+id/show_movie_detail"
+            app:destination="@id/movie_detail_fragment"
+            >
+            <argument
+                android:name="terrapin:movie_id"
+                android:defaultValue="-1"
+                app:argType="integer"
+                />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/movie_detail_fragment"
