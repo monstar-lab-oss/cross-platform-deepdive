@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.AbstractListDetailFragment
 import androidx.navigation.fragment.NavHostFragment
 import com.cliabhach.terrapin.red.shell.EmptyAdapter
+import com.cliabhach.terrapin.red.shell.R
 import com.cliabhach.terrapin.red.shell.databinding.MovieListFragmentBinding
 
 /**
@@ -15,9 +16,9 @@ import com.cliabhach.terrapin.red.shell.databinding.MovieListFragmentBinding
  *
  * Refer to [MovieFragment] for the 'details' counterpart.
  */
-class MovieListFragment : Fragment() {
+class MovieListFragment : AbstractListDetailFragment() {
 
-    override fun onCreateView(
+    override fun onCreateListPaneView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,23 +27,24 @@ class MovieListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onListPaneViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = MovieListFragmentBinding.bind(view)
 
+        val args = requireArguments()
+        // TODO: Use the search term to create a search-like adapter
+        args.keySet()
+
         binding.movieList.adapter = EmptyAdapter()
+    }
 
-        val activity = requireActivity()
-
-        val topNavHost = activity.supportFragmentManager.primaryNavigationFragment
-
-        if (topNavHost is NavHostFragment) {
-            navigateToDetails(activity, binding, topNavHost)
-        }
+    override fun onCreateDetailPaneNavHostFragment(): NavHostFragment {
+        return NavHostFragment.create(R.navigation.primary_details_sub_nav_graph, arguments)
     }
 
     /**
      * Wrapper for a call to [showDetails].
      */
+    @Deprecated("Handle this with onCreateDetailPaneNavHostFragment instead")
     private fun navigateToDetails(
         activity: FragmentActivity,
         binding: MovieListFragmentBinding,
@@ -50,14 +52,18 @@ class MovieListFragment : Fragment() {
     ) {
         val initialId = activity.intent.getIntExtra(MovieFragment.ARG_MOVIE_ID, -1)
 
-        val embeddedNavFragment = binding.movieDetailNavContainer?.run {
+        val embeddedNavFragment = null/*binding.movieDetailNavContainer?.run {
             childFragmentManager.findFragmentById(id)
-        }
+        }*/
 
         showDetails(
             topNavHost,
             embeddedNavFragment as? NavHostFragment,
             initialId
         )
+    }
+
+    companion object {
+        const val ARG_SEARCH_TERM = "terrapin:search_term"
     }
 }
