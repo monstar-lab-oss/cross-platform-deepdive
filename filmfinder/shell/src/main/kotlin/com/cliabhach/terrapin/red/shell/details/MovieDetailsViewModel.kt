@@ -1,6 +1,6 @@
 package com.cliabhach.terrapin.red.shell.details
 
-import android.app.Activity
+import android.os.Bundle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +17,15 @@ class MovieDetailsViewModel: ViewModel() {
     private val _movieIdFlow = MutableStateFlow(-1)
     val movieIdFlow = _movieIdFlow.asStateFlow()
 
-    fun onActivityCreated(activity: Activity) {
-        val initialId = activity.intent.getIntExtra(MovieFragment.ARG_MOVIE_ID, -1)
+    /**
+     * Only call this after the host activity has been created.
+     *
+     * These [arguments] can come from a Fragment, from the Activity's
+     * Intent, or from the navigation graph. It doesn't really matter
+     * as long as there's a [MovieFragment.ARG_MOVIE_ID] in there.
+     */
+    fun onActivityCreated(arguments: Bundle) {
+        val initialId = arguments.getInt(MovieFragment.ARG_MOVIE_ID, -1)
 
         viewModelScope.launch {
             _movieIdFlow.emit(initialId)

@@ -32,7 +32,7 @@ class MovieFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProvider(this)[MovieDetailsViewModel::class.java]
-        activity?.let { viewModel.onActivityCreated(it) }
+        viewModel.onActivityCreated(requireArguments())
     }
 
     override fun onCreateView(
