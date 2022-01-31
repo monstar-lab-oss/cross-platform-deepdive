@@ -14,15 +14,24 @@
         android:orientation="vertical"
         >
 
-    <TextView
-        android:id="@+id/movie_detail_title"
-        style="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textIsSelectable="true"
-        tools:context="com.cliabhach.terrapin.red.shell.details.MovieFragment"
-        />
+        <TextView
+            android:id="@+id/movie_detail_title"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:textIsSelectable="true"
+            tools:context="com.cliabhach.terrapin.red.shell.details.MovieFragment"
+            />
+
+        <ImageView
+            android:id="@+id/movie_details_poster"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:layout_gravity="center_horizontal"
+            tools:layout_height="300dp"
+            />
 
         <TextView
             android:id="@+id/movie_detail_tagline"

@@ -37,6 +37,14 @@
                 tools:context="com.cliabhach.terrapin.red.shell.details.MovieFragment"
                 />
 
+            <ImageView
+                android:id="@+id/movie_details_poster"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:importantForAccessibility="no"
+                />
+
             <TextView
                 android:id="@+id/movie_detail_tagline"
                 style="?android:attr/textAppearanceLarge"
