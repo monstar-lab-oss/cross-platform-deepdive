@@ -10,7 +10,7 @@ sealed class MovieDetails(open val id: Int) {
     data class Result(
         override val id: Int,
         val title: String,
-        val posterImagePath: String,
+        val posterUrl: String,
         val tagline: String,
     ): MovieDetails(id)
 

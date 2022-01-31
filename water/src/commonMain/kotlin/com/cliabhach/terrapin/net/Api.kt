@@ -1,10 +1,13 @@
 package com.cliabhach.terrapin.net
 
+import com.cliabhach.terrapin.net.filtered.config.ApiConfig
+import com.cliabhach.terrapin.net.filtered.config.ImageUrls
 import com.cliabhach.terrapin.net.filtered.movie.MovieDetails
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Empty
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Results
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Unusable
+import com.cliabhach.terrapin.net.raw.config.Root
 import com.cliabhach.terrapin.net.raw.movie.Details
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -35,12 +38,19 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
 
         val response = getAsJson(url)
 
+        val config = getImageConfiguration()
+
         val results: MovieDetails = if (response.status.isSuccess()) {
+            val baseUrl = when (config) {
+                is ApiConfig.Unknown -> ""
+                is ApiConfig.Known -> config.images.getBasePosterUrl(100)
+            }
+
             val details = response.receive<Details>()
             MovieDetails.Result(
                 details.id,
                 details.title,
-                details.poster_path,
+                buildImageUrl(baseUrl, details.poster_path),
                 details.tagline
             )
         } else {
@@ -90,6 +100,33 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
         return results
     }
 
+    suspend fun getImageConfiguration(): ApiConfig {
+        val parameters = ParametersBuilder().apply {
+            set("api_key", apiKey)
+        }
+
+        val url = secureUrl(parameters) {
+            path("3", "configuration")
+        }
+
+        val response = getAsJson(url)
+
+        val results: ApiConfig = if (response.status.isSuccess()) {
+            val page = response.receive<Root>()
+            ApiConfig.Known(ImageUrls(page.images))
+        } else {
+            val actualStatus = if (response.status.description.isNotBlank()) {
+                response.status
+            } else {
+                HttpStatusCode.fromValue(response.status.value)
+            }
+
+            ApiConfig.Unknown(message = actualStatus.toString())
+        }
+
+        return results
+    }
+
     /**
      * Helper function for creating an HTTPS [Url] for The Movie DB.
      */
@@ -102,6 +139,16 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
             host = "api.themoviedb.org",
             parameters = parameters
         ).apply(block = block).build()
+    }
+
+    private fun buildImageUrl(
+        baseUrl: String,
+        path: String
+    ): String {
+        return URLBuilder(baseUrl + path).apply {
+            protocol = URLProtocol.HTTPS
+            parameters["api_key"] = apiKey
+        }.buildString()
     }
 
     /**
