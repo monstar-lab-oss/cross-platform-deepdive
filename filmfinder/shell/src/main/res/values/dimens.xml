@@ -11,4 +11,6 @@
     <dimen name="container_margin">@dimen/standard_padding</dimen>
     <dimen name="container_horizontal_margin">@dimen/standard_padding_2x</dimen>
 
+    <dimen name="highlight_border">@dimen/standard_padding</dimen>
+
 </resources>
