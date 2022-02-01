@@ -8,7 +8,7 @@ so other modules are encouraged to include it as a dependency.
 within itself
 3. /filmfinder/shell -> This is the Android app's UI layer.
 4. /filmfinder/app -> This is the Android app's artifact module.
-5. /browser -> This is the Web frontend. It may contain multiple modules.
+5. /batagur -> This is the Web frontend. It may contain multiple modules.
 
 # Purpose
 
