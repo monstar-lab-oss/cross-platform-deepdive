@@ -1,5 +1,6 @@
 package com.cliabhach.terrapin.red.shell.di
 
+import com.cliabhach.terrapin.red.shell.details.MovieDetailsViewModel
 import com.cliabhach.terrapin.red.shell.search.SearchListener
 import com.cliabhach.terrapin.red.shell.search.SearchViewModel
 import com.cliabhach.terrapin.red.shell.search.SimpleSearchListener
@@ -16,4 +17,5 @@ val shellModule = module {
     }
 
     viewModel { SearchViewModel() }
+    viewModel { MovieDetailsViewModel() }
 }

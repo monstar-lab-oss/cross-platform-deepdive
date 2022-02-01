@@ -15,6 +15,7 @@ import com.cliabhach.terrapin.red.shell.search.SearchListener
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
  * The 'list' part of a list-details fragment pair.
@@ -24,6 +25,8 @@ import org.koin.android.ext.android.inject
 class MovieListFragment : AbstractListDetailFragment() {
 
     private val listener: SearchListener by inject()
+
+    private val detailsViewModel: MovieDetailsViewModel by sharedViewModel()
 
     override fun onCreateListPaneView(
         inflater: LayoutInflater,

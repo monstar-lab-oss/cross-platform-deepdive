@@ -17,6 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.cliabhach.terrapin.net.raw.movie.SearchResult
 import com.cliabhach.terrapin.red.shell.R
 import com.cliabhach.terrapin.red.shell.databinding.MovieDetailsActivityBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Host for [MovieListFragment]s and [MovieFragment]s.
@@ -33,6 +34,11 @@ class MovieHostActivity : AppCompatActivity() {
      * stuff when navigating from one fragment to another.
      */
     private lateinit var barConfig: AppBarConfiguration
+
+    /**
+     * Common state, for use by fragments hosted by this Activity.
+     */
+    private val detailsViewModel: MovieDetailsViewModel by viewModel()
 
     // Maybe there's a nice way to use the Lifecycle for this?
     // It's probably fine as is.

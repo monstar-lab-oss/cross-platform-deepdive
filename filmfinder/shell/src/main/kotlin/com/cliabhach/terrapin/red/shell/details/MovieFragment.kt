@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 /**
  * The 'details' part of a list-details fragment pair.
@@ -24,16 +25,9 @@ import org.koin.android.ext.android.inject
  */
 class MovieFragment : Fragment() {
 
-    private lateinit var viewModel: MovieDetailsViewModel
+    private val detailsViewModel: MovieDetailsViewModel by sharedViewModel()
 
     internal val api: Api by inject()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProvider(this)[MovieDetailsViewModel::class.java]
-        viewModel.onActivityCreated(requireArguments())
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +46,7 @@ class MovieFragment : Fragment() {
         binding.movieDetailTitle.text = "No text yet!"
 
         if (movieId != -1) {
-            viewModel.movieIdFlow
+            detailsViewModel.movieIdFlow
                 .onEach { id ->
                     when (val details = api.getMovieDetails(id)) {
                         is MovieDetails.Result -> {
