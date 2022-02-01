@@ -23,10 +23,6 @@ class IdempotentHighlightDecoration(
     res: Resources
 ) : ItemDecoration() {
 
-    private val offset by lazy {
-        res.getDimensionPixelSize(R.dimen.highlight_border)
-    }
-
     /**
      * A drawing palette - this caches objects for faster execution of [onDrawOver].
      *
@@ -38,7 +34,9 @@ class IdempotentHighlightDecoration(
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
         if (parent.shouldBeHighlighted(view)) {
-            outRect.set(offset, offset, offset, offset)
+            with(palette) {
+                outRect.set(offset, offset, offset, offset)
+            }
         } else {
             outRect.setEmpty()
         }
@@ -107,6 +105,15 @@ class IdempotentHighlightDecoration(
 internal class DecorationPalette(
     res: Resources
 ) {
+    /**
+     * The 'thickness' or 'width' of the highlight.
+     *
+     * Called offset for its use in [IdempotentHighlightDecoration.getItemOffsets].
+     */
+    internal val offset by lazy {
+        res.getDimensionPixelSize(R.dimen.highlight_border)
+    }
+
     internal val paint by lazy {
         Paint().also {
             it.color = Color.GREEN
