@@ -1,5 +1,6 @@
 package com.cliabhach.terrapin.red.shell.details
 
+import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import androidx.recyclerview.widget.RecyclerView.State
 import com.cliabhach.terrapin.red.shell.R
 import kotlin.math.roundToInt
-import kotlin.properties.Delegates
 
 /**
  * This'll show a light highlight around the currently-selected item in the RecyclerView.
@@ -19,23 +19,25 @@ import kotlin.properties.Delegates
  * I'm heavily indebted to [androidx.recyclerview.widget.DividerItemDecoration] for
  * demonstrating what kinds of assumptions to avoid.
  */
-class IdempotentHighlightDecoration : ItemDecoration() {
+class IdempotentHighlightDecoration(
+    res: Resources
+) : ItemDecoration() {
 
-    private var offset by Delegates.notNull<Int>()
+    private val offset by lazy {
+        res.getDimensionPixelSize(R.dimen.highlight_border)
+    }
 
     /**
      * A drawing palette - this caches objects for faster execution of [onDrawOver].
      *
      * Contains a [Paint] and a [Rect].
      */
-    private val palette = DecorationPalette()
+    private val palette = DecorationPalette(res)
 
     var currentHighlightId = -1L
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
         if (parent.shouldBeHighlighted(view)) {
-            offset = view.resources.getDimensionPixelSize(R.dimen.highlight_border)
-
             outRect.set(offset, offset, offset, offset)
         } else {
             outRect.setEmpty()
@@ -98,7 +100,13 @@ class IdempotentHighlightDecoration : ItemDecoration() {
 
 }
 
-internal class DecorationPalette {
+// NB: Strictly speaking, we could offer individualised appearances for each view in the
+// RecyclerView by querying style attributes, using different themes for different types
+// of ViewHolder....but in practice this app doesn't need that. Maybe something to add
+// much later on?
+internal class DecorationPalette(
+    res: Resources
+) {
     internal val paint by lazy {
         Paint().also {
             it.color = Color.GREEN
