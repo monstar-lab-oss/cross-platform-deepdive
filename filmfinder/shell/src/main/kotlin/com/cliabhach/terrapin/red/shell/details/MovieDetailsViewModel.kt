@@ -24,11 +24,11 @@ class MovieDetailsViewModel: ViewModel() {
      * Intent, or from the navigation graph. It doesn't really matter
      * as long as there's a [MovieFragment.ARG_MOVIE_ID] in there.
      */
-    fun onActivityCreated(arguments: Bundle) {
-        val initialId = arguments.getInt(MovieFragment.ARG_MOVIE_ID, -1)
+    fun onFragmentCreated(arguments: Bundle) {
+        val anId = arguments.getInt(MovieFragment.ARG_MOVIE_ID, -1)
 
         viewModelScope.launch {
-            _movieIdFlow.emit(initialId)
+            _movieIdFlow.emit(anId)
         }
     }
 }

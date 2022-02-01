@@ -40,12 +40,14 @@ class MovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = MovieDetailsFragmentBinding.bind(view)
+        val arguments = requireArguments()
 
-        val movieId = requireArguments().getInt(ARG_MOVIE_ID, -1)
+        val movieId = arguments.getInt(ARG_MOVIE_ID, -1)
 
         binding.movieDetailTitle.text = "No text yet!"
 
         if (movieId != -1) {
+            detailsViewModel.onFragmentCreated(arguments)
             detailsViewModel.movieIdFlow
                 .onEach { id ->
                     when (val details = api.getMovieDetails(id)) {

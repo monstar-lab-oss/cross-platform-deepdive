@@ -50,11 +50,18 @@ class MovieHostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportFragmentManager.fragmentFactory = MovieNavHost.obtainFactory(intent.extras)
+        // Prepare what needs to be prepared..
+        val initialArgs = intent.extras ?: Bundle()
 
+        supportFragmentManager.fragmentFactory = MovieNavHost.obtainFactory(initialArgs)
+
+        detailsViewModel.onFragmentCreated(initialArgs)
+
+        // ..then inflate and bind the layout
         val binding = MovieDetailsActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // We have to use getNavHostBeforeOnStart from onCreate.
         val topNavHost = getNavHostBeforeOnStart()
         // Similarly, the field 'navController' isn't usable until
         // NavHostFragment::onViewCreated gets called.
