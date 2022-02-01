@@ -11,6 +11,6 @@ import kotlinx.serialization.Serializable
 data class Details(
     val id: Int,
     val title: String,
-    val poster_path: String,
+    val poster_path: String = "",
     val tagline: String
 )
