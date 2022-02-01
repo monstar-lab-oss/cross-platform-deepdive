@@ -56,7 +56,7 @@ class MovieListFragment : AbstractListDetailFragment() {
         )
         movieAdapter.setHasStableIds(true)
 
-        val decor = IdempotentHighlightDecoration(resources)
+        val decor = IdempotentHighlightDecoration(view.context.theme)
 
         binding.movieList.adapter = movieAdapter
         binding.movieList.removeItemDecoration(decor)

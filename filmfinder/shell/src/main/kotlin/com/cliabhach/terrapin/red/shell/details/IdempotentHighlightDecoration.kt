@@ -2,10 +2,14 @@ package com.cliabhach.terrapin.red.shell.details
 
 import android.content.res.Resources
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.util.TypedValue
 import android.view.View
+import androidx.annotation.StyleableRes
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.res.getColorOrThrow
+import androidx.core.content.res.use
 import androidx.core.view.children
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
@@ -20,7 +24,7 @@ import kotlin.math.roundToInt
  * demonstrating what kinds of assumptions to avoid.
  */
 class IdempotentHighlightDecoration(
-    res: Resources
+    theme: Resources.Theme
 ) : ItemDecoration() {
 
     /**
@@ -28,7 +32,7 @@ class IdempotentHighlightDecoration(
      *
      * Contains a [Paint] and a [Rect].
      */
-    private val palette = DecorationPalette(res)
+    private val palette = DecorationPalette(theme)
 
     var currentHighlightId = -1L
 
@@ -116,7 +120,7 @@ class IdempotentHighlightDecoration(
 // of ViewHolder....but in practice this app doesn't need that. Maybe something to add
 // much later on?
 internal class DecorationPalette(
-    res: Resources
+    theme: Resources.Theme
 ) {
     /**
      * The 'thickness' or 'width' of the highlight.
@@ -124,13 +128,18 @@ internal class DecorationPalette(
      * Called offset for its use in [IdempotentHighlightDecoration.getItemOffsets].
      */
     internal val offset by lazy {
-        res.getDimensionPixelSize(R.dimen.highlight_border)
+        theme.resources.getDimensionPixelSize(R.dimen.highlight_border)
     }
 
     internal val paint by lazy {
-        Paint().also {
-            it.color = Color.GREEN
+        val p = Paint()
+
+        theme.obtainStyledAttributes(R.style.Keratin_Theme, paintStyleables).use {
+            p.color = theme.attributeToColor(it.getColorOrThrow(0))
+            p.style = Paint.Style.STROKE
+            p.strokeWidth = (offset / 2).toFloat()
         }
+        p
     }
 
     /**
@@ -139,4 +148,27 @@ internal class DecorationPalette(
     internal val viewBounds = Rect()
 
     internal val highlightBounds = Rect()
+
+    private companion object {
+
+        const val COLOR_SECONDARY: Int = android.R.attr.textColorSecondary
+
+        @StyleableRes
+        val paintStyleables = intArrayOf(
+            androidx.appcompat.R.attr.colorPrimary,
+        )
+
+        // Code inspired by NavigationBarMenuView::createDefaultColorStateList in MDC 1.6a1
+        fun Resources.Theme.attributeToColor(defaultColor: Int): Int {
+            val value = TypedValue()
+
+            val baseColor = if (resolveAttribute(COLOR_SECONDARY, value, true)) {
+                ResourcesCompat.getColorStateList(resources, value.resourceId, this)
+            } else {
+                null
+            }
+
+            return baseColor?.defaultColor ?: defaultColor
+        }
+    }
 }
