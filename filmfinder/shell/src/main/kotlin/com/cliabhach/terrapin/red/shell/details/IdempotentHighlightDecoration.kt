@@ -48,9 +48,20 @@ class IdempotentHighlightDecoration(
 
         c.save()
 
-        // TODO: Figure out padding/margin
-        left = 0
-        right = parent.width
+        // Reduce left and right values if the RecyclerView's own padding takes priority
+        if (parent.clipToPadding) {
+            left = parent.paddingLeft
+            right = parent.width - parent.paddingRight
+            c.clipRect(
+                left,
+                parent.paddingTop,
+                right,
+                parent.height - parent.paddingBottom
+            )
+        } else {
+            left = 0
+            right = parent.width
+        }
 
         // We only want to highlight one child, but that one might not be on screen right now.
         parent.children.filter {
@@ -60,8 +71,10 @@ class IdempotentHighlightDecoration(
                 // Code based on 'drawVertical' function in DividerItemDecoration
                 parent.getDecoratedBoundsWithMargins(child, viewBounds)
 
-                val bottom: Int = viewBounds.bottom + child.translationY.roundToInt()
-                val top: Int = bottom - offset
+                val yTranslation = child.translationY.roundToInt()
+
+                val bottom: Int = viewBounds.bottom + yTranslation
+                val top: Int = viewBounds.top + yTranslation + offset
 
                 highlightBounds.set(left, top, right, bottom)
 
