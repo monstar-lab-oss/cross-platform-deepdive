@@ -13,6 +13,8 @@ import com.cliabhach.terrapin.red.shell.databinding.MovieListFragmentBinding
 import com.cliabhach.terrapin.red.shell.search.MovieTitleListAdapter
 import com.cliabhach.terrapin.red.shell.search.SearchListener
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -54,8 +56,16 @@ class MovieListFragment : AbstractListDetailFragment() {
         )
         movieAdapter.setHasStableIds(true)
 
+        val decor = IdempotentHighlightDecoration()
 
         binding.movieList.adapter = movieAdapter
+        binding.movieList.removeItemDecoration(decor)
+        binding.movieList.addItemDecoration(decor)
+
+        detailsViewModel.movieIdFlow.onEach {
+            decor.currentHighlightId = it.toLong()
+            binding.movieList.invalidateItemDecorations()
+        }.launchIn(lifecycleScope)
 
         // Second, make sure we're listening to queries correctly
         movieAdapter.searchTerm = query
