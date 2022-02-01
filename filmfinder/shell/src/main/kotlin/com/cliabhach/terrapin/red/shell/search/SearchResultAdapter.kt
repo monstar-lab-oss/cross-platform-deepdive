@@ -32,4 +32,8 @@ abstract class SearchResultAdapter<VH : ViewHolder> : ListAdapter<SearchResult, 
      * list changes.
      */
     var searchTerm: CharSequence = ""
+
+    override fun getItemId(position: Int): Long {
+        return getItem(position).id.toLong()
+    }
 }

@@ -43,6 +43,7 @@ class MovieListFragment : AbstractListDetailFragment() {
         val args = requireArguments()
         val query = args.getCharSequence(ARG_SEARCH_TERM, "")
 
+        // First, sort out the adapter
         val movieAdapter = MovieTitleListAdapter(
             onItemClick = { _, item ->
                 detailPaneNavHostFragment.navController.navigate(
@@ -51,9 +52,12 @@ class MovieListFragment : AbstractListDetailFragment() {
                 )
             }
         )
+        movieAdapter.setHasStableIds(true)
+
 
         binding.movieList.adapter = movieAdapter
 
+        // Second, make sure we're listening to queries correctly
         movieAdapter.searchTerm = query
         lifecycleScope.launch {
             // Hopefully this will use the cache

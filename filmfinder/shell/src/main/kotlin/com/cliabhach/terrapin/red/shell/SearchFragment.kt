@@ -122,6 +122,7 @@ class SearchFragment : Fragment() {
                     )
                 }
             ).also {
+                it.setHasStableIds(true)
                 results.root.adapter = it
             }
         }
