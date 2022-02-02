@@ -5,6 +5,32 @@ A movie-finding app backed by The Movie DB.
 We use Typescript here. The project was bootstrapped with
 [Create React App](https://github.com/facebook/create-react-app).
 
+## Plan
+
+### Routes (pages/subpages)
+1. Import routes from common module
+2. Each route gets its own file
+3. Each route file has to declare a unique top-level function
+   1. So, like, we might have a /details route with function Details()
+   2. I don't know what happens with more complicated layouts, but
+   it's probably safe to just have separate routes for different screen
+   sizes or configurations for now.
+4. Use react-router-dom in App.tsx to map the strings to the files
+
+### Home
+1. Just...make a basic home screen with nice things like stars?
+2. Include search widget from another file or something
+3. I don't like the idea of doing it all un-styled, but that might
+be the right approach here
+
+### Search results
+1. These get their own screen
+2. Don't even think about messing much with the layout
+
+### Details screen
+1. Should be the simplest layout
+2. Go ham with routing and refresh/update logic
+
 # Getting this to work
 
 ## Available scripts
