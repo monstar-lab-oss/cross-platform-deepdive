@@ -40,6 +40,12 @@ kotlin {
 
 
     sourceSets {
+        all {
+            languageSettings {
+                // Required for TS definition files
+                optIn('kotlin.js.ExperimentalJsExport')
+            }
+        }
         commonMain {
             dependencies {
                 implementation 'io.ktor:ktor-client-core:1.6.7'

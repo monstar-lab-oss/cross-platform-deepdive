@@ -41,6 +41,12 @@ kotlin {
 
 
     sourceSets {
+        all {
+            languageSettings {
+                // Required for TS definition files
+                optIn('kotlin.js.ExperimentalJsExport')
+            }
+        }
         commonMain {
             dependencies {
                 implementation kotlin('stdlib-common')
