@@ -28,14 +28,12 @@ internal class AndroidNavigation(
                 action = IntentActions.FAVORITES,
                 flagList = listOf(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION,
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 )
             )
             is Router.MovieDetailsRoute -> startActivity(
                 action = IntentActions.MOVIE_DETAILS,
                 flagList = listOf(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION,
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 ),
                 bundleBuilder = {
                     putInt("movie_id", route.movieId)
@@ -44,7 +42,6 @@ internal class AndroidNavigation(
                 action = IntentActions.MOVIES,
                 flagList = listOf(
                     Intent.FLAG_ACTIVITY_NO_ANIMATION,
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 )
             )
         }
