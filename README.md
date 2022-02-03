@@ -4,6 +4,8 @@ An exploration of cross-platform software development, with a focus on mobile.
 
 ## Examples
 
+Each example lives on a different branch of this repository.
+
 - [KMM - Ok Movies Place](https://github.com/monstar-lab-oss/cross-platform-deepdive/tree/ok-movies-place)
 - [KMP - Terrapin](https://github.com/monstar-lab-oss/cross-platform-deepdive/tree/terrapin)
 
