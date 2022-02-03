@@ -9,6 +9,7 @@
     "@types/node": "^17.0.12",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "Terrapin-light": "../../build/js/packages/Terrapin-light",
     "Terrapin-water": "../../build/js/packages/Terrapin-water",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
