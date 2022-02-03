@@ -1,0 +1,82 @@
+plugins {
+    id 'org.jetbrains.kotlin.multiplatform'
+}
+
+group 'com.cliabhach.terrapin'
+version '1.0'
+
+kotlin {
+    /* Targets configuration omitted. 
+    *  To find out how to configure the targets, please follow the link:
+    *  https://kotlinlang.org/docs/reference/building-mpp-with-gradle.html#setting-up-targets */
+    jvm {
+        compilations.all {
+            kotlinOptions.jvmTarget = '14'
+        }
+        withJava()
+        testRuns["test"].executionTask.configure {
+            useJUnitPlatform()
+        }
+    }
+    js(IR) {
+        browser {
+            commonWebpackConfig {
+                cssSupport.enabled = true
+            }
+            // TODO: Figure out why 'distribution' DSL block isn't supported
+            // For now, output is in ../build/js/ (NOT /water/build/js/)
+        }
+        // Even though we only use the IR as a library, this
+        // has to be 'executable' for other modules' npm/yarn
+        // import to work.
+        binaries.executable()
+    }
+    def hostOs = System.getProperty("os.name")
+    def isMingwX64 = hostOs.startsWith("Windows")
+    def nativeTarget
+    if (hostOs == "Mac OS X") nativeTarget = macosX64('native')
+    else if (hostOs == "Linux") nativeTarget = linuxX64("native")
+    else if (isMingwX64) nativeTarget = mingwX64("native")
+    else throw new GradleException("Host OS is not supported in Kotlin/Native.")
+
+
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation kotlin('stdlib-common')
+            }
+        }
+        commonTest {
+            dependencies {
+                // Commented out as per https://youtrack.jetbrains.com/issue/KTIJ-16821 and
+                // https://kotlinlang.org/docs/gradle.html#set-dependencies-on-test-libraries .
+                //
+                // Shame that the type inference for JetBrains' 'kotlin()' function is so bad.
+                //implementation kotlin('test')
+                //implementation kotlin('test-common')
+                //implementation kotlin('test-annotations-common')
+            }
+        }
+        jvmMain {
+            dependencies {
+            }
+        }
+        jvmTest {
+
+        }
+        jsMain {
+            dependencies {
+            }
+        }
+        jsTest {
+
+        }
+        nativeMain {
+            dependencies {
+            }
+        }
+        nativeTest {
+
+        }
+    }
+}

@@ -4,11 +4,13 @@ This is a rather simple Kotlin tech demo. The following directories exist:
 
 1. /water -> This is the networking layer. It's explicitly multiplatform,
 so other modules are encouraged to include it as a dependency.
-2. /filmfinder -> This is the Android app. It contains multiple modules
+2. /light -> This is the navigation routing layer. It's multiplatform,
+just like water.
+3. /filmfinder -> This is the Android app. It contains multiple modules
 within itself
-3. /filmfinder/shell -> This is the Android app's UI layer.
-4. /filmfinder/app -> This is the Android app's artifact module.
-5. /batagur -> This is the Web frontend. It may contain multiple modules.
+4. /filmfinder/shell -> This is the Android app's UI layer.
+5. /filmfinder/app -> This is the Android app's artifact module.
+6. /batagur -> This is the Web frontend. It may contain multiple modules.
 
 # Purpose
 
