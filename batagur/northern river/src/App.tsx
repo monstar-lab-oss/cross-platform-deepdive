@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomeRoute from './home/routes';
 import SearchRoute from './search/routes';
+import LightRoutes from './routes';
 
 export default function App() {
   return (
@@ -9,8 +10,8 @@ export default function App() {
       <header className="App-header">
         <BrowserRouter>
           <Routes>
-            <Route path="/search" element={<SearchRoute />} />
-            <Route path="/" element={<HomeRoute />} />
+            <Route path={LightRoutes.search.path} element={<SearchRoute />} />
+            <Route path={LightRoutes.home.path} element={<HomeRoute />} />
           </Routes>
         </BrowserRouter>
         <p>
