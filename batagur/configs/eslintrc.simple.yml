@@ -1,0 +1,57 @@
+##
+# SPDX-FileCopyrightText: 2022 Philip Cohn-Cort
+#
+# SPDX-License-Identifier: APACHE-2
+##
+extends:
+  - "eslint:recommended"
+  - "plugin:@typescript-eslint/eslint-recommended"
+  - "plugin:@typescript-eslint/recommended"
+
+parser: "@typescript-eslint/parser"
+
+plugins:
+  - "@typescript-eslint"
+
+env:
+  node: true
+
+parserOptions:
+  # C.f. https://github.com/typescript-eslint/typescript-eslint/blob/27946318b0b4ad7fb/packages/parser/README.md#configuration
+  project: "./target2021.ts.json"
+
+##
+# Each rule can be fully configured with a single YAML array.
+#
+# The first element of that array is one of the following case-sensitive values:
+#
+# * off
+# * warn
+# * error
+# * 0
+# * 1
+# * 2
+#
+# Note that 0 and off both disable the rule, 1 and warn make it a warning, and
+# 2 and error make it an error.
+#
+# Further elements of the array depend on the particular rule. I've linked some
+# markdown guides for each of the below rules so you can see what options work.
+#
+rules:
+  # We use the NodeJS standard of 2 spaces per indent over the ESLint default of 4
+  # C.f. https://github.com/typescript-eslint/typescript-eslint/blob/27946318b0b4ad7fb/packages/eslint-plugin/docs/rules/indent.md
+  "@typescript-eslint/indent":
+    - "error"
+    - 2
+  # Prefer generic typing over array literals. It makes two-dimensional arrays easier to read.
+  # C.f. https://github.com/typescript-eslint/typescript-eslint/blob/27946318b0b4ad7fb/packages/eslint-plugin/docs/rules/array-type.md
+  "@typescript-eslint/array-type":
+    - "warn"
+    - default: "generic"   # Ought to evaluate and perhaps switch to "array-simple" in future.
+  # We don't benefit from complaints about public members not being explicitly 'public'.
+  # This doesn't affect 'private' members, though.
+  # C.f. https://github.com/typescript-eslint/typescript-eslint/blob/27946318b0b4ad7fb/packages/eslint-plugin/docs/rules/explicit-member-accessibility.md
+  "@typescript-eslint/explicit-member-accessibility":
+    - "error"
+    - accessibility: "no-public"
