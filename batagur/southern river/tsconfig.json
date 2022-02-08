@@ -4,6 +4,9 @@
     "outDir": "lib",
     "baseUrl": ".",
     "paths": {
+      "light/*": [
+        "../../build/js/packages/Terrapin-light/*"
+      ]
     }
   },
   "exclude": [
