@@ -9,6 +9,8 @@
   "scripts": {
     "test": "jest",
     "make": "tsc -p . && npx webpack",
+    "plain": "node lib/index.js",
+    "with-pack": "node .webpack/main.cjs",
     "lint": "npx eslint 'src/**'"
   },
   "type": "module",
