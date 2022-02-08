@@ -2,11 +2,11 @@
 
 async function doStuff() {
 
-    console.log("Start!");
+  console.log("Start!");
 
-    console.log("Mid!")
+  console.log("Mid!")
 
-    console.log("End!")
+  console.log("End!")
 }
 
 doStuff()

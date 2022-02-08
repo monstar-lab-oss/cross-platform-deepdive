@@ -1,5 +1,5 @@
 export namespace This {
-    const That: {};
+  const That: {};
 }
 
 export as namespace What;
