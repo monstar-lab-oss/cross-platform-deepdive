@@ -1,0 +1,13 @@
+extends:
+  - '../.eslintrc.yml'
+  - "plugin:@typescript-eslint/eslint-recommended"
+  - "plugin:@typescript-eslint/recommended"
+
+parser: "@typescript-eslint/parser"
+
+plugins:
+  - "@typescript-eslint"
+
+parserOptions:
+  # C.f. https://github.com/typescript-eslint/typescript-eslint/blob/27946318b0b4ad7fb/packages/parser/README.md#configuration
+  project: "./tsconfig.json"
