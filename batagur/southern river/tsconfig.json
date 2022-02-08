@@ -1,0 +1,14 @@
+{
+  "extends": "../configs/target2021.ts.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "baseUrl": ".",
+    "paths": {
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "src/squareMocks",
+    "**/test/*"
+  ]
+}
