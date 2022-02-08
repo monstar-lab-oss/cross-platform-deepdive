@@ -1,5 +1,5 @@
 extends:
-  - '../.eslintrc.yml'
+  - "../.eslintrc.yml"
   - "plugin:@typescript-eslint/eslint-recommended"
   - "plugin:@typescript-eslint/recommended"
   - "plugin:react/recommended" # Typical React app rules
@@ -15,3 +15,11 @@ plugins:
 parserOptions:
   # C.f. https://github.com/typescript-eslint/typescript-eslint/blob/27946318b0b4ad7fb/packages/parser/README.md#configuration
   project: "./tsconfig.json"
+
+# Additional settings, to be shared between all plugins
+# C.f. https://eslint.org/docs/user-guide/configuring/configuration-files#adding-shared-settings
+settings:
+  react:
+    # Use the version of React that's in node_modules or
+    # wherever it is that the React plugin searches.
+    version: "detect"
