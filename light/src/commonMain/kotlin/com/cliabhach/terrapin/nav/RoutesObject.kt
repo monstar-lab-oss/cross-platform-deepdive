@@ -8,12 +8,12 @@ import kotlin.js.JsExport
  * @author Philip Cohn-Cort
  */
 @JsExport
-object Routes {
+object RoutesObject {
     val where = "??"
 
-    object home : Route("/")
-    object search : Route("/search")
+    object home : RouteObject("/")
+    object search : RouteObject("/search")
 }
 
 @JsExport
-sealed class Route(val path: String)
+sealed class RouteObject(val path: String)
