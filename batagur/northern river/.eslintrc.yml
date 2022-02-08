@@ -2,6 +2,10 @@ extends:
   - '../.eslintrc.yml'
   - "plugin:@typescript-eslint/eslint-recommended"
   - "plugin:@typescript-eslint/recommended"
+  - "plugin:react/recommended" # Typical React app rules
+  - "plugin:react/jsx-runtime" # Support dynamic 'React' and '_jsx' imports
+# - "plugin:react-app/jest" # This was in the CRA template, but is there even
+#                           # a need for this?
 
 parser: "@typescript-eslint/parser"
 
