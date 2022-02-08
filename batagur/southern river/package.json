@@ -1,0 +1,11 @@
+{
+  "name": "FilmFinder",
+  "version": "1.0.0",
+  "description": "A simple tool for finding films",
+  "author": "Philip Cohn-Cort",
+  "license": "APACHE-2",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  }
+}
