@@ -3,7 +3,9 @@ package com.cliabhach.terrapin.nav
 import kotlin.js.JsExport
 
 /**
- * Constants for navigation.
+ * Variation of 'Routes' that uses 'object' syntax.
+ *
+ * A Route is a constant used for navigation.
  *
  * @author Philip Cohn-Cort
  */
