@@ -11,9 +11,9 @@ import com.cliabhach.terrapin.nav.RoutesObject
  */
 @JsExport
 val LightRoutes = object {
-    val LHome = RoutesObject.home
-    val LSearch = RoutesObject.search
+    val LHome = RoutesObject.Home
+    val LSearch = RoutesObject.Search
 }
 
 @JsExport
-val Something = "83"
+val Something = "85"

@@ -10,8 +10,8 @@ export default function App() {
       <header className="App-header">
         <BrowserRouter>
           <Routes>
-            <Route path={LightRoutes.search.path} element={<SearchRoute />} />
-            <Route path={LightRoutes.home.path} element={<HomeRoute />} />
+            <Route path={LightRoutes.Search.path} element={<SearchRoute />} />
+            <Route path={LightRoutes.Home.path} element={<HomeRoute />} />
           </Routes>
         </BrowserRouter>
         <p>

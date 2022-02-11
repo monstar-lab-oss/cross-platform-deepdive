@@ -13,8 +13,8 @@ import kotlin.js.JsExport
 object RoutesObject {
     val where = "??"
 
-    object home : RouteObject("/")
-    object search : RouteObject("/search")
+    object Home : RouteObject("/")
+    object Search : RouteObject("/search")
 }
 
 @JsExport
