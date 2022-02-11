@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+// TODO: Can we get rid of this? Why did CRA add it anyway?
+//import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>

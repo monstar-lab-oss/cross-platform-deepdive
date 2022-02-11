@@ -19,11 +19,10 @@ export default function App() {
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
+          href={LightRoutes.search.path}
           rel="noopener noreferrer"
         >
-          Learn React
+          Switch to Search
         </a>
       </header>
     </div>
