@@ -1,4 +1,5 @@
 {
+  "$schema": "../configs/package.json.schema.json",
   "name": "FilmFinder",
   "version": "1.0.0",
   "description": "A simple tool for finding films",
