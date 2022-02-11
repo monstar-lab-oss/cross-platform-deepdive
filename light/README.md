@@ -67,3 +67,30 @@ remarkably unclear.
 Of course the package.json goes somewhere else entirely -
 I am not certain whether that is a programming mistake or
 some kind of statement about its use.
+
+## Things that don't work
+
+### Fixed in Kotlin 1.6.20
+
+You can't export nested `object`s. So for code like
+```kotlin
+@JsExport
+object A {
+    val B
+    object C {}
+    class D {}
+}
+
+@JsExport
+val e = A.C
+```
+You'll be able to access `A`, `A.B`, and `e`, but not `A.C`
+or `A.D`. This might sound boring, until you realize that we
+use constructs like `A.C` all the time, in the form of
+```kotlin
+object MyObject {
+    companion object {
+        const val IMPORTANT_VALUE = 4
+    }
+}
+```

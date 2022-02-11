@@ -16,6 +16,15 @@ import kotlin.js.JsExport
 open class RoutesInterface {
     val where = "??"
 
+    /**
+     * NB: With Kotlin 1.6.10, this object is not visible to JS code.
+     *
+     * Kotlin 1.6.20-M1 fixes that and makes it visible.
+     */
+    companion object {
+        val another = "50"
+    }
+
     private object home : RouteInterface {
         override val path: String
             get() = "/"
