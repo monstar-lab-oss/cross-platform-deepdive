@@ -6,6 +6,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
@@ -68,10 +69,18 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
             project.registerCopyTask(
                 rootProjectName,
                 projectName,
-                outputsJsFilesTask
+                outputsJsFilesTask,
+            )
+
+        val copyPackageJsonTaskProvider: TaskProvider<Copy> =
+            project.registerCopyPackageJsonTask(
+                packageJsonOutputTaskProvider,
+                rootProjectName,
+                projectName
             )
 
         dependsOn(copyTaskProvider)
+        dependsOn(copyPackageJsonTaskProvider)
     }
 
     private fun Project.registerCopyTask(
@@ -94,6 +103,32 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
                 projectName,
                 outputsJsFilesTask,
             )
+        }
+    }
+
+    private fun Project.registerCopyPackageJsonTask(
+        packageJsonOutputTaskProvider: Provider<Task>,
+        rootProjectName: String,
+        projectName: String
+    ): TaskProvider<Copy> {
+        return tasks.register(
+            "copyJsPackageJsonToNodeModules",
+            Copy::class.java
+        ) {
+            val packageJsonOutputTask = packageJsonOutputTaskProvider.get()
+            val nodeModulesFolder = CopyJsToNodeModules.getNodeModulesFolder(
+                this,
+                rootProjectName,
+                projectName
+            )
+
+            // Copy package.json into the (given) parent folder
+            it.from(packageJsonOutputTask.outputs)
+            it.into(nodeModulesFolder)
+
+            it.description = "Copy $projectName's package.json into a node_modules folder"
+            it.group = "nodejs"
+            it.dependsOn(packageJsonOutputTask)
         }
     }
 
