@@ -2,8 +2,11 @@ package com.cliabhach.terrapin.gradle
 
 import org.apache.commons.lang3.StringUtils
 import org.gradle.api.DefaultTask
+import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.TaskProvider
 import java.util.*
 
 /**
@@ -40,6 +43,28 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
         }
     }
 
+    private fun Project.registerCopyTask(
+        rootProjectName: String,
+        projectName: String,
+        outputsJsFilesTask: Task
+    ): TaskProvider<CopyJsToNodeModules> {
+        val capitalizedProjectName = StringUtils.capitalize(projectName)
+
+        return tasks.register(
+            "copy${capitalizedProjectName}JsToNodeModules",
+            CopyJsToNodeModules::class.java
+        ) { copyTask ->
+
+            copyTask.logOut("Now configuring $copyTask")
+
+            copyTask.configureAgainstProject(
+                this,
+                rootProjectName,
+                projectName,
+                outputsJsFilesTask,
+            )
+        }
+    }
 
     companion object {
 
@@ -47,7 +72,19 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
 
         private val baseQualifiers = splitToLowercase(COMPILE_JS_TASK_NAME)
 
-        // TODO: Detect the JS compilation task, somehow
+        @JvmStatic
+        fun matches(task: Task, vararg variantQualifiers: String): Boolean {
+            val taskNameParts = splitToLowercase(task.name)
+
+            val doesMatch = (baseQualifiers + variantQualifiers) == taskNameParts
+
+            // If it's null, this isn't a Kotlin/JS project.
+            // Or maybe the API changed since 1.6.20-M1.
+
+            task.logger.log(LogLevel.ERROR, "Task definitely found: $task")
+
+            return doesMatch
+        }
 
         /**
          * Quick alias for [StringUtils.splitByCharacterTypeCamelCase].
