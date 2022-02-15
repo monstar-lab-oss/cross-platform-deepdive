@@ -25,10 +25,12 @@ subprojects {
 
     // tasks.all and tasks.withType are lazily evaluated, but tasks.getByName
     // and tasks.named aren't.
-    tasks.withType(KotlinJsIrLink) { outputsJsFilesTask ->
+    tasks.withType(KotlinJsIrLink) { Task outputsJsFilesTask ->
 
         // Looking for "compileProductionExecutableKotlinJs"
-        if (ParentCopyJsToNodeModules.matches(outputsJsFilesTask, "production", "executable")) {
+        if (ParentCopyJsToNodeModules.matches(
+                outputsJsFilesTask, "production", "executable")
+        ) {
 
             // If the line below never executes, not for ANY of the subprojects
             // (because none of them match our conditions), then we never
