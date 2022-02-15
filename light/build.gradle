@@ -23,8 +23,13 @@ kotlin {
             commonWebpackConfig {
                 cssSupport.enabled = true
             }
+            webpackTask {
+                output.libraryTarget = "commonjs2"
+            }
             // TODO: Figure out why 'distribution' DSL block isn't supported
-            // For now, output is in ../build/js/ (NOT /water/build/js/)
+            // For now, output is in ../build/js/ (NOT /light/build/js/)
+        }
+        nodejs {
         }
         // Even though we only use the IR as a library, this
         // has to be 'executable' for other modules' npm/yarn
