@@ -29,14 +29,14 @@ subprojects {
 
         // Looking for "compileProductionExecutableKotlinJs"
         if (ParentCopyJsToNodeModules.matches(
-                outputsJsFilesTask, "production", "executable")
-        ) {
+                outputsJsFilesTask, "production", "executable"
+        )) {
 
             // If the line below never executes, not for ANY of the subprojects
             // (because none of them match our conditions), then we never
             // create these copy tasks.
-            ParentCopyJsToNodeModules rootTask = rootTaskProvider.get()
-            rootTask.registerChildCopyTask(
+            ParentCopyJsToNodeModules parentTask = rootTaskProvider.get()
+            parentTask.registerChildCopyTask(
                     project,
                     outputsJsFilesTask,
                     rootProjectName
