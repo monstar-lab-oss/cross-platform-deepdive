@@ -25,6 +25,8 @@ subprojects {
 
     // tasks.all and tasks.withType are lazily evaluated, but tasks.getByName
     // and tasks.named aren't.
+    Provider<Task> packageJsonTaskProvider = providePackageJsonTask(project)
+
     tasks.withType(KotlinJsIrLink) { Task outputsJsFilesTask ->
 
         // Looking for "compileProductionExecutableKotlinJs"
@@ -39,8 +41,14 @@ subprojects {
             parentTask.registerChildCopyTask(
                     project,
                     outputsJsFilesTask,
-                    rootProjectName
+                    rootProjectName,
+                    packageJsonTaskProvider
             )
         }
     }
+}
+
+private static Provider<Task> providePackageJsonTask(Project p) {
+    // TODO: write a lookup or something
+    return p.provider(() -> null)
 }

@@ -5,6 +5,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.logging.LogLevel
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
@@ -47,6 +48,9 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
     /**
      * Create and register a [CopyJsToNodeModules] task.
      *
+     * The parameter [packageJsonOutputTaskProvider] should provide the
+     * task which outputs the `package.json` file.
+     *
      * In essence, we call [TaskContainer.register] with a closure. That
      * closure invokes [CopyJsToNodeModules.configureAgainstProject].
      *
@@ -57,6 +61,7 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
         project: Project,
         outputsJsFilesTask: Task,
         rootProjectName: String,
+        packageJsonOutputTaskProvider: Provider<Task>,
         projectName: String = project.name,
     ) {
         val copyTaskProvider: TaskProvider<CopyJsToNodeModules> =
@@ -72,7 +77,7 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
     private fun Project.registerCopyTask(
         rootProjectName: String,
         projectName: String,
-        outputsJsFilesTask: Task
+        outputsJsFilesTask: Task,
     ): TaskProvider<CopyJsToNodeModules> {
         val capitalizedProjectName = StringUtils.capitalize(projectName)
 
