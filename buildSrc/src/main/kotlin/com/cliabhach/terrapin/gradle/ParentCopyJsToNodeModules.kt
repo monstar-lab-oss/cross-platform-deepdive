@@ -2,6 +2,8 @@ package com.cliabhach.terrapin.gradle
 
 import org.apache.commons.lang3.StringUtils
 import org.gradle.api.DefaultTask
+import org.gradle.api.logging.LogLevel
+import org.gradle.api.tasks.Input
 import java.util.*
 
 /**
@@ -9,15 +11,18 @@ import java.util.*
  *
  * @author Philip Cohn-Cort
  */
-abstract class ParentCopyJsToNodeModules : DefaultTask() {
+abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
 
+    @get:Input
+    override val logLevel: LogLevel
+        get() = LogLevel.WARN
 
     /**
      * Define some basic properties for this task.
      *
      * This currently defines [description] and [group], disables the
      * up-to-date check on outputs, and sets up messages to print when
-     * the
+     * the task starts and ends.
      */
     fun configureAgainstProject() {
         actuallyConfigure()
@@ -28,10 +33,10 @@ abstract class ParentCopyJsToNodeModules : DefaultTask() {
         group = "nodejs"
         outputs.upToDateWhen { false }
         doFirst {
-            // TODO: Log start
+            it.logOut("Preparing JS copy to node_modules...")
         }
         doLast {
-            // TODO: Log end
+            it.logOut("JS copy to node_modules is now complete.")
         }
     }
 

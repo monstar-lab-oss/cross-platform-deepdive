@@ -1,6 +1,6 @@
 package com.cliabhach.terrapin.gradle
 
-import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.logging.Logger
 
@@ -11,10 +11,12 @@ import org.gradle.api.logging.Logger
  */
 interface Loggable {
 
-    // TODO: Use in the copy tasks as an input
+    /**
+     * Default logging level.
+     */
     val logLevel: LogLevel
 
-    fun logOut(project: Project, message: String) {
-        project.logger.log(logLevel, message)
+    fun Task.logOut(message: String) {
+        logger.log(logLevel, message)
     }
 }
