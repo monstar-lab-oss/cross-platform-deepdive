@@ -1,5 +1,8 @@
 import com.cliabhach.terrapin.gradle.ParentCopyJsToNodeModules
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrLink
+import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinPackageJsonTask
+
+import java.util.concurrent.atomic.AtomicReference
 
 plugins {
     id 'org.jetbrains.kotlin.multiplatform' version '1.6.20-M1' apply false
@@ -49,6 +52,15 @@ subprojects {
 }
 
 private static Provider<Task> providePackageJsonTask(Project p) {
-    // TODO: write a lookup or something
-    return p.provider(() -> null)
+    AtomicReference<KotlinPackageJsonTask> atomicRef = new AtomicReference<>(null)
+    Provider<Task> packageJsonTaskProvider = p.provider(() -> atomicRef.get() as Task)
+
+    p.tasks.withType(KotlinPackageJsonTask) { KotlinPackageJsonTask packageJsonTask ->
+        String taskName = packageJsonTask.name
+        if (!taskName.containsIgnoreCase("test")) {
+            atomicRef.set(packageJsonTask)
+        }
+    }
+
+    return packageJsonTaskProvider
 }
