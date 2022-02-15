@@ -2,9 +2,12 @@ package com.cliabhach.terrapin.gradle
 
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.TaskOutputs
+import java.io.File
 
 /**
  * Basic Copy action that understands Kotlin/JS compilation quirks.
@@ -66,15 +69,58 @@ abstract class CopyJsToNodeModules : Copy(), Loggable {
         projectName: String,
         outputsJsFiles: Task,
     ) {
+        // This SHOULD output all the files that will be copied, but there's
+        // something stopping the FileCollection from showing more than two
+        // items. To see the actual information, refer to the output of
+        // `printCopyDiagnostics` instead.
+        copyTask.doFirst {
+            logCopyStart(projectName, outputsJsFiles)
+        }
 
         val nodeModulesFolder = rootProject.file(
             "batagur/vendor/node_modules/@$rootProjectName/$projectName/"
         )
+        copyTask.doFirst {
+            makeOutputDirectories(nodeModulesFolder, outputsJsFiles)
+        }
 
         // In the ideal case, these 3 lines would be enough
         copyTask.dependsOn(outputsJsFiles)
         copyTask.from(outputsJsFiles.outputs)
         copyTask.into(nodeModulesFolder)
 
+        // This outputs diagnostic information about which files are being
+        // copied. Unfortunately, `copyTask` tries to copy over duplicates.
+        // The originating task itself (outputsJsFiles) is way too vague to
+        // be helpful here.
+        printCopyDiagnostics(copyTask)
+    }
+
+    private fun logCopyStart(projectName: String, outputsJsFiles: Task) {
+        logOut("Starting a copy for $projectName")
+        val outs: TaskOutputs = outputsJsFiles.outputs
+        logOut("With files in...")
+        outs.files.forEach {
+            logOut("...found $it")
+        }
+    }
+
+    private fun printCopyDiagnostics(copyTask: Copy) {
+        copyTask.eachFile {
+            logOut("Actually copying file $it")
+        }
+        // Just...suppress duplicates. Last copy wins. If there are supposed to
+        // be two different files with the same name, then we can handle that
+        // separately.
+        copyTask.duplicatesStrategy = DuplicatesStrategy.WARN
+    }
+
+    private fun makeOutputDirectories(
+        nodeModulesFolder: File,
+        outputsJsFiles: Task
+    ) {
+        logOut("Output goes to $nodeModulesFolder")
+        nodeModulesFolder.mkdirs()
+        logOut("Source task is $outputsJsFiles")
     }
 }
