@@ -1,0 +1,19 @@
+/**
+ * This is based on the parent project's `settings.gradle`.
+ *
+ * The two pluginManagement repositories come from IntelliJ's template,
+ * and the one actual-code-dependency entry (mavenCentral) is good enough
+ * for the buildSrc.
+ */
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}

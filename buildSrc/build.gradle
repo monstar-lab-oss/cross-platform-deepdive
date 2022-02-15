@@ -1,0 +1,15 @@
+// IntelliJ uses a different groovy parser here (or at least the parser here
+// is worse than in other build.gradle files) - it doesn't understand plugins.
+//noinspection GroovyAssignabilityCheck
+plugins {
+    // Very important: if you don't include this, the Kotlin code
+    // won't compile and the buildSrc tasks complete without warnings.
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+dependencies {
+    implementation gradleApi()
+}
+
+// TODO: handle output directory for buildSrc tasks
+
