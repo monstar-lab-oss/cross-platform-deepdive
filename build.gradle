@@ -1,5 +1,7 @@
 import com.cliabhach.terrapin.gradle.ParentCopyJsToNodeModules
 import org.jetbrains.kotlin.gradle.targets.js.ir.KotlinJsIrLink
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinPackageJsonTask
 
 import java.util.concurrent.atomic.AtomicReference
@@ -12,7 +14,13 @@ plugins {
 group = 'com.cliabhach.terrapin'
 version = '1.0'
 
-
+// Use host-provided NodeJS instead of downloading our own copy
+//noinspection GroovyAssignabilityCheck
+plugins.withType(NodeJsRootPlugin) {
+    NodeJsRootExtension ext = extensions.getByType(NodeJsRootExtension)
+    //noinspection GroovyAssignabilityCheck
+    ext.download = false
+}
 
 
 // Try to register a special task for Kotlin/JS modules
