@@ -4,12 +4,33 @@
 plugins {
     // Very important: if you don't include this, the Kotlin code
     // won't compile and the buildSrc tasks complete without warnings.
-    id 'org.jetbrains.kotlin.jvm'
+    // If you omit the version, you'll see an error like
+    //
+    // > Plugin [id: 'org.jetbrains.kotlin.jvm'] was not found in any of the following sources:
+    //
+    // since it can't read the version numbers in the parent directory's
+    // build.gradle file. Be warned.
+    id 'org.jetbrains.kotlin.jvm' version '1.6.20-M1'
 }
 
 dependencies {
     implementation gradleApi()
 }
 
-// TODO: handle output directory for buildSrc tasks
+// This project outputs files into the '/batagur/vendor' folder. As
+// `buildSrc` is its own project, we have to use the '../' syntax
+// (instead of the rootProject property) to point to the right folder.
+File outputFileDirectory = file('../batagur/vendor/')
+if (!outputFileDirectory.exists()) {
+    logger.log(LogLevel.ERROR, """
+The vendor directory for Web/TypeScript projects is missing. This
+probably means that the project structure has changed significantly,
+so consider updating the scripts in `buildSrc` to understand the new
+project structure.
+
+Directory: $outputFileDirectory
+
+Don't just comment them all out, that never fixes anything.
+""")
+}
 
