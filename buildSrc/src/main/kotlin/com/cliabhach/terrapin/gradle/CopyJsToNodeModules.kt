@@ -77,17 +77,19 @@ abstract class CopyJsToNodeModules : Copy(), Loggable {
             logCopyStart(projectName, outputsJsFiles)
         }
 
-        val nodeModulesFolder = rootProject.file(
-            "batagur/vendor/node_modules/@$rootProjectName/$projectName/"
+        val nodeModulesFolder = getNodeModulesFolder(
+            project, rootProjectName, projectName
         )
+        val nodeModulesSourceFolder = File(nodeModulesFolder, "kotlin")
+
         copyTask.doFirst {
-            makeOutputDirectories(nodeModulesFolder, outputsJsFiles)
+            makeOutputDirectories(nodeModulesSourceFolder, outputsJsFiles)
         }
 
         // In the ideal case, these 3 lines would be enough
         copyTask.dependsOn(outputsJsFiles)
         copyTask.from(outputsJsFiles.outputs)
-        copyTask.into(nodeModulesFolder)
+        copyTask.into(nodeModulesSourceFolder)
 
         // This outputs diagnostic information about which files are being
         // copied. Unfortunately, `copyTask` tries to copy over duplicates.
@@ -122,5 +124,23 @@ abstract class CopyJsToNodeModules : Copy(), Loggable {
         logOut("Output goes to $nodeModulesFolder")
         nodeModulesFolder.mkdirs()
         logOut("Source task is $outputsJsFiles")
+    }
+
+    companion object {
+
+        /**
+         * This is the parent folder for all the output of this task.
+         *
+         * In general, we copy compiled JS and .d.ts files into a subfolder of this
+         * called `kotlin`.
+         */
+        @JvmStatic
+        fun getNodeModulesFolder(
+            project: Project,
+            rootProjectName: String,
+            projectName: String
+        ): File = project.rootProject.file(
+            "batagur/vendor/node_modules/@$rootProjectName/$projectName/"
+        )
     }
 }
