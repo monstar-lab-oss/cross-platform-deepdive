@@ -6,6 +6,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.logging.LogLevel
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.TaskProvider
 import java.util.*
 
@@ -43,6 +44,31 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
         }
     }
 
+    /**
+     * Create and register a [CopyJsToNodeModules] task.
+     *
+     * In essence, we call [TaskContainer.register] with a closure. That
+     * closure invokes [CopyJsToNodeModules.configureAgainstProject].
+     *
+     * This [ParentCopyJsToNodeModules] will be told to depend on the created task.
+     */
+    @JvmOverloads
+    fun registerChildCopyTask(
+        project: Project,
+        outputsJsFilesTask: Task,
+        rootProjectName: String,
+        projectName: String = project.name,
+    ) {
+        val copyTaskProvider: TaskProvider<CopyJsToNodeModules> =
+            project.registerCopyTask(
+                rootProjectName,
+                projectName,
+                outputsJsFilesTask
+            )
+
+        dependsOn(copyTaskProvider)
+    }
+
     private fun Project.registerCopyTask(
         rootProjectName: String,
         projectName: String,
@@ -76,7 +102,7 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
         fun matches(task: Task, vararg variantQualifiers: String): Boolean {
             val taskNameParts = splitToLowercase(task.name)
 
-            val doesMatch = (baseQualifiers + variantQualifiers) == taskNameParts
+            val doesMatch = isEquivalent(baseQualifiers + variantQualifiers, taskNameParts)
 
             // If it's null, this isn't a Kotlin/JS project.
             // Or maybe the API changed since 1.6.20-M1.
@@ -84,6 +110,10 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
             task.logger.log(LogLevel.ERROR, "Task definitely found: $task")
 
             return doesMatch
+        }
+
+        private fun isEquivalent(first: List<String>, second: List<String>): Boolean {
+            return first.size == second.size && first.containsAll(second)
         }
 
         /**
