@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "lib",
     "baseUrl": ".",
+    "forceConsistentCasingInFileNames": false,
     "paths": {
       "light/*": [
         "../../build/js/packages/Terrapin-light/*"
