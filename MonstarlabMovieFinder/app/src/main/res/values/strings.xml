@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">MovieFinder</string>
+
+    <!-- Main Search Activity Strings -->
+    <string name="search_hint">Type the movie you are looking for…</string>
+    <string name="search_title">Start search</string>
+
+    <!-- Sort Menu Strings -->
+    <string name="menu_title_favorite_sort">Favorite movies</string>
+    <string name="menu_popular_sort_menu_title">Popular movies</string>
+    <string name="menu_newest_sort_title">Latest movies</string>
+    <string name="menu_top_rated_sort_title">Top rated movies</string>
+    <string name="menu_now_playing_sort_title">Now Playing movies</string>
+    <string name="menu_upcoming_sort_title">Upcoming movies</string>
+
+    <!-- Detail Activity Strings -->
+    <string name="title_activity_detail">DetailMovieActivity</string>
+    <string name="overview_title">Overview</string>
+    <string name="favorite_snack_message">The movie has been added to your favorite movie list</string>
+    <string name="unfavorite_snack_message">The movie has been removed from your favorite movie list</string>
+
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+    </string>
+    <string name="action_settings">Settings</string>
+
+</resources>

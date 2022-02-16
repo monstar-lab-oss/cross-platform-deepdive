@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.calti.myapplication.MainActivity">
+    <item
+        android:id="@+id/favorite_action"
+        android:title="@string/menu_title_favorite_sort" />
+
+   <!-- <item
+        android:id="@+id/newest_action"
+        android:title="@string/menu_newest_sort_title" />-->
+
+    <item
+        android:id="@+id/popular_action"
+        android:title="@string/menu_popular_sort_menu_title" />
+
+    <item
+        android:id="@+id/top_rated_action"
+        android:title="@string/menu_top_rated_sort_title" />
+
+    <item
+        android:id="@+id/now_playing_action"
+        android:title="@string/menu_now_playing_sort_title" />
+
+    <item
+        android:id="@+id/upcoming_action"
+        android:title="@string/menu_upcoming_sort_title" />
+
+</menu>

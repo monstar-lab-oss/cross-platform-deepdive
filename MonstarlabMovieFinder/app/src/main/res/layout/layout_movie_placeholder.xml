@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.monstarlab.test.moviefinder.kmp.shared.data.KmmMovie" />
+        
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="context"
+            type="android.content.Context" />
+
+        <variable
+            name="viewModel"
+            type="com.monstarlab.test.moviefinder.viewmodel.MainViewModel" />
+
+        <variable
+            name="movie"
+            type="com.monstarlab.test.moviefinder.kmp.shared.data.KmmMovie" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/movie_thumbnail_margin"
+        android:elevation="@dimen/movie_thumbnail_elevation"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/movieImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/movie_frame"
+            android:elevation="2dp"
+            bind:movie="@{movie}"
+            tools:srcCompat="@drawable/ic_placeholder" />
+
+    </LinearLayout>
+
+</layout>
