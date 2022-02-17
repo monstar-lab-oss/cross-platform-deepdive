@@ -16,5 +16,6 @@ dependencyResolutionManagement {
 
 rootProject.name = 'Terrapin'
 
+include ':grass'
 include ':light'
 include ':water'
