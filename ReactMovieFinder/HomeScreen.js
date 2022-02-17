@@ -80,6 +80,7 @@ class Test extends Component {
     }
 
 
+
   onPress = () => {
     this.setState({
       count: this.state.count + 1
@@ -90,7 +91,7 @@ class Test extends Component {
         //Alert.alert(item.title);
         //navigation.navigate('Profile', { name: item.title })
         const { navigate } = this.props.navigation;
-        navigate('Detail', { overview: item.overview ,poster_path:item.poster_path })
+        navigate('Detail', { title:item.title ,overview: item.overview ,poster_path:item.poster_path })
     }
 
  render() {

@@ -1,6 +1,14 @@
 import React, {Component} from 'react';
 import type {Node} from 'react';
 import {
+  realm,
+  addMovie,
+  getAllMovies,
+  deleteAllMovies,
+} from './Database.js';
+
+
+import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -10,6 +18,7 @@ import {
   useColorScheme,
   View,
   NativeModules,
+  Alert,
 } from 'react-native';
 
 import {
@@ -41,7 +50,7 @@ const MovieDetailScreen = ({ navigation, route }) => {
     flex: 1,
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  const onPress = () => {
+  const onNativePress = () => {
     console.log('We will invoke the native module here!');
     if(Platform.OS == 'ios'){
       CalendarModuleFoo.createCalendarEvent('testName', 'testLocation');
@@ -51,6 +60,14 @@ const MovieDetailScreen = ({ navigation, route }) => {
     }
 
   };
+  const onSavePress = () => {
+    addMovie(route.params.title)
+    Alert.alert(JSON.stringify(getAllMovies()));
+  };
+
+  const onRemovePress = () => {
+    deleteAllMovies()
+  };
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -59,8 +76,15 @@ const MovieDetailScreen = ({ navigation, route }) => {
       <Button
       title="Click to invoke your native module!"
       color="#841584"
-      onPress={onPress}
-    />
+      onPress={onNativePress}/>
+    <Button
+    title="Click to save movie as favorite"
+    color="#841584"
+    onPress={onSavePress}/>
+    <Button
+    title="Click to remove all favorites"
+    color="#841584"
+    onPress={onRemovePress}/>
     </SafeAreaView>
 
   );
