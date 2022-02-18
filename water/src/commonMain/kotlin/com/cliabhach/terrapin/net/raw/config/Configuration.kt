@@ -1,5 +1,7 @@
 package com.cliabhach.terrapin.net.raw.config
 
+import kotlin.js.JsExport
+
 /**
  * Marker annotation for configuration objects.
  *
@@ -10,4 +12,5 @@ package com.cliabhach.terrapin.net.raw.config
  *
  * @author Philip Cohn-Cort
  */
+@JsExport
 interface Configuration

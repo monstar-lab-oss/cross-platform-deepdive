@@ -18,4 +18,7 @@ object RoutesObject {
 }
 
 @JsExport
+val TimeA = RoutesObject.Home
+
+@JsExport
 sealed class RouteObject(val path: String)

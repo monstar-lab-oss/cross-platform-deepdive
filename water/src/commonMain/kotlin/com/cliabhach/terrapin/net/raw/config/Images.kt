@@ -4,9 +4,11 @@ package com.cliabhach.terrapin.net.raw.config
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.js.JsExport
 
 /**
  */
+@JsExport
 @Serializable
 data class Images(
     @SerialName("base_url")
