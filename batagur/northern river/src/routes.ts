@@ -1,4 +1,8 @@
-// TODO: Can we import the Terrapin-light type definitions safely?
+// Can we import the Terrapin-light type definitions safely?
+// Answer: Yes!
+import type { com } from '@terrapin/light';
+
+type RoutesObjectType = typeof com.cliabhach.terrapin.nav.RoutesObject;
 
 /**
  * Create a local alias to avoid conflict with the `Routes` value in 'react-router-dom'.
@@ -7,6 +11,6 @@
  * know how to make Kotlin Multiplatform create that. Namespaces are weird.
  */
 const Light = window[<any>'Terrapin-light'] as any;
-const LightRoutes = Light.com.cliabhach.terrapin.nav.RoutesObject;
+const LightRoutes: RoutesObjectType = Light.com.cliabhach.terrapin.nav.RoutesObject;
 
 export default LightRoutes;

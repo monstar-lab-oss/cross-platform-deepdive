@@ -19,7 +19,7 @@ export default function App() {
         </p>
         <a
           className="App-link"
-          href={LightRoutes.search.path}
+          href={LightRoutes.Search.path}
           rel="noopener noreferrer"
         >
           Switch to Search
