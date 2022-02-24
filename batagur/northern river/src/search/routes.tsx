@@ -7,7 +7,7 @@ export default function SearchRoute() {
       <div className="searchbox">
         <label htmlFor="q">Search</label>
         <input id="q" type="search" placeholder="A Wrinkle In Time"/>
-        <button id="magnifying-glass" type="submit" value=""/>
+        <button id="magnifying-glass" type="submit" className="icon icon_edit-find" value=""/>
       </div>
     </main>
   );
