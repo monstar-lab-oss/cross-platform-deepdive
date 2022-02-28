@@ -1,14 +1,17 @@
 import './styles.css';
-import { Component, ReactNode } from 'react';
+import React, { ChangeEvent, Component, ReactNode } from 'react';
 
 class SearchBox extends Component {
-  // TODO: Add support for onChange and onClick events
   state = {
     query: ""
   }
 
-  // TODO: Replace with two useful functions
-  doNothing() {
+  updateQuery(event: ChangeEvent<HTMLInputElement>) {
+    this.setState({ query: event.target.value})
+  }
+
+  sendQuery(event: React.MouseEvent) {
+    // TODO: Use water
   }
 
   render(): ReactNode {
@@ -18,14 +21,14 @@ class SearchBox extends Component {
         id="q"
         type="search"
         placeholder="A Wrinkle In Time"
-        onChange={this.doNothing}
+        onChange={this.updateQuery}
       />
       <button
         id="magnifying-glass"
         type="submit"
         className="icon icon_edit-find"
         value=""
-        onClick={this.doNothing}
+        onClick={this.sendQuery}
       />
     </div>
   }
