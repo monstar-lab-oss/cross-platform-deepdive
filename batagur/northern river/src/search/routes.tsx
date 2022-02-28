@@ -7,11 +7,26 @@ class SearchBox extends Component {
     query: ""
   }
 
+  // TODO: Replace with two useful functions
+  doNothing() {
+  }
+
   render(): ReactNode {
     return <div className="searchbox">
       <label htmlFor="q">Search</label>
-      <input id="q" type="search" placeholder="A Wrinkle In Time" />
-      <button id="magnifying-glass" type="submit" className="icon icon_edit-find" value="" />
+      <input
+        id="q"
+        type="search"
+        placeholder="A Wrinkle In Time"
+        onChange={this.doNothing}
+      />
+      <button
+        id="magnifying-glass"
+        type="submit"
+        className="icon icon_edit-find"
+        value=""
+        onClick={this.doNothing}
+      />
     </div>
   }
 }
