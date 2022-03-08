@@ -1,7 +1,7 @@
 // Imports go here
 
-require('@terrapin/light');
-require('@terrapin/water');
+import { com } from '@terrapin/light';
+import TimeA = com.cliabhach.terrapin.nav.TimeA
 
 async function doStuff() {
 
@@ -12,6 +12,7 @@ async function doStuff() {
 
   console.log("Found light? " + (L != undefined));
   console.log("Found water? " + (W != undefined));
+  console.log("Found another light? ", TimeA.path);
 
   console.log("***Mid!***\n");
 
