@@ -7,7 +7,6 @@ pluginManagement {
 }
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
@@ -15,9 +14,11 @@ dependencyResolutionManagement {
 }
 
 include ':app'
+include ':light'
 include ':shell'
 include ':water'
 // This generates a warning in Gradle 7.1 - 7.3. They fixed the
 // underlying code properly in gradle/gradle#19135, which is in
-// the not-yet-released Gradle 7.4.
+// Gradle 7.4.
+project(':light').projectDir = new File(settingsDir, '../light')
 project(':water').projectDir = new File(settingsDir, '../water')
