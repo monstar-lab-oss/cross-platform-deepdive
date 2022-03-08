@@ -16,10 +16,10 @@ sealed class SearchResultsPage {
     object Empty: SearchResultsPage()
 
     class Unusable(
-        val message: CharSequence
+        val message: String
     ): SearchResultsPage()
 
     class Results(
-        val list: List<SearchResult>
+        val items: Array<SearchResult>
     ): SearchResultsPage()
 }

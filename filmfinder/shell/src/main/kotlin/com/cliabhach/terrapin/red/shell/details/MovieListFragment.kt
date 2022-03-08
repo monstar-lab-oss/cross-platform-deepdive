@@ -77,7 +77,7 @@ class MovieListFragment : AbstractListDetailFragment() {
                     movieAdapter.submitList(listOf())
                 }
                 is SearchResultsPage.Results -> {
-                    movieAdapter.submitList(search.list)
+                    movieAdapter.submitList(search.items.toList())
                 }
                 is SearchResultsPage.Unusable -> {
                     Snackbar.make(view, search.message, Snackbar.LENGTH_LONG).show()

@@ -85,7 +85,7 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
             if (page.results.isEmpty()) {
                 Empty
             } else {
-                Results(page.results.toList())
+                Results(page.results.copyOf())
             }
         } else {
             val actualStatus = if (response.status.description.isNotBlank()) {

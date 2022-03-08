@@ -76,7 +76,7 @@ class SearchFragment : Fragment() {
                 is SearchResultsPage.Results -> {
                     searchResults.setTextColor(Color.RED)
                     mainAdapter.searchTerm = it
-                    mainAdapter.submitList(search.list)
+                    mainAdapter.submitList(search.items.toList())
                 }
                 is SearchResultsPage.Unusable -> {
                     searchResults.setTextColor(Color.BLACK)
