@@ -1,7 +1,17 @@
 import './styles.css';
 import React, { ChangeEvent, Component, ReactNode } from 'react';
+import { getSearchFunction, SearchResultsPage } from './net';
 
 class SearchBox extends Component {
+  constructor(props: any) {
+    super(props)
+
+    this.updateQuery = this.updateQuery.bind(this);
+    this.sendQuery = this.sendQuery.bind(this);
+  }
+
+  private searchMovies = getSearchFunction()
+
   state = {
     query: ""
   }
@@ -12,6 +22,13 @@ class SearchBox extends Component {
 
   sendQuery(event: React.MouseEvent) {
     // TODO: Use water
+    this.searchMovies(this.state.query).then((resultsPage: typeof SearchResultsPage) => {
+      if (resultsPage instanceof SearchResultsPage.Unusable) {
+        console.log("oh no " + resultsPage.message);
+      } else if (resultsPage instanceof SearchResultsPage.Results) {
+        console.log("found results! " + resultsPage.items);
+      }
+    })
   }
 
   render(): ReactNode {
