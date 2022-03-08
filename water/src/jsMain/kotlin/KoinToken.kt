@@ -7,6 +7,8 @@ import kotlin.reflect.KClass
  *
  * Register modules and other injectable values in [tsModule], and retrieve whatever you
  * need with [getFromKoin].
+ *
+ * @see insertKoin
  */
 @JsExport
 class KoinToken internal constructor(private val application: KoinApplication) {

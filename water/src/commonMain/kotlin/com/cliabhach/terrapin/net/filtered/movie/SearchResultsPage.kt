@@ -1,6 +1,7 @@
 package com.cliabhach.terrapin.net.filtered.movie
 
 import com.cliabhach.terrapin.net.raw.movie.SearchResult
+import kotlin.js.JsExport
 
 /**
  * A frontend-friendly representation of search results.
@@ -11,6 +12,7 @@ import com.cliabhach.terrapin.net.raw.movie.SearchResult
  *
  * @author Philip Cohn-Cort
  */
+@JsExport
 sealed class SearchResultsPage {
 
     object Empty: SearchResultsPage()
