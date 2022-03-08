@@ -70,6 +70,36 @@ some kind of statement about its use.
 
 ## Things that don't work
 
+### Broken in Kotlin 1.6.20
+
+If an exported `object` contains another `object` like so:
+```kotlin
+object Parent {
+    object Child
+}
+```
+
+then the TypeScript definition should look like this:
+```
+class Parent {
+    static get Child(): {
+    }
+}
+```
+But the export is made as
+```
+const Parent: {
+    static get Child(): {
+    }
+}
+```
+instead, which is invalid for a TypeScript definition
+file. This has to be corrected manually after each
+export.
+
+For a more practical example, refer to `RoutesObject`, in
+this module.
+
 ### Fixed in Kotlin 1.6.20
 
 You can't export nested `object`s. So for code like
