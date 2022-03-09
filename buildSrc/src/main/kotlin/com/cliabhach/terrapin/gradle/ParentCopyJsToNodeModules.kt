@@ -21,7 +21,7 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
 
     @get:Input
     override val logLevel: LogLevel
-        get() = LogLevel.WARN
+        get() = LogLevel.INFO
 
     /**
      * Define some basic properties for this task.
@@ -147,7 +147,7 @@ abstract class ParentCopyJsToNodeModules : DefaultTask(), Loggable {
             // If it's null, this isn't a Kotlin/JS project.
             // Or maybe the API changed since 1.6.20-M1.
 
-            task.logger.log(LogLevel.ERROR, "Task definitely found: $task")
+            task.logger.log(LogLevel.DEBUG, "Task definitely found: $task")
 
             return doesMatch
         }

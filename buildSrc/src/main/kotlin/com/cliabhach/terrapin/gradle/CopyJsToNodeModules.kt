@@ -25,7 +25,7 @@ abstract class CopyJsToNodeModules : Copy(), Loggable {
 
     @get:Input
     override val logLevel: LogLevel
-        get() = LogLevel.WARN
+        get() = LogLevel.DEBUG
 
     /**
      * Public entrypoint to the configuration.
