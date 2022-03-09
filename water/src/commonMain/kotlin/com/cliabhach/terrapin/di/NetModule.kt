@@ -1,6 +1,7 @@
 package com.cliabhach.terrapin.di
 
 import com.cliabhach.terrapin.net.Api
+import com.cliabhach.terrapin.top.BuildKonfig
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -16,10 +17,12 @@ import kotlinx.serialization.json.Json as KotlinxJson
  * @author Philip Cohn-Cort
  */
 val netModule = module {
+    single(named("API KEY")) {
+        BuildKonfig.MDB_API_KEY
+    }
     single {
         Api(
             trueApi = get(),
-            // TODO: Provide API key in this module, with something like https://github.com/Karumi/Hagu
             apiKey = get(qualifier = named("API KEY"))
         )
     }

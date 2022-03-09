@@ -10,9 +10,6 @@ import org.koin.core.Koin
  * Note that Koin modules can't be declared directly in TS or JS code.
  */
 val tsModule = module {
-    single(named("API KEY")) {
-        "" // FIXME: There must be a better way to define this
-    }
     single {
         listOf<HttpClientPlugin>(
             HttpCache
