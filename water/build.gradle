@@ -120,6 +120,22 @@ into source control.
 """
             )
         } else {
+            if (movieDbApiKey.startsWith('"')) {
+                logger.warn(
+                        "\n" +
+                                "The gradle build for :${project.name} found a string value with the key " +
+                                "`$apiKeyKey`, but that value seems to start with a quote mark. Not to " +
+                                "worry: it will still be used for the build. Just be aware that (unlike " +
+                                "Android's BuildConfig) quote marks in .properties files are preserved in " +
+                                "BuildKonfig's output. For example:\n\n" +
+                                "\$ System.out.println(" +
+                                "\"The first character of the key is \" + " +
+                                "BuildKonfig.MDB_API_KEY.charAt(0) + \".\"" +
+                                ")\n\n" +
+                                "will output\n\n" +
+                                "> The first character of the key is \".\n\n"
+                )
+            }
             // The first parameter to 'buildConfigField' is supposed to be a
             // `com.codingfeline.buildkonfig.compiler.FieldSpec.Type`, but that class
             // isn't available to the lint checker.
