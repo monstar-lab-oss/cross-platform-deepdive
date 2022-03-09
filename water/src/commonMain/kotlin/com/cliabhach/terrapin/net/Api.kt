@@ -138,7 +138,16 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
             protocol = URLProtocol.HTTPS,
             host = "api.themoviedb.org",
             parameters = parameters
-        ).apply(block = block).build()
+        ).apply {
+            // Due to https://github.com/ktorio/ktor/issues/1695 the host
+            // and protocol constructor params are discarded on Kotlin/JS
+            // platforms. Reassert them here just in case.
+            //
+            // This issue affects ktor 1.6.7
+            protocol = URLProtocol.HTTPS
+            host = "api.themoviedb.org"
+            block()
+        }.build()
     }
 
     private fun buildImageUrl(
