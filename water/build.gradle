@@ -1,7 +1,10 @@
 plugins {
     id 'org.jetbrains.kotlin.multiplatform'
     id 'org.jetbrains.kotlin.plugin.serialization'
+    id 'com.codingfeline.buildkonfig'
 }
+
+import com.codingfeline.buildkonfig.gradle.TargetConfigDsl
 
 group = 'com.cliabhach.terrapin'
 version = '1.0'
@@ -89,5 +92,27 @@ kotlin {
         nativeTest {
 
         }
+    }
+}
+
+
+buildkonfig {
+    packageName = "${group}.top"
+    // Groovy cannot tell that there is both a property ('defaultConfigs', a map) and
+    // a method ('defaultConfigs(Action)') defined in the BuildKonfigExtension class.
+    //
+    // For that reason we disable the inspection here.
+    //
+    //noinspection GroovyAssignabilityCheck
+    defaultConfigs { TargetConfigDsl conf ->
+        // The first parameter to 'buildConfigField' is supposed to be a
+        // `com.codingfeline.buildkonfig.compiler.FieldSpec.Type`, but that class
+        // isn't available to the lint checker.
+        //
+        // For that reason we disable the inspection here.
+        //
+        //noinspection GroovyAssignabilityCheck
+        conf.buildConfigField 'STRING', 'API_KEY', 'id'
+        // TODO: Pull in a value from e.g. local.properties instead
     }
 }
