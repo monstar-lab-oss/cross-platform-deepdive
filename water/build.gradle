@@ -95,6 +95,10 @@ kotlin {
     }
 }
 
+final String apiKeyKey = 'terrapin.mdbApiKey'
+
+Properties local = new Properties()
+project.file('local.properties').withInputStream(local::load)
 
 buildkonfig {
     packageName = "${group}.top"
@@ -105,14 +109,25 @@ buildkonfig {
     //
     //noinspection GroovyAssignabilityCheck
     defaultConfigs { TargetConfigDsl conf ->
-        // The first parameter to 'buildConfigField' is supposed to be a
-        // `com.codingfeline.buildkonfig.compiler.FieldSpec.Type`, but that class
-        // isn't available to the lint checker.
-        //
-        // For that reason we disable the inspection here.
-        //
-        //noinspection GroovyAssignabilityCheck
-        conf.buildConfigField 'STRING', 'API_KEY', 'id'
-        // TODO: Pull in a value from e.g. local.properties instead
+        String movieDbApiKey = local[apiKeyKey]
+        if (movieDbApiKey == null || movieDbApiKey.isEmpty()) {
+            logger.error(
+                    """
+The gradle build for ${project.name} cannot find a string value with the
+key `$apiKeyKey`. Please ensure this is present in a local.properties
+file in that project directory; do not commit the local.properties file
+into source control.
+"""
+            )
+        } else {
+            // The first parameter to 'buildConfigField' is supposed to be a
+            // `com.codingfeline.buildkonfig.compiler.FieldSpec.Type`, but that class
+            // isn't available to the lint checker.
+            //
+            // For that reason we disable the inspection here.
+            //
+            //noinspection GroovyAssignabilityCheck
+            conf.buildConfigField 'STRING', 'MDB_API_KEY', movieDbApiKey
+        }
     }
 }
