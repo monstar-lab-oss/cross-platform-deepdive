@@ -10,7 +10,11 @@ repositories {
 }
 
 dependencies {
+    implementation project(':water')
+
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
+
+    // React dependencies, wrapped up with Kotlin-friendly syntax
     implementation 'org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.317-kotlin-1.6.10'
     implementation 'org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-pre.317-kotlin-1.6.10'
     implementation 'org.jetbrains.kotlin-wrappers:kotlin-react-css:17.0.2-pre.317-kotlin-1.6.10'
