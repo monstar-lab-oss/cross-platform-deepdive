@@ -17,6 +17,7 @@ import react.dom.html.ReactHTML.img
  * The analogous model that we retrieve from the network is
  * [MovieDetails].
  */
+@JsExport
 external interface DetailsExProps: Props {
     var title: String
     var imageUrl: String
@@ -26,6 +27,7 @@ external interface DetailsExProps: Props {
 /**
  * Placeholder for when no details are available.
  */
+@JsExport
 val sampleMovieDetails = MovieDetails.Result(
     id = 1,
     title = "Doesn't This Cat Picture Look Nice?",
@@ -66,6 +68,7 @@ val Details = FC<DetailsExProps> { props ->
  * If the parameter here is unusable, we'll render a details
  * screen for [sampleMovieDetails] instead.
  */
+@JsExport
 fun createDetails(given: MovieDetails): ReactElement<out DetailsExProps> {
     val details: MovieDetails.Result = when (given) {
         is MovieDetails.Unusable -> sampleMovieDetails

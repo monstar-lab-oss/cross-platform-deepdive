@@ -30,4 +30,13 @@ kotlin {
         }
         binaries.executable()
     }
+
+    sourceSets {
+        all {
+            languageSettings {
+                // Required for TS definition files
+                optIn('kotlin.js.ExperimentalJsExport')
+            }
+        }
+    }
 }
