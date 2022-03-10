@@ -146,6 +146,7 @@ class Api(private val trueApi: HttpClient, private val apiKey: String) {
             // This issue affects ktor 1.6.7
             protocol = URLProtocol.HTTPS
             host = "api.themoviedb.org"
+            port = DEFAULT_PORT
             block()
         }.build()
     }
