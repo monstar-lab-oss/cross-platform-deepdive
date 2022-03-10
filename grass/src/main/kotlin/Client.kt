@@ -15,13 +15,10 @@ fun main() {
                 "memory, you could read its tagline here."
     )
 
-    val welcome = Welcome.create {
-        name = "Kotlin/JS"
-    }
     val details = Details.create {
         title = sample.title
         imageUrl = sample.posterUrl
         tagline = sample.tagline
     }
-    render(welcome, container)
+    render(details, container)
 }
