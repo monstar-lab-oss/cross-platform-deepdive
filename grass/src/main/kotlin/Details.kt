@@ -1,6 +1,6 @@
 import csstype.FontSize
 import csstype.NamedColor
-import csstype.px
+import csstype.rem
 import emotion.react.css
 import react.FC
 import react.Props
@@ -26,7 +26,7 @@ external interface DetailsExProps: Props {
 val Details = FC<DetailsExProps> { props ->
     div {
         css {
-            padding = 4.px
+            padding = 1.rem
             backgroundColor = NamedColor.lightyellow
             color = NamedColor.tomato
         }
@@ -38,7 +38,8 @@ val Details = FC<DetailsExProps> { props ->
         }
         div {
             css {
-                fontSize = FontSize.medium
+                paddingTop = 1.rem
+                fontSize = FontSize.large
             }
             +props.tagline
         }
