@@ -1,6 +1,5 @@
 import com.cliabhach.terrapin.di.HttpClientPlugin
 import io.ktor.client.features.cache.*
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import org.koin.core.Koin
 
