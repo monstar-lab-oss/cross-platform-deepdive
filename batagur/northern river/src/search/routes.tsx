@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { ChangeEvent, Component, ReactNode } from 'react';
+import React, { ChangeEvent, Component, Dispatch, ReactNode, useState } from 'react';
 import { getSearchFunction, SearchResultsPage } from './net';
 
 /**
@@ -9,6 +9,7 @@ import { getSearchFunction, SearchResultsPage } from './net';
  * to be configured that way.
  */
 interface SearchProps {
+  readonly onResultsFound: Dispatch<typeof SearchResultsPage>
 }
 
 /**
@@ -34,9 +35,11 @@ class SearchBox extends Component<SearchProps, SearchState> {
 
     this.updateQuery = this.updateQuery.bind(this);
     this.sendQuery = this.sendQuery.bind(this);
+    this.notifyQueryResults = props.onResultsFound;
   }
 
   private searchMovies = getSearchFunction()
+  private notifyQueryResults: Dispatch<typeof SearchResultsPage>;
 
   state: SearchState = {
     query: "",
@@ -55,6 +58,7 @@ class SearchBox extends Component<SearchProps, SearchState> {
         console.log("found results! " + resultsPage.items[0]);
       }
       this.setState({ searchResults: resultsPage});
+      this.notifyQueryResults(resultsPage);
     })
   }
 
@@ -79,10 +83,14 @@ class SearchBox extends Component<SearchProps, SearchState> {
 }
 
 export default function SearchRoute() {
+
+  // TODO: convert this into a class so we can use props?
+  const [searchResults, setSearchResults] = useState(SearchResultsPage.Empty);
+
   return (
     <main style={{ color: "lightgreen" }}>
       <h1>The search screen!</h1>
-      <SearchBox>
+      <SearchBox onResultsFound={setSearchResults}>
       </SearchBox>
     </main>
   );
