@@ -3,8 +3,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomeRoute from './home/routes';
 import SearchRoute from './search/routes';
 import LightRoutes from './routes';
+import { createDetails } from '@terrapin/grass';
+import { useState } from 'react';
+import { noMovieDetails } from './details/general';
 
 export default function App() {
+
+  // TODO: connect setter to a Dispatch in SearchRoute via getMovieDetails
+  const [movieDetails, setMovieDetails] = useState(noMovieDetails);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +24,7 @@ export default function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+        { createDetails(movieDetails) }
         <a
           className="App-link"
           href={LightRoutes.Search.path}
