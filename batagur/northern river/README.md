@@ -66,6 +66,103 @@ Just search up info about CRA's eject - it just replaces
 the react-scripts dependency and messes with package.json.
 Whatever.
 
+## Caveats
+
+### Importing class-namespace hybrids
+
+The Kotlin/JS compiler sometimes creates a kind of object
+that's unusual in regular TypeScript code: a namespace that
+is also a class. This happens most frequently when using
+`sealed class`es, like so:
+
+```kotlin
+package com.example
+
+sealed class A {
+
+  object Def: A()
+
+  class B(val input: String): A()
+
+  class C(val output: Int): A()
+}
+```
+
+This creates a TypeScript definition like
+
+```typescript
+export namespace com.example {
+  class A {
+    protected constructor();
+    static get Def(): {
+    } & com.example.A;
+  }
+  namespace A {
+    class B extends com.example.A {
+      constructor(input: string);
+      get input(): string;
+    }
+    class C extends com.example.A {
+      constructor(output: number);
+      get output(): number;
+    }
+  }
+}
+```
+
+This, in turn, can be imported into other TypeScript files
+in one of four ways.
+
+```typescript
+// You always need to import the 'com' namespace first
+import { com } from 'example'
+
+// 1. Use fully-qualified name
+function getAnA(): com.example.A {
+  return new com.example.A.B("")
+}
+
+// 2. Use 'import =' (import equals) syntax
+import A = com.example.A
+import B = com.example.A.B
+function getAnA(): A {
+  return new B("") // or 'new A.B("")'
+}
+
+// 3. Use 'const' class-import syntax
+const A = com.example.A
+const B = com.example.A.B
+function getAnA(): typeof A {
+  return new B("") // or 'new A.B("")'
+}
+
+// 4. Use 'type' type-import syntax
+type A = com.example.A
+function getAnA(): A {
+  return new com.example.A.B("")
+}
+```
+
+While all four of the above options look subtly different,
+the runtime behavior is mostly the same for all of them.
+
+Mostly.
+
+In cases 1, 2, and 4, everything will work as expected -
+`getAnA` creates a new `B` object, and calling code sees
+that object as if it were an object of type `A`. In case 3,
+the `typeof A` definition combines the properties of the
+class with the properties of the namespace, and you might
+see warnings about `B` not having a property called `C`.
+
+Note that the `import =` syntax on case 2 doesn't currently
+work in this module. I suspect there is something wrong
+with the tsconfig settings, as at runtime both `com` and
+`com.example.A` are undefined. The `com` namespace can
+be undefined as it's a TypeScript-only concept, but the
+class `com.example.A` should definitely still exist in the
+JS environment.
+
 ## More resources
 
 You can learn more in the [Create React App documentation](https://create-react-app.dev/docs/getting-started/).
