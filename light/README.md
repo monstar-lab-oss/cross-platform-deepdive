@@ -72,6 +72,8 @@ some kind of statement about its use.
 
 ### Broken in Kotlin 1.6.20
 
+#### Nested `object` types
+
 If an exported `object` contains another `object` like so:
 ```kotlin
 object Parent {
@@ -100,7 +102,83 @@ export.
 For a more practical example, refer to `RoutesObject`, in
 this module.
 
+#### Cross-module type comparison
+
+If you add two or more Kotlin/JS modules to a project,
+then the compilation process will sever certain prototype
+inheritance chains. Here's an example:
+
+Imagine a project that has four modules in total. Three are
+K/JS modules called `K1`, `K2`, and `K3`; the other one is
+a TypeScript module called `T1`.
+
+- `T1` depends on `K2` and `K3`
+- `K2` depends on `K1`
+- `K3` is independent of `K1` and `K2`
+
+In this setup, `T1` can access every type that each kotlin
+module exports. This works fine, and you can use built-in
+tools like `instanceof` from JavaScript and TypeScript to
+make sure that objects created in K/JS code have the right
+type.
+
+Let's make a change.
+
+- `K3` depends on `K1`
+
+Now, `T1` can import `K1`'s classes and types from either
+`K2` or from `K3`. It can even use a mix of imports without
+the compiler (`tsc`, in our case) complaining. The problem
+arises at runtime, though - to the Node module loader a
+type in `K2` is never the same as a type in `K3`. The below
+code will output the text `"Oh no."`.
+
+```kotlin
+// Base.kt in :k1
+open class Base {}
+
+// Derived.kt in :k3
+class Derived: Base()
+```
+
+```typescript
+// some code in :t1
+import { Base } from '@kjs/k2';
+import { Derived } from '@kjs/k3';
+
+const d: Base = new Derived();
+
+if (d instanceof Base) {
+  console.log("Great!");
+} else {
+  console.log("Oh no.");
+}
+```
+
+It's quite possible that your code won't get as far as that
+`console.log` - exhaustive K/JS switch statements (which
+are normally supported just fine) fail at runtime with
+`kotlin.NoWhenBranchMatchedException`.
+
+Luckily, you can work around this by only using types
+together when you know they're from the same exported
+module.
+
+```typescript
+import { Base } from '@kjs/k3';
+import { Derived } from '@kjs/k3';
+```
+
+You can also bundle all of your K/JS modules into a single
+K/JS module (e.g. a hypothetical `K4` that depends on `K2`
+and `K3`), and only ever import from that. If only there
+was a way for the compilation process to output a single
+version of `K1` for `tsc` to use, then perhaps this would
+not be an issue.
+
 ### Fixed in Kotlin 1.6.20
+
+#### Nested `object` exports
 
 You can't export nested `object`s. So for code like
 ```kotlin
