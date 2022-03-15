@@ -1,5 +1,6 @@
 import com.cliabhach.terrapin.di.netModule
 import com.cliabhach.terrapin.net.Api
+import com.cliabhach.terrapin.net.filtered.movie.MovieDetails
 import com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +19,19 @@ fun searchMovies(
 ): Promise<SearchResultsPage> {
     return CoroutineScope(Dispatchers.Default).promise {
         koinToken.getFromKoin(Api::class).searchMovies(query)
+    }
+}
+
+/**
+ * Retrieve a specific Movie from the Movie DB, given its unique id.
+ */
+@JsExport
+fun getMovieDetails(
+    koinToken: KoinToken,
+    id: Int
+): Promise<MovieDetails> {
+    return CoroutineScope(Dispatchers.Default).promise {
+        koinToken.getFromKoin(Api::class).getMovieDetails(id)
     }
 }
 
