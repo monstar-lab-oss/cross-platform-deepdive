@@ -82,16 +82,28 @@ class SearchBox extends Component<SearchProps, SearchState> {
   }
 }
 
-export default function SearchRoute() {
+/**
+ * Default layout for the search screen.
+ *
+ * This is basically just a div with a [h1] and a [SearchBox].
+ */
+export default class SearchRoute extends Component<SearchProps> {
 
   // TODO: convert this into a class so we can use props?
-  const [searchResults, setSearchResults] = useState(SearchResultsPage.Empty);
+  constructor(props: SearchProps) {
+    super(props);
+    this.setSearchResults = props.onResultsFound;
+  }
 
-  return (
-    <main style={{ color: "lightgreen" }}>
-      <h1>The search screen!</h1>
-      <SearchBox onResultsFound={setSearchResults}>
-      </SearchBox>
-    </main>
-  );
+  private setSearchResults: Dispatch<typeof SearchResultsPage>;
+
+  render(): React.ReactNode {
+    return (
+      <main style={{ color: "lightgreen" }}>
+        <h1>The search screen!</h1>
+        <SearchBox onResultsFound={this.setSearchResults}>
+        </SearchBox>
+      </main>
+    );
+  }
 }
