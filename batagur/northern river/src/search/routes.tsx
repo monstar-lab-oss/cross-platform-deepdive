@@ -1,6 +1,7 @@
 import './styles.css';
 import React, { ChangeEvent, Component, Dispatch, ReactNode, useState } from 'react';
-import { getSearchFunction, SearchResultsPage } from './net';
+import { com } from '@terrapin/grass';
+import { getSearchFunction } from './net';
 
 /**
  * Properties for a SearchBox.
@@ -9,7 +10,7 @@ import { getSearchFunction, SearchResultsPage } from './net';
  * to be configured that way.
  */
 interface SearchProps {
-  readonly onResultsFound: Dispatch<typeof SearchResultsPage>
+  readonly onResultsFound: Dispatch<com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage>
 }
 
 /**
@@ -21,7 +22,7 @@ interface SearchProps {
  */
 interface SearchState {
   readonly query: string
-  readonly searchResults: typeof SearchResultsPage.Empty
+  readonly searchResults: com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage
 }
 
 /**
@@ -39,11 +40,11 @@ class SearchBox extends Component<SearchProps, SearchState> {
   }
 
   private searchMovies = getSearchFunction()
-  private notifyQueryResults: Dispatch<typeof SearchResultsPage>;
+  private notifyQueryResults: Dispatch<com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage>;
 
   state: SearchState = {
     query: "",
-    searchResults: SearchResultsPage.Empty
+    searchResults: com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Empty
   }
 
   updateQuery(event: ChangeEvent<HTMLInputElement>) {
@@ -51,10 +52,10 @@ class SearchBox extends Component<SearchProps, SearchState> {
   }
 
   sendQuery(event: React.MouseEvent) {
-    this.searchMovies(this.state.query).then((resultsPage: typeof SearchResultsPage) => {
-      if (resultsPage instanceof SearchResultsPage.Unusable) {
+    this.searchMovies(this.state.query).then((resultsPage: com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage) => {
+      if (resultsPage instanceof com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Unusable) {
         console.log("oh no " + resultsPage.message);
-      } else if (resultsPage instanceof SearchResultsPage.Results) {
+      } else if (resultsPage instanceof com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Results) {
         console.log("found results! " + resultsPage.items[0]);
       }
       this.setState({ searchResults: resultsPage});
@@ -95,7 +96,7 @@ export default class SearchRoute extends Component<SearchProps> {
     this.setSearchResults = props.onResultsFound;
   }
 
-  private setSearchResults: Dispatch<typeof SearchResultsPage>;
+  private setSearchResults: Dispatch<com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage>;
 
   render(): React.ReactNode {
     return (
