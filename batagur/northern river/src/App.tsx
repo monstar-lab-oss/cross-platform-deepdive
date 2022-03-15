@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomeRoute from './home/routes';
+import { linkDetails } from './home/linkDetails';
 import SearchRoute from './search/routes';
 import LightRoutes from './routes';
 import { com, createDetails } from '@terrapin/grass';
@@ -10,9 +11,8 @@ import { castCorrectly } from './details/net';
 
 export default function App() {
 
-  // TODO: connect setter to a Dispatch in SearchRoute via getMovieDetails
   const [movieDetails, setMovieDetails] = useState(castCorrectly(noMovieDetails));
-  const retrieveDetails = (page: com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage) => { movieDetails };
+  const retrieveDetails = (page: com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage) => { linkDetails(page, setMovieDetails) };
 
   return (
     <div className="App">

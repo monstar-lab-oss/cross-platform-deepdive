@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { com } from '@terrapin/grass';
 import { noMovieDetails, obtainUnusableDetails, MovieDetailsPromise } from "../details/general";
 import { castCorrectly, getRetrievalFunction } from "../details/net";
@@ -13,7 +14,7 @@ const retrievalFunction = getRetrievalFunction();
  * @param page any page of search results; c.f. the `SearchBox` component
  * @returns a (probably-new) MovieDetails object reflecting that page
  */
-export async function detailsFromResult(page: com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage): MovieDetailsPromise {
+async function detailsFromResult(page: com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage): MovieDetailsPromise {
   let details: MovieDetailsPromise;
 
   if (page instanceof com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage.Unusable) {
@@ -25,4 +26,13 @@ export async function detailsFromResult(page: com.cliabhach.terrapin.net.filtere
   }
 
   return details;
+}
+
+/**
+ * Synchronous function for invoking `detailsFromResult`.
+ * @param page any page of search results; c.f. the `SearchBox` component
+ * @param setMovieDetails a callback function, such as one created by `React.useState`
+ */
+export function linkDetails(page: com.cliabhach.terrapin.net.filtered.movie.SearchResultsPage, setMovieDetails: Dispatch<SetStateAction<com.cliabhach.terrapin.net.filtered.movie.MovieDetails>>) {
+  detailsFromResult(page).then(setMovieDetails);
 }
