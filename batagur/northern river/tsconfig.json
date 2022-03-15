@@ -9,16 +9,16 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "es2021"
     ],
-    "module": "esnext",
+    "module": "es2022",
     "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es5"
+    "target": "es2021"
   },
   "include": [
     "src"
